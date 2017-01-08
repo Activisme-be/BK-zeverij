@@ -1,0 +1,22 @@
+{
+  "name": "bk-zeverij",
+  "version": "1.0.0",
+  "description": "Belgisch Kampioenschap zeverij",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Activisme-be/BK-zeverij.git"
+  },
+  "author": "ActivismeBE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Activisme-be/BK-zeverij/issues"
+  },
+  "homepage": "https://github.com/Activisme-be/BK-zeverij#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
