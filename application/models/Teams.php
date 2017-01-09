@@ -16,7 +16,7 @@ class Teams extends Model
      *
      * @var array
      */
-    protected $fillable = ['name_full', 'name_abbr', 'color'];
+    protected $fillable = ['name_full', 'name_abbr', 'color', 'label'];
 
     /**
      * Disable / Enable timestamps

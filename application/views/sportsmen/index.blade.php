@@ -22,7 +22,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a href="">{{ $human->Name }}</a>
-                        <span class="pull-right">{{ $human->union->name_abbr }}</span>
+                        <span class="label {{ $human->union->label }} pull-right">
+                            {{ $human->union->name_abbr }}
+                        </span>
                     </div>
 
                     <div class="panel-body">
