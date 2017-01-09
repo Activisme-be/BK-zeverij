@@ -1,0 +1,51 @@
+.label-cdv {
+    @include label-variant($color-cdv);
+}
+
+.label-cdh {
+    @include label-variant($color-cdh);
+}
+
+.label-ecolo {
+    @include label-variant($color-ecolo);
+}
+
+.label-fdf {
+    @include label-variant($color-fdf);
+}
+
+.label-groen {
+    @include label-variant($color-groen);
+}
+
+.label-mr {
+    @include label-variant($color-mr);
+}
+
+.label-nav {
+    @include label-variant($color-nva);
+}
+
+.label-ovld {
+    @include label-variant($color-ovld);
+}
+
+.label-pp {
+    @include label-variant($color-pp);
+}
+
+.label-ps {
+    @include label-variant($color-ps);
+}
+
+.label-ptbgo {
+    @include label-variant($color-ptbgo);
+}
+
+.label-spa {
+    @include label-variant($color-spa);
+}
+
+.label-vb {
+    @include label-variant($color-vb);
+}
