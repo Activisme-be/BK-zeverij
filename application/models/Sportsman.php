@@ -24,4 +24,14 @@ class Sportsmen extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Relationship for connecting the sportmen t(o his team.
+     *
+     * @return belongsTo relationship.
+     */
+    public function union()
+    {
+        return $this->belongsTo('Teams', 'Union_id');
+    }
 }
