@@ -3,6 +3,13 @@
 class Participants extends CI_Controller
 {
     /**
+     * Userdata when the user is authencated.
+     *
+     * @var array
+     */
+    public $user = [];
+
+    /**
      * Sportsmen constructor.
      */
      public function __construct()
@@ -10,6 +17,8 @@ class Participants extends CI_Controller
          parent::__construct();
          $this->load->library(['blade']);
          $this->load->helper(['url']);
+
+         $this->user = $this->session->userdata('session');
      }
 
     /**
@@ -34,6 +43,11 @@ class Participants extends CI_Controller
      */
     public function show()
     {
+        $paramId = $this->uri->segment(3);
+
+        $data['human'] = Sportsmen::with('union')->find($paramId);
+        $data['title'] = $data['human']->union->name_abbr . ': ' . $data['human']->Name;
+
         return $this->blade->render('sportmen/show', $data);
     }
 }

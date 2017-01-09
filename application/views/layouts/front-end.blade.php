@@ -38,7 +38,8 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Meld ons een dwaze uitspraak.</a></li>
+                        <li><a href="{{ base_url('auth/register') }}">Registreer</a></li>
+                        <li><a href="{{ base_url('auth/login') }}">Inloggen</a></li>
                     </ul>
                 </div>{{-- /.nav-collapse --}}
             </div>
