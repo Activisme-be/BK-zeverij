@@ -19,6 +19,8 @@ class Welcome extends CI_Controller
 	{
         $data['title']     = 'Index';
         $data['sportsmen'] = Sportsmen::count();
+        $data['teams']     = Teams::count();
+        
         return $this->blade->render('welcome', $data);
 	}
 }

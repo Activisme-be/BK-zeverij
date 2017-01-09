@@ -2,21 +2,21 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sportsmen extends Model
+class Teams extends Model
 {
     /**
      * Database table
      *
      * @var string
      */
-    protected $table = 'gov_members';
+    protected $table = 'gov_unions';
 
     /**
      * Mass-assign fields.
      *
      * @var array
      */
-    protected $fillable = ['Name', 'Function', 'Union_id', 'Documentation'];
+    protected $fillable = ['name_full', 'name_abbr', 'color'];
 
     /**
      * Disable / Enable timestamps
