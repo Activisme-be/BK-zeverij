@@ -15,7 +15,7 @@ class Participants extends CI_Controller
     /**
      * Sportsmen index.
      *
-     * @see    GET|HEAD: http://www.domain.tld/sportsmen
+     * @see    GET|HEAD: http://www.domain.tld/participants
      * @return Blade view
      */
     public function index()
@@ -24,5 +24,16 @@ class Participants extends CI_Controller
         $data['title'] = 'Onze Topsporters';
 
         return $this->blade->render('sportsmen/index', $data);
+    }
+
+    /**
+     * Show a specific sportsmen.
+     *
+     * @see    GET|HEAD: http://www.domain.tld/participants/show/
+     * @return Blade view.
+     */
+    public function show()
+    {
+        return $this->blade->render('sportmen/show', $data);
     }
 }
