@@ -15,7 +15,7 @@ class Participants extends CI_Controller
      public function __construct()
      {
          parent::__construct();
-         $this->load->library(['blade']);
+         $this->load->library(['blade', 'session']);
          $this->load->helper(['url']);
 
          $this->user = $this->session->userdata('session');

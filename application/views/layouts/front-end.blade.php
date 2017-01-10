@@ -34,11 +34,11 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand font-heading" href="#">BK postjes pakken</a>
+                    <a class="navbar-brand font-heading" href="{{ base_url() }}">BK postjes pakken</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ base_url('auth/register') }}">Registreer</a></li>
+                        <li {{ (current_url() == base_url('auth/register')) ? 'class="active"' : '' }}><a href="{{ base_url('auth/register') }}">Registreer</a></li>
                         <li><a href="{{ base_url('auth/login') }}">Inloggen</a></li>
                     </ul>
                 </div>{{-- /.nav-collapse --}}
