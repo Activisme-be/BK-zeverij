@@ -3,11 +3,17 @@
 @section('content')
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
+            @if (isset($_SESSION['class']) && isset($_SESSION['message']))
+                <div class="{{ $_SESSION['class'] }}">
+                    {{ $_SESSION['message'] }}
+                </div>
+            @endif
+
             <div class="panel panel-default">
                 <div class="panel-heading">Inloggen</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" action="" method="post">
+                    <form class="form-horizontal" action="{{ base_url('auth/verify') }}" method="post">
 
                         <div class="form-group">
                             <label class="control-label col-sm-4">Email adres: </label>

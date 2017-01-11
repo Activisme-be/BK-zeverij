@@ -38,8 +38,23 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li {{ (current_url() == base_url('auth/register')) ? 'class="active"' : '' }}><a href="{{ base_url('auth/register') }}">Registreer</a></li>
-                        <li><a href="{{ base_url('auth/login') }}">Inloggen</a></li>
+                        @if ($this->user)
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    {{ $this->user['username'] }}
+                                    <span class="caret"></span>
+                                 </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Account instellingen</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ base_url('auth/logout') }}">Uitloggen</a></li>
+                                </ul>
+                            </li>
+                        @else
+                            <li {{ (current_url() == base_url('auth/register')) ? 'class="active"' : '' }}><a href="{{ base_url('auth/register') }}">Registreer</a></li>
+                            <li {{ (current_url() == base_url('auth/login')) ? 'class="active"' : '' }}><a href="{{ base_url('auth/login') }}">Inloggen</a></li>
+                        @endif
                     </ul>
                 </div>{{-- /.nav-collapse --}}
             </div>

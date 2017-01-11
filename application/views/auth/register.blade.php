@@ -7,7 +7,7 @@
                 <div class="panel-heading">Registreer</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" action="" method="POST">
+                    <form class="form-horizontal" action="{{ base_url('auth/store') }}" method="POST">
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">
