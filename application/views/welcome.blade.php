@@ -40,7 +40,7 @@
                 <div class="list-group">
                     <a href="{{ base_url('participants') }}" class="list-group-item">Onze topsporters. <span class="pull-right badge">{{ $sportsmen }}</span></a>
                     <a href="{{ base_url() }}" class="list-group-item">Deelnemende ploegen. <span class="pull-right badge">{{ $teams }}</span></a>
-                    <a href="{{ base_url() }}" class="list-group-item">Het klassement</a>
+                    <a href="{{ base_url('ranking') }}" class="list-group-item">Het klassement</a>
                 </div>
             </div>
         </div>
