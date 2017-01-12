@@ -52,7 +52,7 @@ class Auth extends CI_Controller
                 return $this->blade->render('auth/login', $data);
             }
 
-            return redirect($_SERVER['HTTP_REFERER']);
+            return redirect(base_url());
     }
 
     /**

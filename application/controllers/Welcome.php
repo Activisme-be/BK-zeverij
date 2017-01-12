@@ -18,11 +18,14 @@ class Welcome extends CI_Controller
         $this->load->library(['blade', 'session']);
         $this->load->helper(['url']);
 
-        $this->user = $this->session->userdata('session');
+        $this->user = $this->session->userdata('authencated_user');
     }
 
     /**
+     * The application index method.
      *
+     * @see     GET|HEAD: http://www.domain.tld
+     * @return  Blade view.
      */
 	public function index()
 	{

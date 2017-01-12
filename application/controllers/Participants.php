@@ -38,7 +38,7 @@ class Participants extends CI_Controller
     /**
      * Show a specific sportsmen.
      *
-     * @see    GET|HEAD: http://www.domain.tld/participants/show/
+     * @see    GET|HEAD: http://www.domain.tld/participants/show/{id}
      * @return Blade view.
      */
     public function show()
@@ -48,6 +48,6 @@ class Participants extends CI_Controller
         $data['human'] = Sportsmen::with('union')->find($paramId);
         $data['title'] = $data['human']->union->name_abbr . ': ' . $data['human']->Name;
 
-        return $this->blade->render('sportmen/show', $data);
+        return $this->blade->render('sportsmen/show', $data);
     }
 }

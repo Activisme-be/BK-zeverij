@@ -12,6 +12,7 @@
 
         {{-- General styles --}}
         <link href="{{ base_url('assets/css/master.css') }}" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
         {{-- IE10 Viewport hack for Surface/desktop Windows 8 bug --}}
         <link href="{{ base_url('assets/css/ie10-viewport-bug-workaround.css') }}" rel="stylesheet">
