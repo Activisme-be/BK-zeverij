@@ -33,7 +33,7 @@
                                             <td><strong>{{ $position++ }}</strong></td>
                                             <td><span class="label {{ $human->union->label }}">{{ $human->union->name_abbr }}</span></td>
                                             <td>{{ $human->Name }}</td>
-                                            <td>0 punten</td>
+                                            <td>{{ $human->points_count; }} punten</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
