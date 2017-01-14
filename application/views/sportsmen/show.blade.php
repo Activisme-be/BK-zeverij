@@ -58,7 +58,7 @@
                   @include('sportsmen\items')
               </div>{{--/table-resp--}}
 
-              <div class="tab-pane fade in active" id="melding">
+              <div class="tab-pane fade in" id="melding">
                   @include('sportsmen\create')
               </div>{{--/table-resp--}}
           </div>{{--/tab-content--}}

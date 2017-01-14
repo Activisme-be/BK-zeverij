@@ -16,7 +16,7 @@ class Points extends Model
      *
      * @var array
      */
-    protected $fillable = ['gov_members_id', 'status', 'media_url', 'description'];
+    protected $fillable = ['point', 'status', 'media_url', 'description'];
 
     /**
      * Enable / Disable Timestamps
