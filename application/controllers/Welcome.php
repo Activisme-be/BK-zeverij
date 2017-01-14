@@ -11,6 +11,8 @@ class Welcome extends CI_Controller
 
     /**
      * Welcome constructor
+     *
+     * @return void
      */
     public function __construct()
     {

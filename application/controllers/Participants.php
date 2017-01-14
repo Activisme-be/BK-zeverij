@@ -27,6 +27,8 @@ class Participants extends CI_Controller
 
     /**
      * Sportsmen constructor.
+     *
+     * @return void
      */
      public function __construct()
      {
