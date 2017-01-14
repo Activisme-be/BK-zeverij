@@ -2,6 +2,15 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Teams Model.
+ *
+ * @author    Tim Joosten   <Topairy@gmail.com>
+ * @copyright Activisme-BE  <info@activisme.be>
+ * @license:  MIT license
+ * @since     2017
+ * @package   BK-wansmaak
+ */
 class Teams extends Model
 {
     /**
