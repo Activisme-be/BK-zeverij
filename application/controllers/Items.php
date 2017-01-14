@@ -26,8 +26,8 @@ class Items extends CI_Controller
     /**
      * Create a new item in the database.
      *
-     * @see
-     * @return
+     * @see     POST: http://www.domain.tld/items/create
+     * @return  Response | Redirect
      */
     public function create()
     {
@@ -70,7 +70,25 @@ class Items extends CI_Controller
     }
 
     /**
-     * Delete a item.
+     * Confirm a item so people can start voting on it.
+     *
+     * @see     GET|HEAD: http://www.domain.tld/items/confirm
+     * @return  Response | Redirect
+     */
+    public function confirm()
+    {
+        $itemId = $this->uri->segment(3);
+
+        if (Points::find($itemId)->update(['status', 1])) { // The item is updated.
+            $this->session->flashdata('class', 'alert alert-info');
+            $this->session->flashdata('message', 'Het wansmakelijk puntje is goedgekeurd.');
+        }
+
+        return redirct($_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * Delete a item. - This also delete the points and related data.
      *
      * @see
      * @return
