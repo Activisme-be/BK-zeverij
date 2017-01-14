@@ -32,7 +32,7 @@ class Ranking extends CI_Controller
     public function index()
     {
         $data['title']    = 'Ranking';
-        $data['humans']   = Sportsmen::with('union')->get();
+        $data['humans']   = Sportsmen::with('union', 'points')->get();
         $data['unions']   = Teams::all();
         $data['position'] = 1;
 

@@ -34,4 +34,24 @@ class Sportsmen extends Model
     {
         return $this->belongsTo('Teams', 'Union_id');
     }
+
+    /**
+     *
+     *
+     * @return  BelongsToMany relationship
+     */
+    public function items()
+    {
+        return $this->belongsToMany('Points', 'pivot_items', 'sportsmen_id', 'item_id');
+    }
+
+    /**
+     * Relation for the score mechanics
+     *
+     * @return  BelongsToMany relationship
+     */
+    public function points()
+    {
+        return $this->belongsToMany('Points', 'pivot_ranking', 'sportsmen_id', 'item_id');
+    }
 }

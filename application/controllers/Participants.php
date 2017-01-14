@@ -10,6 +10,13 @@ class Participants extends CI_Controller
     public $user = [];
 
     /**
+     * The database relations.
+     *
+     * @var array
+     */
+     public $relations = [];
+
+    /**
      * Sportsmen constructor.
      */
      public function __construct()
@@ -18,7 +25,8 @@ class Participants extends CI_Controller
          $this->load->library(['blade', 'session']);
          $this->load->helper(['url']);
 
-         $this->user = $this->session->userdata('session');
+         $this->user        = $this->session->userdata('session');
+         $this->relations   = ['union', 'items', 'points'];
      }
 
     /**
@@ -29,7 +37,7 @@ class Participants extends CI_Controller
      */
     public function index()
     {
-        $data['data']  = Sportsmen::with('union')->get();
+        $data['data']  = Sportsmen::with($this->relations)->get();
         $data['title'] = 'Onze Topsporters';
 
         return $this->blade->render('sportsmen/index', $data);
@@ -45,7 +53,7 @@ class Participants extends CI_Controller
     {
         $paramId = $this->uri->segment(3);
 
-        $data['human'] = Sportsmen::with('union')->find($paramId);
+        $data['human'] = Sportsmen::with($this->relations)->find($paramId);
         $data['title'] = $data['human']->union->name_abbr . ': ' . $data['human']->Name;
 
         return $this->blade->render('sportsmen/show', $data);

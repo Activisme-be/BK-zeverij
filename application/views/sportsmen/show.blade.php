@@ -34,6 +34,7 @@
               </div>
           </div>
 
+          {{--
           <div class="panel panel-primary">
             <div class="panel-heading">Sociale Media</div>
             <div class="panel-body">
@@ -42,6 +43,7 @@
                 <a href=""><i class="fa fa-envelope fa-2x"></i></a>
             </div>
           </div>
+          --}}
 
         </div><!--/col-3-->
     	<div class="col-sm-9">
@@ -51,16 +53,16 @@
             <li><a href="#melding" data-toggle="tab">Meld een wansmakelijk punt</a></li>
           </ul>
 
-          <div class="tab-content">
+          <div class="tab-content padding-top">
               <div class="tab-pane fade in active" id="items">
-
-              </div><!--/table-resp-->
+                  @include('sportsmen\items')
+              </div>{{--/table-resp--}}
 
               <div class="tab-pane fade in active" id="melding">
+                  @include('sportsmen\create')
+              </div>{{--/table-resp--}}
+          </div>{{--/tab-content--}}
 
-              </div><!--/table-resp-->
-          </div><!--/tab-content-->
-
-        </div><!--/col-9-->
-    </div><!--/row-->
+        </div>{{--/col-9--}}
+    </div>{{--/row--}}
 @endsection
