@@ -33,7 +33,7 @@ class Participants extends CI_Controller
      public function __construct()
      {
          parent::__construct();
-         $this->load->library(['blade', 'session']);
+         $this->load->library(['blade', 'session', 'security']);
          $this->load->helper(['url']);
 
          $this->user        = $this->session->userdata('session');
@@ -62,7 +62,7 @@ class Participants extends CI_Controller
      */
     public function show()
     {
-        $paramId = $this->uri->segment(3);
+        $paramId = $this->security->xss_clean($this->uri->segment(3));
 
         $data['human'] = Sportsmen::with($this->relations)->find($paramId);
         $data['title'] = $data['human']->union->name_abbr . ': ' . $data['human']->Name;

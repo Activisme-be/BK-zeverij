@@ -24,7 +24,7 @@ class Auth extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(['session', 'blade', 'form_validation']);
+        $this->load->library(['session', 'blade', 'form_validation', 'security']);
         $this->load->helper(['url']);
 
         $this->user = $this->session->userdata('authencated_user');
@@ -73,7 +73,7 @@ class Auth extends CI_Controller
      */
     public function check_database($password)
     {
-        $input['email'] = $this->input->post('email');
+        $input['email'] = $this->security-xss_clean($this->input->post('email'));
         $MySQL['user']  = Authencate::where('email', $input['email'])
             ->with('permissions')
             ->where('blocked', 'N')
@@ -150,7 +150,7 @@ class Auth extends CI_Controller
         $input['password'] = md5($this->input->post('password'));
         $input['blocked']  = 'N';
 
-        if (Authencate::create($input)) { // User is created.
+        if (Authencate::create($this->security->xss_clean($input))) { // User is created.
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'Uw account is aangemaakt');
         }

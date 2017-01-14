@@ -26,7 +26,7 @@ class Items extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(['blade', 'session', 'form_validation']);
+        $this->load->library(['blade', 'session', 'form_validation', 'security']);
         $this->load->helper(['url']);
 
         $this->user = $this->session->userdata('authencated_user');
@@ -57,7 +57,7 @@ class Items extends CI_Controller
 
         // The validation passes so we can move on to our controller logic.
 
-        $sportsmenId = $this->input->post('sportsmen_id'); // Only needed to assign the query.
+        $sportsmenId = $this->security->xss_clean($this->input->post('sportsmen_id'));
 
         // Inputs
         $input['media_url']     = $this->input->post('media');
@@ -66,7 +66,7 @@ class Items extends CI_Controller
         $input['status']        = 0;
 
         // MySQL Handlings.
-        $MySQL['insert']   = Points::create($input);
+        $MySQL['insert']   = Points::create($this->security->xss_clean($input));
         $MySQL['relation'] = Sportsmen::find($sportsmenId)->items()->attach($MySQL['insert']->id);
 
         // Output handling
@@ -86,7 +86,7 @@ class Items extends CI_Controller
      */
     public function confirm()
     {
-        $itemId = $this->uri->segment(3);
+        $itemId = $this->security->xss_clean($this->uri->segment(3));
 
         if (Points::find($itemId)->update(['status', 1])) { // The item is updated.
             $this->session->flashdata('class', 'alert alert-info');
