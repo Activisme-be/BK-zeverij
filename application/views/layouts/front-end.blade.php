@@ -51,14 +51,29 @@
                                  </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Account instellingen</a></li>
+                                    <li><a href="{{ base_url('account/settings') }}"><span class="fa fa-cog" aria-hidden="true"></span> Account instellingen</a></li>
+
+                                    @if (in_array('admin', $this->user['roles']))
+                                        <li><a href="{{ base_url('items') }}"><span class="fa fa-cogs" aria-hidden="true"> Item management </a></li>
+                                        <li><a href="{{ base_url('users') }}"><span class="fa fa-users" aria-hidden="true"> User Management </a></li>
+                                    @endif
+
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="{{ base_url('auth/logout') }}">Uitloggen</a></li>
+                                    <li><a href="{{ base_url('auth/logout') }}"><span class="fa fa-sign-out" aria-hidden="true"></span> Uitloggen</a></li>
                                 </ul>
                             </li>
                         @else
-                            <li {{ (current_url() == base_url('auth/register')) ? 'class="active"' : '' }}><a href="{{ base_url('auth/register') }}">Registreer</a></li>
-                            <li {{ (current_url() == base_url('auth/login')) ? 'class="active"' : '' }}><a href="{{ base_url('auth/login') }}">Inloggen</a></li>
+                            <li {{ (current_url() == base_url('auth/register')) ? 'class="active"' : '' }}>
+                                <a href="{{ base_url('auth/register') }}">
+                                    <span class="fa fa-plus-square" aria-hidden="true"></span> Registreer
+                                </a>
+                            </li>
+
+                            <li {{ (current_url() == base_url('auth/login')) ? 'class="active"' : '' }}>
+                                <a href="{{ base_url('auth/login') }}">
+                                    <span class="fa fa-sign-in" aria-hidden="true"></span> Inloggen
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </div>{{-- /.nav-collapse --}}
@@ -73,6 +88,10 @@
         {{-- ============================================= --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="{{ base_url('assets/js/bootstrap.js') }}"></script>
+
+        {{-- FIXME: Implement minified vue.js --}}
+        {{-- FIXME: Implement minified vue-resource.js --}}
+        {{-- FIXME: Implement vue.js functions. --}}
 
         {{-- IE10 viewport hack for Surface/desktop Windows 8 bug --}}
         <script src="{{ base_url('assets/js/ie10-viewport-bug-workaround.js') }}"></script>
