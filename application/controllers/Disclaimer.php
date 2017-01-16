@@ -25,7 +25,7 @@ class Disclaimer extends MY_Controller
      */
     public function __construct()
     {
-        parent::__constrcut();
+        parent::__construct();
         $this->load->library(['blade', 'session']);
         $this->load->helper(['url']);
 
@@ -41,6 +41,6 @@ class Disclaimer extends MY_Controller
     public function index()
     {
         $data['title'] = 'Disclaimer';
-        return $this->blade->render('dislaimer/index', $data);
+        return $this->blade->render('disclaimer/index', $data);
     }
 }
