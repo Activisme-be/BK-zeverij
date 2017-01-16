@@ -9,7 +9,7 @@
  * @since     2017
  * @package   BK-wansmaak
  */
-class Participants extends CI_Controller
+class Participants extends MY_Controller
 {
     /**
      * Userdata when the user is authencated.
@@ -33,11 +33,32 @@ class Participants extends CI_Controller
      public function __construct()
      {
          parent::__construct();
-         $this->load->library(['blade', 'session', 'security']);
+         $this->load->library(['blade', 'session']);
          $this->load->helper(['url']);
 
-         $this->user        = $this->session->userdata('session');
+         $this->user        = $this->session->userdata('authencated_user');
          $this->relations   = ['union', 'items', 'points'];
+     }
+
+     /**
+      * Middleware instance
+      *
+      * only create if you want to use, not compulsory.
+      * or return parent::middleware(); if you want to keep.
+      * or return empty array() and no middleware will run.
+      *
+      * @return array
+      */
+     protected function middleware()
+     {
+         // Return the list of middlewares you want to be applied,
+         // Here is list of some valid options
+         //
+         // admin_auth                    // As used below, simplest, will be applied to all
+         // someother|except:index,list   // This will be only applied to posts()
+         // yet_another_one|only:index    // This will be only applied to index()
+         //
+         return ['auth'];
      }
 
     /**
@@ -64,7 +85,8 @@ class Participants extends CI_Controller
     {
         $paramId = $this->security->xss_clean($this->uri->segment(3));
 
-        $data['human'] = Sportsmen::with($this->relations)->find($paramId);
+        $data['human'] = Sportsmen::withCount($this->relations)->find($paramId);
+        $data['items'] = Points::where('status', 1)->where('sportsmen_id', $data['human']->id)->get();
         $data['title'] = $data['human']->union->name_abbr . ': ' . $data['human']->Name;
 
         return $this->blade->render('sportsmen/show', $data);

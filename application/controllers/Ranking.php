@@ -1,4 +1,6 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Ranking Controller.
@@ -9,7 +11,7 @@
  * @since     2017
  * @package   BK-wansmaak
  */
-class Ranking extends CI_Controller
+class Ranking extends MY_Controller
 {
     /**
      * Authencation user data.
@@ -41,7 +43,7 @@ class Ranking extends CI_Controller
     public function index()
     {
         $data['title']    = 'Ranking';
-        $data['humans']   = Sportsmen::withCount('union', 'points')->get();
+        $data['humans']   = Sportsmen::withCount('union', 'points')->orderBy('points_count', 'desc')->get();
         $data['unions']   = Teams::all();
         $data['position'] = 1;
 

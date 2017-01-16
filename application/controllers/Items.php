@@ -9,8 +9,10 @@
  * @since     2017
  * @package   BK-wansmaak
  */
-class Items extends CI_Controller
+class Items extends MY_Controller
 {
+    // FIXME: Implement middleware
+
     /**
      * Authencated userdata
      *
@@ -26,10 +28,83 @@ class Items extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(['blade', 'session', 'form_validation', 'security']);
+        $this->load->library(['blade', 'session', 'form_validation']);
         $this->load->helper(['url']);
 
         $this->user = $this->session->userdata('authencated_user');
+    }
+
+    /**
+     * Middleware instance
+     *
+     * only create if you want to use, not compulsory.
+     * or return parent::middleware(); if you want to keep.
+     * or return empty array() and no middleware will run.
+     *
+     * @return array
+     */
+    protected function middleware()
+    {
+        // Return the list of middlewares you want to be applied,
+        // Here is list of some valid options
+        //
+        // admin_auth                    // As used below, simplest, will be applied to all
+        // someother|except:index,list   // This will be only applied to posts()
+        // yet_another_one|only:index    // This will be only applied to index()
+        //
+        return ['admin_auth|except:create,vote', 'auth|only:create,vote'];
+    }
+
+
+    /**
+     * Index method for the items.
+     *
+     * @see    GET|HEAD: http://www.domain.tld/item
+     * @return Blade view
+     */
+    public function index()
+    {
+        // FIXME: Set pagination on the items variable.
+
+        $data['title'] = 'Wansmakelijke punten.';
+        $data['items'] = Points::all();
+
+        return $this->blade->render('items\index', $data);
+    }
+
+    /**
+     * Search for a specific item.
+     *
+     * @see    GET|HEAD: http://www.domain.tld/items/search
+     * @return Blade view
+     */
+    public function search()
+    {
+        $term = $this->security->xss_clean($this->input->get('term'));
+
+        $data['title'] = 'Wansmakelijke punten';
+        $data['items'] = Points::where('point', 'LIKE', '%' . $term .'%')->get();
+
+        return $this->blade->render('items\index', $data);
+    }
+
+    /**
+     * Vote on an item.
+     *
+     * @see    GET|HEAD: http://www.domain.tld/items/vote/{sportsMenId}/{itemId}
+     * @return Response | Redirect
+     */
+    public function vote()
+    {
+        $sportsMenId = $this->security->xss_clean($this->uri->segment(3));
+        $itemId      = $this->security->xss_clean($this->uri->segment(4));
+
+        if (Sportsmen::find($sportsMenId)->points()->attach($itemId)) { // The vote is registered
+            $this->session->flashdata('class', 'alert alert-success');
+            $this->session->flashdata('message', 'Uw stem is successvol verwerkt.');
+        }
+
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**
@@ -40,6 +115,8 @@ class Items extends CI_Controller
      */
     public function create()
     {
+        // FIXME: Implement creator_id fill in.
+
         $this->form_validation->set_rules('media', 'Media url', 'trim|required');
         $this->form_validation->set_rules('item_name', 'Naam punt', 'trim|required');
         $this->form_validation->set_rules('sportsmen_id', 'Politici id', 'trim|required|min_length[1]|max_length[3]');
@@ -63,6 +140,7 @@ class Items extends CI_Controller
         $input['media_url']     = $this->input->post('media');
         $input['point']         = $this->input->post('item_name');
         $input['description']   = $this->input->post('description');
+        $input['sportsmen_id']  = $sportsmenId;
         $input['status']        = 0;
 
         // MySQL Handlings.
@@ -84,16 +162,17 @@ class Items extends CI_Controller
      * @see     GET|HEAD: http://www.domain.tld/items/confirm
      * @return  Response | Redirect
      */
-    public function confirm()
+    public function status()
     {
-        $itemId = $this->security->xss_clean($this->uri->segment(3));
+        $item         = Points::find($this->security->xss_clean($this->uri->segment(4)));
+        $item->status = $this->security->xss_clean($this->uri->segment(3)); // Set the recored to 'published'.
 
-        if (Points::find($itemId)->update(['status', 1])) { // The item is updated.
+        if ($item->save()) { // The item is updated.
             $this->session->flashdata('class', 'alert alert-info');
             $this->session->flashdata('message', 'Het wansmakelijk puntje is goedgekeurd.');
         }
 
-        return redirct($_SERVER['HTTP_REFERER']);
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**
@@ -104,6 +183,13 @@ class Items extends CI_Controller
      */
     public function delete()
     {
+        // $MySQL['item']    = Points::find($this->security->xss_clean($this->uri->segment(3)));
+        // $MySQL['delete']  = $MySQL['item']->delete();
+        // $MySQL['ranking'] = $MySQL['item']
+        // $MySQL['point']   =
 
+        // if ($MySQL['delete'] && $MySQL['ranking'] && $MySQL['point']) { // Item is deleted
+        //
+        // }
     }
 }

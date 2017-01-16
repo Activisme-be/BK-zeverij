@@ -9,7 +9,7 @@
  * @since     2017
  * @package   BK-wansmaak
  */
-class Auth extends CI_Controller
+class Auth extends MY_Controller
 {
     /**
      * Authencated user data.
@@ -24,8 +24,8 @@ class Auth extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(['session', 'blade', 'form_validation', 'security']);
-        $this->load->helper(['url']);
+        $this->load->library(['session', 'blade', 'email', 'form_validation']);
+        $this->load->helper(['url', 'string']);
 
         $this->user = $this->session->userdata('authencated_user');
     }
@@ -73,7 +73,7 @@ class Auth extends CI_Controller
      */
     public function check_database($password)
     {
-        $input['email'] = $this->security-xss_clean($this->input->post('email'));
+        $input['email'] = $this->security->xss_clean($this->input->post('email'));
         $MySQL['user']  = Authencate::where('email', $input['email'])
             ->with('permissions')
             ->where('blocked', 'N')
@@ -107,6 +107,67 @@ class Auth extends CI_Controller
 
             return false;
         }
+    }
+
+    /**
+     * Reset a user password
+     *
+     * @see    POST: http://www.domain/auth/reset
+     * @return Response | Redirect
+     */
+    public function reset()
+    {
+        $input['email'] = $this->security->xss_clean($this->input->post('email'));
+        $MySQL['user']  = Authencate::where('email', '=', $input['email']);
+
+        if ($MySQL['user']->count() === 1) { // User is found.
+            $password['pass'] = random_string('alnum', 16);
+
+            $MySQL['update'] = Authencate::find($MySQL['user']->first()->id);
+            $MySQL['update']->password = md5($password['pass']);
+
+            if ($MySQL['update']->save()) {
+                // Config mail.
+                $config['protocol'] = 'smtp';
+                $config['smtp_host'] = "mailout.one.com";
+                $config['smtp_user'] = "mailing@activisme.be";
+                $config['smtp_pass'] = "ikbeneenwachtwoord";
+                $config['smtp_port'] = "25";
+                // $config['smtp_crypto'] = 'tls';
+                $config['authencation'] = 'true';
+
+
+                $this->email->initialize($config); // Init the config.
+
+                // Send email.
+                $this->email->from('mailing@activisme.be', 'Activisme-Be');
+                $this->email->to($input['email']);
+                $this->email->subject('Reset wachtwoord - Activisme-Be');
+                $this->email->message($this->blade->render('email/reset', $password));
+                $this->email->set_mailtype('html');
+
+                if (@$this->email->send()) { // Mail is send.
+                    // printf('Email is sent'); // For debugging propose.
+                    // die();                   // For debugging propose.
+
+                    // $this->email->clear(); // Clear the email batch in the sys.
+                    // $this->session->set_flashdata('email', 'De email is verzonden.');
+                } else { // The email isn't send.
+                    // echo $this->email->print_debugger();   // For debuging propose.
+                    // die();                          // For debugging propose.
+                    $this->email->clear(); // Clear the email batch in the sys.
+
+                    // Send output.
+                    $this->session->set_flashdata('class', 'alert alert-success');
+                    $this->session->set_flashdata('message', 'Er is een email verzonden met je nieuwe wachtwoord.');
+                }
+            }
+        } else { // There is no user found.
+            $this->session->set_flashdata('class', 'alert alert-success');
+            $this->session->flashdata('message', 'Wij konden de aanvraag niet verwerken');
+        }
+
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**

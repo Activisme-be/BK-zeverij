@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">Inloggen</button>
-                                <a class="btn btn-link" href="">Forgot Your Password?</a>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resetPass">Wachtwoord vergeten</button>
                             </div>
                         </div>
 
@@ -43,4 +43,6 @@
             </div>
         </div>
     </div>
+
+    @include('auth\reset') {{-- Reset password modal --}}
 @endsection

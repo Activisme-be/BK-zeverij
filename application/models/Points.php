@@ -25,7 +25,7 @@ class Points extends Model
      *
      * @var array
      */
-    protected $fillable = ['point', 'status', 'media_url', 'description'];
+    protected $fillable = ['creator_id', 'sportsmen_id', 'point', 'status', 'media_url', 'description'];
 
     /**
      * Enable / Disable Timestamps
@@ -33,4 +33,24 @@ class Points extends Model
      * @return bool
      */
     public $timestamps = false;
+
+    /**
+     * Item -> sportsmen id. relation.
+     *
+     * @return belongTo relation.
+     */
+    public function govMember()
+    {
+        return $this->belongsTo('Sportsmen', 'sportsmen_id');
+    }
+
+    /**
+     * Item -> creator id relation.
+     *
+     * @return belongsTo relation.
+     */
+    public function creator()
+    {
+        return $this->belongsTo('Authencate', 'creator_id');
+    }
 }

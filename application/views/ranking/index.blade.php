@@ -7,9 +7,12 @@
                 <li role="presentation" class="active">
                     <a href="#invidueel" aria-controls="home" role="tab" data-toggle="tab">Invidueel klassement</a>
                 </li>
+                
+                {{--
                 <li role="presentation">
                     <a href="#ploegen" aria-controls="profile" role="tab" data-toggle="tab">Ploegen klassement</a>
                 </li>
+                --}}
             </ul>
 
             <div class="tab-content padding-top">
@@ -42,12 +45,13 @@
                     </div>
                 </div>
 
-                {{-- --}}
+                {{--
                 <div role="tabpanel" class="tab-pane fade in" id="ploegen">
                     <div class="panel panel-default">
 
                     </div>
                 </div>
+                --}}
 
             </div>
         </div>

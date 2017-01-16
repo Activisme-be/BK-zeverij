@@ -38,6 +38,10 @@
                     <a class="navbar-brand font-heading" href="{{ base_url() }}">BK postjes pakken</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li {{ (current_url() == base_url('disclaimer')) ? 'class="active"' : '' }}><a href="{{ base_url('disclaimer') }}">Disclaimer</a></li>
+                    </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         @if ($this->user)
                             <li class="dropdown">

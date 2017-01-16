@@ -16,7 +16,7 @@
           <ul class="list-group">
              <li class="list-group-item text-muted">Info:</li>
              <li class="list-group-item text-right"><span class="pull-left"><strong>Partij:</strong></span> <span class="label {{ $human->union->label}}">{{ $human->union->name_abbr}}</span></li>
-             <li class="list-group-item text-right"><span class="pull-left"><strong>Punten:</strong></span> 0 Punten</li>
+             <li class="list-group-item text-right"><span class="pull-left"><strong>Punten:</strong></span> {{ $human->points_count }} Punten</li>
              <li class="list-group-item text-right">
                 <span class="pull-left">
                     <strong>Info:</strong>
