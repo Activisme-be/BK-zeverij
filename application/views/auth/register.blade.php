@@ -3,6 +3,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
+            @if (isset($_SESSION['class']) && isset($_SESSION['message']))
+                <div class="{{ $_SESSION['class']}}">
+                    <strong>Success:</strong> {{ $_SESSION['message'] }}
+                </div>
+            @endif
+
             <div class="panel panel-default">
                 <div class="panel-heading">Registreer</div>
 

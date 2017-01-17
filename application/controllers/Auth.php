@@ -164,7 +164,7 @@ class Auth extends MY_Controller
             }
         } else { // There is no user found.
             $this->session->set_flashdata('class', 'alert alert-success');
-            $this->session->flashdata('message', 'Wij konden de aanvraag niet verwerken');
+            $this->session->set_flashdata('message', 'Wij konden de aanvraag niet verwerken');
         }
 
         return redirect($_SERVER['HTTP_REFERER']);
@@ -198,7 +198,7 @@ class Auth extends MY_Controller
 
         if ($this->form_validation->run() === false) { // Form validation fails
             // validation_errors(); // For debugging propose
-            // die();               // For debugging propose
+            //die();               // For debugging propose
 
             $data['title'] = 'Registreer';
             return $this->blade->render('auth/register', $data);
