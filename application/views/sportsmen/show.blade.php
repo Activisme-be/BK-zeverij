@@ -38,9 +38,9 @@
           <div class="panel panel-primary">
             <div class="panel-heading">Sociale Media</div>
             <div class="panel-body">
-            	<a href=""><i class="fa fa-facebook fa-2x"></i></a>
-                <a href=""><i class="fa fa-twitter fa-2x"></i></a>
-                <a href=""><i class="fa fa-envelope fa-2x"></i></a>
+            	<a href=""><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></a>
             </div>
           </div>
           --}}
