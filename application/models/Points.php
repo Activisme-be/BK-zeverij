@@ -32,7 +32,7 @@ class Points extends Model
      *
      * @return bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * Item -> sportsmen id. relation.
@@ -41,7 +41,8 @@ class Points extends Model
      */
     public function govMember()
     {
-        return $this->belongsTo('Sportsmen', 'sportsmen_id');
+        return $this->belongsTo('Sportsmen', 'sportsmen_id')
+            ->withTimestamps();
     }
 
     /**
@@ -51,6 +52,7 @@ class Points extends Model
      */
     public function creator()
     {
-        return $this->belongsTo('Authencate', 'creator_id');
+        return $this->belongsTo('Authencate', 'creator_id')
+            ->withTimestamps();
     }
 }

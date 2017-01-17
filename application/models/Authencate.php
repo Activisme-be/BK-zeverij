@@ -32,7 +32,7 @@ class Authencate extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * Permissions data relation for the user.
@@ -41,6 +41,7 @@ class Authencate extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany('Permissions', 'pivot_login_permissions', 'permissions_id', 'login_id');
+        return $this->belongsToMany('Permissions', 'pivot_login_permissions', 'permissions_id', 'login_id')
+            ->withTimestamps();
     }
 }

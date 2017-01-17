@@ -32,7 +32,7 @@ class Sportsmen extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * Relationship for connecting the sportmen t(o his team.
@@ -41,7 +41,8 @@ class Sportsmen extends Model
      */
     public function union()
     {
-        return $this->belongsTo('Teams', 'Union_id');
+        return $this->belongsTo('Teams', 'Union_id')
+            ->withTimestamps();
     }
 
     /**
@@ -51,7 +52,8 @@ class Sportsmen extends Model
      */
     public function items()
     {
-        return $this->belongsToMany('Points', 'pivot_items', 'sportsmen_id', 'item_id');
+        return $this->belongsToMany('Points', 'pivot_items', 'sportsmen_id', 'item_id')
+            ->withTimestamps();
     }
 
     /**
@@ -62,6 +64,7 @@ class Sportsmen extends Model
     public function points()
     {
         return $this->belongsToMany('Points', 'pivot_ranking', 'sportsmen_id', 'item_id')
-            ->withPivot('user_id');
+            ->withPivot('user_id')
+            ->withTimestamps();
     }
 }
