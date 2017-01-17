@@ -73,24 +73,57 @@ class Account extends MY_Controller
      */
     public function update()
     {
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('name', 'Naam', 'trim|required');
+
+        if (! empty($this->input->post('password'))) {
+            $this->form_validation->set_rules('password', 'Wachtwoord', 'trim|min_length[6]|matches[password_confirm]');
+            $this->form_validation->set_rules('password_confirm', 'Wachtwoord confirmaties', 'trim');
+        }
 
         if ($this->form_validation->run() == false) { // Validation fails.
+            // var_dump(validation_errors());   // For debugging proposes.
+            // die();                           // For debugging proposes.
+
             $data['title'] = 'Account configuratie';
             return $this->blade->render('auth/settings', $data);
         }
 
         // Validation passes so continu with our logic.
 
-        $MySQL['update'] = Authencate::find($this->user['id']);
+        $input['name']     = $this->security->xss_clean($this->input->post('name'));
+        $input['email']    = $this->security->xss_clean($this->input->post('email'));
+        $input['username'] = $this->security->xss_clean($this->input->post('username'));
+
+        var_dump($this->user);
+
+        $MySQL['update']           = Authencate::find($this->user['id']);
+        $MYSQL['update']->name     = $input['name'];
+        $MySQL['update']->email    = $input['email'];
+        $MySQL['update']->username = $input['username'];
+
+        if (! empty($this->input->post('password'))) { // The password is filled in.
+            $MySQL['update']->password = $this->security->xss_clean($this->input->post('pasword'));
+        }
 
         if ($MySQL['update']->save()) { // Update -> Success
-            $this->session->set_flashdata('class', '');
-            $this->session->set_flashdata('name', '');
+            $permissions = [];
+
+            foreach (Authencate::where('email', $MySQL['update']->email)->permissions as $permission) { // Set every permission role to a key,
+                array_push($permissions, $permission->role);                                            // Push every key invidual to the permissions array.
+            }
+
+            $this->session->set_userdata('authencated_user', [
+                'id'       => $MySQL['update']->id,
+                'name'     => $input['name'],
+                'email'    => $input['email'],
+                'username' => $input['username'],
+                'roles'    => $permissions
+            ]);
+
+            $this->session->set_flashdata('class', 'alert alert-success');
+            $this->session->set_flashdata('name', 'Je account instelingen zijn successvol aangepast');
         }
 
         return redirect($_SERVER['HTTP_REFERER']);
