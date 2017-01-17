@@ -61,6 +61,7 @@ class Sportsmen extends Model
      */
     public function points()
     {
-        return $this->belongsToMany('Points', 'pivot_ranking', 'sportsmen_id', 'item_id');
+        return $this->belongsToMany('Points', 'pivot_ranking', 'sportsmen_id', 'item_id')
+            ->withPivot('user_id');
     }
 }

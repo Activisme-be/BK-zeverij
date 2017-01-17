@@ -99,7 +99,7 @@ class Items extends MY_Controller
         $sportsMenId = $this->security->xss_clean($this->uri->segment(3));
         $itemId      = $this->security->xss_clean($this->uri->segment(4));
 
-        if (Sportsmen::find($sportsMenId)->points()->attach($itemId)) { // The vote is registered
+        if (Sportsmen::find($sportsMenId)->points()->attach($itemId, ['user_id' => $this->user['id']])) { // The vote is registered
             $this->session->flashdata('class', 'alert alert-success');
             $this->session->flashdata('message', 'Uw stem is successvol verwerkt.');
         }
