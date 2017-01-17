@@ -8,6 +8,8 @@
 
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{ base_url('auth/store') }}" method="POST">
+                        {{-- CSRF --}}
+                        <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">
