@@ -41,8 +41,7 @@ class Points extends Model
      */
     public function govMember()
     {
-        return $this->belongsTo('Sportsmen', 'sportsmen_id')
-            ->withTimestamps();
+        return $this->belongsTo('Sportsmen', 'sportsmen_id');
     }
 
     /**
@@ -52,7 +51,6 @@ class Points extends Model
      */
     public function creator()
     {
-        return $this->belongsTo('Authencate', 'creator_id')
-            ->withTimestamps();
+        return $this->belongsTo('Authencate', 'creator_id');
     }
 }

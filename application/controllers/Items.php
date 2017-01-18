@@ -69,7 +69,7 @@ class Items extends MY_Controller
         $data['title'] = 'Wansmakelijke punten.';
         $data['items'] = Points::all();
 
-        return $this->blade->render('items\index', $data);
+        return $this->blade->render('items/index', $data);
     }
 
     /**
@@ -85,7 +85,7 @@ class Items extends MY_Controller
         $data['title'] = 'Wansmakelijke punten';
         $data['items'] = Points::where('point', 'LIKE', '%' . $term .'%')->get();
 
-        return $this->blade->render('items\index', $data);
+        return $this->blade->render('items/index', $data);
     }
 
     /**
