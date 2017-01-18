@@ -59,8 +59,8 @@
                                     <li><a href="{{ base_url('account/settings') }}"><span class="fa fa-cog" aria-hidden="true"></span> Account instellingen</a></li>
 
                                     @if (in_array('admin', $this->user['roles']))
-                                        <li><a href="{{ base_url('items') }}"><span class="fa fa-cogs" aria-hidden="true"> Item management </a></li>
-                                        <li><a href="{{ base_url('users') }}"><span class="fa fa-users" aria-hidden="true"> User Management </a></li>
+                                        <li><a href="{{ base_url('items') }}"><span class="fa fa-cogs" aria-hidden="true"></span> Item management </a></li>
+                                        <li><a href="{{ base_url('users') }}"><span class="fa fa-users" aria-hidden="true"></span> User Management </a></li>
                                     @endif
 
                                     <li role="separator" class="divider"></li>
