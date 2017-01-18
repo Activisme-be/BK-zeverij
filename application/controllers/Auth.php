@@ -193,15 +193,12 @@ class Auth extends MY_Controller
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
         $this->form_validation->set_rules('name', 'Naam', 'trim|required');
-        $this->form_validation->set_rules('password', 'Wachtwoord', 'trim|required|min_length[6]|matches[password_confirm]');
-        $this->form_validation->set_rules('password_confirm', 'Wachtwoord confirmaties', 'trim|required');
+        $this->form_validation->set_rules('password', 'Wachtwoord', 'trim|min_length[6]|matches[password_confirm]');
+        $this->form_validation->set_rules('password_confirm', 'Wachtwoord confirmaties', 'trim');
 
         if ($this->form_validation->run() === false) { // Form validation fails
             // validation_errors(); // For debugging propose
-            //die();               // For debugging propose
-
-            $this->session->set_flashdata('class', 'alert alert-danger');
-            $this->session->set_flashdata('message', 'Wij konden uw verzoek niet verwerken wegens validatie fouten.');
+            // die();               // For debugging propose
 
             $data['title'] = 'Registreer';
             return $this->blade->render('auth/register', $data);
