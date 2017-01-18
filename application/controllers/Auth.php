@@ -198,7 +198,7 @@ class Auth extends MY_Controller
 
         if ($this->form_validation->run() === false) { // Form validation fails
             // validation_errors(); // For debugging propose
-            //die();               // For debugging propose
+            // die();               // For debugging propose
 
             $data['title'] = 'Registreer';
             return $this->blade->render('auth/register', $data);

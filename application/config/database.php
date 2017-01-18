@@ -78,10 +78,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'activisme_bk_zeverij',
+	'hostname' => 'activisme.be.mysql',
+	'username' => 'activisme_be_bk',
+	'password' => 'ikbeneenwachtwoord',
+	'database' => 'activisme_be_bk',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

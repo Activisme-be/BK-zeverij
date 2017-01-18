@@ -1,4 +1,4 @@
-@layout('layouts\front-end')
+@layout('layouts/front-end')
 
 @section('content')
     <div class="row">
@@ -44,5 +44,5 @@
         </div>
     </div>
 
-    @include('auth\reset') {{-- Reset password modal --}}
+    @include('auth/reset') {{-- Reset password modal --}}
 @endsection

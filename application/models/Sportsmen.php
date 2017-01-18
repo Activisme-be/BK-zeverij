@@ -41,8 +41,7 @@ class Sportsmen extends Model
      */
     public function union()
     {
-        return $this->belongsTo('Teams', 'Union_id')
-            ->withTimestamps();
+        return $this->belongsTo('Teams', 'Union_id');
     }
 
     /**
