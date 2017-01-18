@@ -193,8 +193,8 @@ class Auth extends MY_Controller
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
         $this->form_validation->set_rules('name', 'Naam', 'trim|required');
-        $this->form_validation->set_rules('password', 'Wachtwoord', 'trim|min_length[6]|matches[password_confirm]');
-        $this->form_validation->set_rules('password_confirm', 'Wachtwoord confirmaties', 'trim');
+        $this->form_validation->set_rules('password', 'Wachtwoord', 'trim|required|min_length[6]|matches[password_confirm]');
+        $this->form_validation->set_rules('password_confirm', 'Wachtwoord confirmaties', 'trim|required');
 
         if ($this->form_validation->run() === false) { // Form validation fails
             // validation_errors(); // For debugging propose
