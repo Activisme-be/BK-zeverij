@@ -2,9 +2,9 @@ new Vue({
     el: '#application',
 
     data : {
-        register : { username : '', email : '', name: '', password : '', password_confirm : '', disclaimer : '' },
-
-        submitted : false
+        register        : { username : '', email : '', name : '', password : '', password_confirm : '', disclaimer : '' },
+        accountSettings : { username : '', email : '', name : ''},
+        submitted       : false
     },
 
 
@@ -15,6 +15,12 @@ new Vue({
             }
 
             return false;
+        },
+
+        errorsSettings: function() {
+            for(var key in this.accountSettings) {
+                if (! this.accountSettings[key]) return true;
+            }
         }
     }
 
