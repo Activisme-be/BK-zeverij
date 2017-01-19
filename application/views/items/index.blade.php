@@ -63,7 +63,7 @@
                                         {{-- /Status --}}
 
                                         <td>{{ $item->govMember->Name }}</td>
-                                        <td><a href="{{ $item->media_url }}">{{ $item->point }}</a></td>
+                                        <td><a href="{{ $item->media_url }}">{{substr($item->point, 0, 67) }}...</a></td>
 
                                         {{-- Functions --}}
                                         <td>
