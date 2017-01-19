@@ -8,7 +8,7 @@ var sass        = require('gulp-sass');
  */
 gulp.task('scripts', function () {
     gulp.src('./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js').pipe(gulp.dest('./assets/js'));
-    gulp.src('./resources/js/ie10-viewport-bug-workaround.js').pipe(gulp.dest('./assets/js'));
+    gulp.src('./resources/js/*.js').pipe(gulp.dest('./assets/js'));
 });
 
 /**
