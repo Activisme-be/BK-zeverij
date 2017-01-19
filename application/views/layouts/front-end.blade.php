@@ -93,10 +93,9 @@
         {{-- Core JavaScript --}}
         {{-- ============================================= --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="{{ base_url('assets/js/bootstrap.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js" async></script>
+        <script src="{{ base_url('assets/js/bootstrap.js') }}" async></script>
 
-        {{-- FIXME: Implement minified vue.js --}}
-        {{-- FIXME: Implement minified vue-resource.js --}}
         {{-- FIXME: Implement vue.js functions. --}}
 
         {{-- IE10 viewport hack for Surface/desktop Windows 8 bug --}}
