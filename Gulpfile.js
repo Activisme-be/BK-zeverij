@@ -19,14 +19,14 @@ gulp.task('sass-watch', function () {
 });
 
 /**
- * COMMAND:
+ * COMMAND: copy-fonts
  */
 gulp.task('copy-fonts', function () {
     gulp.src('./node_modules/bootstrap-sass/assets/fonts/bootstrap/*.{ttf,woff,woff2,eot,svg}').pipe(gulp.dest('./assets/fonts/bootstrap'));
 });
 
 /**
- * COMMAND:
+ * COMMAND: sass
  */
 gulp.task('sass', function () {
     return gulp.src('./resources/sass/*.scss')
