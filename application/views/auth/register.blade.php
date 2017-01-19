@@ -86,6 +86,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ form_error('disclaimer') ? 'has-error' : '' }}">
+                            <div class="col-md-offset-4 col-md-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="accept" name="disclaimer"> Ik accepteer de <a href="{{ base_url('disclaimer') }}" target="_blank">disclaimer</a>
+                                    </label>
+
+                                    @if (form_error('disclaimer'))
+                                        <span class="help-block"><small>{{ form_error('disclaimer') }}</small></span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-offset-4 col-md-6">
                                 <button type="submit" class="btn btn-default">Registreer</button>
