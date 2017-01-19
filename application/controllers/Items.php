@@ -28,7 +28,7 @@ class Items extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(['blade', 'session', 'form_validation']);
+        $this->load->library(['blade', 'session', 'form_validation', 'pagination']);
         $this->load->helper(['url']);
 
         $this->user = $this->session->userdata('authencated_user');
@@ -64,10 +64,15 @@ class Items extends MY_Controller
      */
     public function index()
     {
-        // FIXME: Set pagination on the items variable.
+        $term  = $this->security->xss_clean($this->input->get('term'));
+        $query = new Points;
+        $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
 
-        $data['title'] = 'Wansmakelijke punten.';
-        $data['items'] = Points::all();
+        $this->pagination->initialize($this->paginationConfig(base_url('items/search/'), $query->count(), 25, 3));
+
+        $data['title']   = 'Wansmakelijke punten';
+        $data['items']   = $query->skip($page)->take(25)->get();
+        $data['links']   = $this->pagination->create_links();
 
         return $this->blade->render('items/index', $data);
     }
@@ -80,10 +85,15 @@ class Items extends MY_Controller
      */
     public function search()
     {
-        $term = $this->security->xss_clean($this->input->get('term'));
+        $term  = $this->security->xss_clean($this->input->get('term'));
+        $query = Points::where('point', 'LIKE', '%' . $term . '%');
+        $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
 
-        $data['title'] = 'Wansmakelijke punten';
-        $data['items'] = Points::where('point', 'LIKE', '%' . $term .'%')->get();
+        $this->pagination->initialize($this->paginationConfig(base_url('items/search/'), $query->count(), 25, 3));
+
+        $data['title']   = 'Wansmakelijke punten';
+        $data['items']   = $query->skip($page)->take(25)->get();
+        $data['links']   = $this->pagination->create_links();
 
         return $this->blade->render('items/index', $data);
     }
@@ -173,6 +183,51 @@ class Items extends MY_Controller
         }
 
         return redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * Pagination config
+     *
+     * @param  string   $baseUrl     The base url for the page.
+     * @param  int      $totalRows   The amount off rows of the query.
+     * @param  int      $perPage     Amount of data rows per page.
+     * @param  int      $segment     The URI segment.
+     * @return array    $config
+     */
+    public function paginationConfig($baseUrl, $totalRows, $perPage, $segment)
+    {
+        $config['base_url']     = $baseUrl;
+        $config['total_rows']   = $totalRows;
+        $config['per_page']     = $perPage;
+        $config['uri_segement'] = $segment;
+        $config['num_links']    = round($config['total_rows'] / $config['per_page']);
+
+        $config['page_query_string']    = TRUE;
+        // $config['use_page_numbers']  = TRUE;
+        $config['query_string_segment'] = 'page';
+        $config['full_tag_open']        = '<ul style="margin-top: -10px; margin-bottom: -10px;" class="pagination pagination-sm">';
+        $config['full_tag_close']       = '</ul><!--pagination-->';
+        $config['first_link']           = '&laquo; First';
+        $config['first_tag_open']       = '<li class="prev page">';
+        $config['first_tag_close']      = '</li>';
+        $config['last_link']            = 'Last &raquo;';
+        $config['last_tag_open']        = '<li class="next page">';
+        $config['last_tag_close']       = '</li>';
+        $config['next_link']            = 'Next &rarr;';
+        $config['next_tag_open']        = '<li class="next page">';
+        $config['next_tag_close']       = '</li>';
+        $config['prev_link']            = '&larr; Previous';
+        $config['prev_tag_open']        = '<li class="prev page">';
+        $config['prev_tag_close']       = '</li>';
+        $config['cur_tag_open']         = '<li class="active"><a href="">';
+        $config['cur_tag_close']        = '</a></li>';
+        $config['num_tag_open']         = '<li class="page">';
+        $config['num_tag_close']        = '</li>';
+        // $config['display_pages']     = FALSE;
+        //
+        $config['anchor_class']         = 'follow_link';
+
+        return $config;
     }
 
     /**

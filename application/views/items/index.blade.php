@@ -86,6 +86,9 @@
                         </table>
                         {{-- /item table --}}
 
+                        {{-- pagination --}}
+                            {{ $links }}
+                        {{-- /pagination --}}
                     </div>
                 </div>
             @else
