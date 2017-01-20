@@ -107,11 +107,11 @@ class Users extends MY_Controller
      */
     public function handlings()
     {
-        $userId = $this->security->xss_clean($this->uri->segment(3));
-        $data['user']  = Authencate::find($userId);
+        $userId        = $this->security->xss_clean($this->uri->segment(3));
+        $data['user']  = Authencate::with(['permissions', 'ban', 'items'])->find($userId);
         $data['title'] = $data['user']->name;
 
-        return $this->blade->render('users/handlings');
+        return $this->blade->render('users/handlings', $data);
     }
 
     /**
@@ -125,8 +125,11 @@ class Users extends MY_Controller
         $this->form_validation->set_rules('reason', 'Reden', 'trim|required');
 
         if ($this->form_validation->run() == false) { // Validation fails.
+            $userId = $this->security->xss_clean($this->uri->segent(3));
+
             $data['title'] = 'User management panel.';
-            return $this->blade->render('users/index', $data);
+            $data['user']  = Authencate::with(['permissions', 'ban', 'items'])->find($userId);
+            return $this->blade->render('users/hanglings/' . $data['user']->id, $data);
         }
 
         // No validation errors so we can move on with our logic.
@@ -134,9 +137,12 @@ class Users extends MY_Controller
         $input['reason']  = $this->security->xss_clean($this->input->post('reason'));
 
         $MySQL['reason']  = Ban::create(['reason' => $input['reason']]);
-        $MySQL['blocked'] = Authencate::find($input['user_id'])->update(['blocked' => 'Y', 'ban_id' => $MySQL['reason']->id]);
 
-        if ($MySQL['blocked'] && $MySQL['reason']) { // User is blocked now.
+        $MySQL['blocked'] = Authencate::find($input['user_id']);
+        $MySQL['blocked']->blocked = 'Y';
+        $MySQL['blocked']->ban_id = $MySQL['reason']->id;
+
+        if ($MySQL['blocked']->save() && $MySQL['reason']) { // User is blocked now.
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'The user has been blocked');
         }

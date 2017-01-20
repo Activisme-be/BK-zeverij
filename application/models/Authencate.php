@@ -44,4 +44,15 @@ class Authencate extends Model
         return $this->belongsToMany('Permissions', 'pivot_login_permissions', 'permissions_id', 'login_id')
             ->withTimestamps();
     }
+
+    public function ban()
+    {
+        return $this->belongsTo('Ban', 'ban_id');
+    }
+
+    public function items()
+    {
+        return $this->belongsToMany('Points', 'pivot_ranking', 'sportsmen_id', 'creator_id')
+            ->withTimestamps();
+    }
 }
