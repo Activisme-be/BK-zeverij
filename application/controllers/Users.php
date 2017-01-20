@@ -26,6 +26,10 @@ class Users extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library(['form_validation', 'blade', 'session', 'pagination']);
+        $this->load->helper(['url']);
+
+        $this->user = $this->session->userdata('authencated_user');
     }
 
     /**
@@ -54,23 +58,118 @@ class Users extends MY_Controller
 
     }
 
+    /**
+     * Display the panel for the user management.
+     *
+     * @see    GET|HEAD:    http://www.domain.tld/users
+     * @return Blade view
+     */
     public function index()
     {
+        // FIXME: Build up the view.
 
+        $query = Authencate::with('permissions');
+        $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
+
+        $this->pagination->initialize($this->paginationConfig(base_url('users'), $query->count(), 25, 3));
+
+        $data['title'] = 'User management panel.';
+        $data['users'] = $query->skip($page)->take(25)->get();
+        $data['links'] = $this->pagination->create_links();
+
+        return $this->blade->render('users/index', $data);
     }
 
+    /**
+     * Search for a specific user in the platform.
+     *
+     * @see    POST:    http://www.domain.tld/users/search
+     * @return Blade view.
+     */
     public function search()
     {
 
     }
 
-    public function status()
+    /**
+     * Block the user in the system.
+     *
+     * @see    GET|HEAD:    http://www.domain.tld/users/block
+     * @return Response | Redirect
+     */
+    public function block()
     {
+        if ($this->form_validation->run() == false) { // Validation fails.
+            $data['title'] = 'User management panel.';
+            return $this->blade->render('users/index', $data);
+        }
+
+        // No validation errors so we can move on with our logic.
+
 
     }
 
-    public function paginationConfig()
+    /**
+     * Enable that the user can logged in again.
+     *
+     * @see    GET|HEAD:    http://www.domain.tld/users/unblock
+     * @return Response | Redirect
+     */
+    public function unblock()
     {
+        $user = Authencate::find($this->user['id']);
+        $user->blocked = 'Y';
 
+        if ($user->save()) {
+            $this->session->set_flashdata('class', 'alert alert-success');
+            $this->session->set_flashdata('message', 'The user is terug actief.');
+        }
+
+        return redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * [INTERNAL]: Pagination config
+     *
+     * @param  string   $baseUrl     The base url for the page.
+     * @param  int      $totalRows   The amount off rows of the query.
+     * @param  int      $perPage     Amount of data rows per page.
+     * @param  int      $segment     The URI segment.
+     * @return array    $config
+     */
+    public function paginationConfig($baseUrl, $totalRows, $perPage, $segment)
+    {
+        $config['base_url']     = $baseUrl;
+        $config['total_rows']   = $totalRows;
+        $config['per_page']     = $perPage;
+        $config['uri_segement'] = $segment;
+        $config['num_links']    = round($config['total_rows'] / $config['per_page']);
+
+        $config['page_query_string']    = TRUE;
+        // $config['use_page_numbers']  = TRUE;
+        $config['query_string_segment'] = 'page';
+        $config['full_tag_open']        = '<ul style="margin-top: -10px; margin-bottom: -10px;" class="pagination pagination-sm">';
+        $config['full_tag_close']       = '</ul><!--pagination-->';
+        $config['first_link']           = '&laquo; First';
+        $config['first_tag_open']       = '<li class="prev page">';
+        $config['first_tag_close']      = '</li>';
+        $config['last_link']            = 'Last &raquo;';
+        $config['last_tag_open']        = '<li class="next page">';
+        $config['last_tag_close']       = '</li>';
+        $config['next_link']            = 'Next &rarr;';
+        $config['next_tag_open']        = '<li class="next page">';
+        $config['next_tag_close']       = '</li>';
+        $config['prev_link']            = '&larr; Previous';
+        $config['prev_tag_open']        = '<li class="prev page">';
+        $config['prev_tag_close']       = '</li>';
+        $config['cur_tag_open']         = '<li class="active"><a href="">';
+        $config['cur_tag_close']        = '</a></li>';
+        $config['num_tag_open']         = '<li class="page">';
+        $config['num_tag_close']        = '</li>';
+        // $config['display_pages']     = FALSE;
+        //
+        $config['anchor_class']         = 'follow_link';
+
+        return $config;
     }
 }

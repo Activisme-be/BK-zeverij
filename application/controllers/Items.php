@@ -68,7 +68,7 @@ class Items extends MY_Controller
         $query = new Points;
         $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
 
-        $this->pagination->initialize($this->paginationConfig(base_url('items/search/'), $query->count(), 25, 3));
+        $this->pagination->initialize($this->paginationConfig(base_url('items'), $query->count(), 25, 3));
 
         $data['title']   = 'Wansmakelijke punten';
         $data['items']   = $query->skip($page)->take(25)->get();
@@ -186,7 +186,7 @@ class Items extends MY_Controller
     }
 
     /**
-     * Pagination config
+     * [INTERNAL]: Pagination config
      *
      * @param  string   $baseUrl     The base url for the page.
      * @param  int      $totalRows   The amount off rows of the query.
