@@ -66,6 +66,8 @@ class Users extends MY_Controller
      */
     public function index()
     {
+        //var_dump($this->user);
+        //die();
         $query = Authencate::with('permissions');
         $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
 
@@ -108,8 +110,8 @@ class Users extends MY_Controller
     public function handlings()
     {
         $userId        = $this->security->xss_clean($this->uri->segment(3));
-        $data['user']  = Authencate::with(['permissions', 'ban', 'items'])->find($userId);
-        $data['title'] = $data['user']->name;
+        $data['human'] = Authencate::with(['permissions', 'ban', 'items'])->find($userId);
+        $data['title'] = $data['human']->name;
 
         return $this->blade->render('users/handlings', $data);
     }

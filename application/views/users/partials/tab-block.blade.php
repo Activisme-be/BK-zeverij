@@ -1,12 +1,12 @@
 <div class="panel panel-default">
     <div class="panel-body">
         {{-- Tab content --}}
-        <form class="form-horizontal" method="POST" action="{{ base_url('users/block/' . $user->id) }}">
+        <form class="form-horizontal" method="POST" action="{{ base_url('users/block/' . $human->id) }}">
             <div class="form-group">
                 <label class="control-label col-sm-2">User:</label>
 
                 <div class="col-sm-10">
-                    <input disabled type="text" class="form-control" name="username" value="{{ $user->username}}">
+                    <input disabled type="text" class="form-control" name="username" value="{{ $human->username}}">
                 </div>
             </div>
 
