@@ -85,6 +85,7 @@
             {{-- Includes --}}
                 {{-- TODO: Implement user creation model --}}
                 {{-- TODO: Implement permissions model --}}
+                {{-- TODO: Implement block model. --}}
             {{-- /Includes --}}
         </div>
     </div>
