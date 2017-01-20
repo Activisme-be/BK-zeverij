@@ -66,8 +66,6 @@ class Users extends MY_Controller
      */
     public function index()
     {
-        // FIXME: Build up the view.
-
         $query = Authencate::with('permissions');
         $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
 
@@ -88,25 +86,44 @@ class Users extends MY_Controller
      */
     public function search()
     {
+        $query = Authencate::with('permissions')->where('email', 'LIKE', '%'. $term .'%');
+        $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
 
+        $this->pagination->initialize($this->paginationConfig(base_url('users/search'), $query->count(), 25, 3));
+
+        $data['title'] = 'User management panel.';
+        $data['users'] = $query->skip($page)->take(25)->get();
+        $data['links'] = $this->pagination->create_links();
+
+        return $this->blade->render('users/index', $data)
     }
 
     /**
      * Block the user in the system.
      *
-     * @see    GET|HEAD:    http://www.domain.tld/users/block
+     * @see    GET|HEAD:    http://www.domain.tld/users/block/{id}
      * @return Response | Redirect
      */
     public function block()
     {
+        $this->form_validation->set_rules('reason', 'Reden', 'trim|required');
+
         if ($this->form_validation->run() == false) { // Validation fails.
             $data['title'] = 'User management panel.';
             return $this->blade->render('users/index', $data);
         }
 
         // No validation errors so we can move on with our logic.
+        $input['user_id'] = $this->security->xss_clean($this->uri->segment(3));
+        $input['reason']  = $this->security->xss_clean($this->input->post('reason'));
 
+        $MySQL['blocked'] = Authencate::find($input['user_id'])->update(['blocked' => 'Y']);
+        $MySQL['reason']  = Ban::create(['login_id' => $input['user_id'], 'reason' => $input['reason']]);
 
+        if ($MySQL['blocked'] && $MySQL['reason']) { // User is blocked now
+        }
+
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 
     /**
