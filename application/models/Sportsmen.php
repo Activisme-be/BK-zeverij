@@ -52,6 +52,7 @@ class Sportsmen extends Model
     public function items()
     {
         return $this->belongsToMany('Points', 'pivot_items', 'sportsmen_id', 'item_id')
+            ->withPivot('creator_id')
             ->withTimestamps();
     }
 

@@ -155,7 +155,7 @@ class Items extends MY_Controller
 
         // MySQL Handlings.
         $MySQL['insert']   = Points::create($this->security->xss_clean($input));
-        $MySQL['relation'] = Sportsmen::find($sportsmenId)->items()->attach($MySQL['insert']->id);
+        $MySQL['relation'] = Sportsmen::find($sportsmenId)->items()->attach($MySQL['insert']->id, ['creator_id' => $this->user['id']]);
 
         // Output handling
         if ($MySQL['insert'] && $MySQL['relation']) {

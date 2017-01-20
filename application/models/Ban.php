@@ -13,4 +13,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Ban extends Model
 {
+    /**
+     * Database table.
+     *
+     * @var string
+     */
+    protected $table = 'ban_reasons';
+
+    /**
+     * Mass-assign fields
+     *
+     * @var array
+     */
+    protected $fillable = ['reason'];
+
+    /**
+     * Enable or disable timestamps.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
 }

@@ -62,12 +62,7 @@
                                     <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
 
                                     <td> {{-- Functions --}}
-                                        @if ($user->blocked === 'N')
-                                            <a href="" class="label label-danger">Blokkeer</a>
-                                        @elseif ($user->blocked === 'Y')
-                                            <a href="" class="label label-danger">Activeer</a>
-                                        @endif
-
+                                        <a href="{{ base_url('users/handlings/' . $user->id) }}" class="label label-info">Bekijk</a>
                                         <a href="#" class="label label-warning">Rechten</a>
                                         <a href="#" class="label label-danger">Verwijder</a>
                                     </td> {{-- /Functions --}}
@@ -84,9 +79,7 @@
 
             {{-- Includes --}}
                 {{-- TODO: Implement user creation model --}}
-                {{-- TODO: Implement permissions model --}}
-                {{-- TODO: Implement block model. --}}
-            {{-- /Includes --}}
+            {{-- /includes --}}
         </div>
     </div>
 @endsection

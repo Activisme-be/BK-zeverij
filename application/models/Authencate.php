@@ -25,7 +25,7 @@ class Authencate extends Model
      *
      * @var array
      */
-    protected $fillable = ['username', 'password', 'blocked', 'email', 'name'];
+    protected $fillable = ['ban_id', 'username', 'password', 'blocked', 'email', 'name'];
 
     /**
      * Disable / Enable timestamps
