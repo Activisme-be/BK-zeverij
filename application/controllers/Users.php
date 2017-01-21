@@ -160,10 +160,13 @@ class Users extends MY_Controller
      */
     public function unblock()
     {
-        $user = Authencate::find($this->user['id']);
-        $user->blocked = 'Y';
+        $userId = $this->security->xss_clean($this->uri->segment(3));
 
-        if ($user->save()) {
+        $MySQL['account'] = Authencate::find($userId);
+        $MySQL['account']->blocked = 'N';
+        $MySQL['account']->ban_id  = '';
+
+        if ($MySQL['account']->save() && Ban::destroy($MySQL['account']->ban_id)) {
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'The user is terug actief.');
         }

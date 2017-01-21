@@ -6,7 +6,7 @@
                     <strong>Geblokkeerd: op {{ $human->ban->created_at }} </strong>
 
                     <p>wegens: {{ $human->ban->reason}}</p>
-                    <p><a href="#" class="btn btn-sm btn-danger">Activeren</a></p>
+                    <p><a href="{{ base_url('users/unblock/' . $human->id) }}" class="btn btn-sm btn-danger">Activeren</a></p>
                 </div>
             @endif
 
