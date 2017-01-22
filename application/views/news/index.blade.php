@@ -38,9 +38,9 @@
 				        
 				        		<p>
 				          			<i class="icon-user"></i> Autheur: <a href="#">{{ $article->author->name }}</a> 
-				          			| <i class="icon-calendar"></i> {{ $article->created_at }}
-				          			| <i class="icon-comment"></i> <a href="#">{{ count($article->comments) }} Reacties</a>
-				          			| <i class="icon-tags"></i> Tags:
+				          			| <i class="fa fa-calendar" aria-hidden="true"></i> {{ $article->created_at }}
+				          			| <i class="fa fa-comment" aria-hidden="true"></i> <a href="#">{{ count($article->comments) }} Reacties</a>
+				          			| <i class="fa fa-tags" aria-hidden="true"></i> Tags:
 
 				          			@if ((int) count($article->categories) > 0)
 				          				@foreach($article->categories as $category)
