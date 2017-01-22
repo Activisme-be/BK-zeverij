@@ -61,7 +61,7 @@ class News extends MY_Controller
      */
     public function index()
     {
-        $data['data']       = 'Nieuws';
+        $data['title']      = 'Nieuws';
         $data['categories'] = NewsCategories::all(); 
 
         return $this->blade->render('news/index', $data);
