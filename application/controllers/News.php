@@ -209,13 +209,22 @@ class News extends MY_Controller
     public function delete() 
     {
         $param['id']      = $this->security->xss_clean($this->uri->segment(3));
-        $MySQL['article'] = Articles::find($param['id']);
+        $MySQL['article'] = Articles::with(['comments', 'author', 'categories'])->find($param['id']);
 
         if ((int) count($MySQL['article']) === 1) { // Record is found 
-            $MySQL['article']->destroy(); 
+
+            if ((int) count($MySQL['article']->comments) > 0) {         // There are comments on the article. 
+                foreach ($MySQL['article']->comments as $comment) {     // Remove all the comments in the database. 
+                    Comments::destroy($comment->id);                    // Remove the comment with teh given id. 
+                }
+            }
+
+            $MySQL['article']->comments()->sync([]);    // Disconnect the comments from the article.
+            $MySQL['article']->categories()->sync([]);  // Disconnect the categories form the article.
+            $MySQL['article']->delete();               // Delete the article out off the database. 
 
             $this->session->set_flashdata('class', 'alert alert-success'); 
-            $this->session->set_flashdata('message', 'THe article has been deleted');
+            $this->session->set_flashdata('message', 'The article has been deleted');
         }
 
         return redirect($_SERVER['HTTP_REFERER'], 'refresh');
