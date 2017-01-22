@@ -9,47 +9,53 @@
 
     <div style="padding-bottom: 30px;" class="padding-top row">
     	<div class="col-md-9">
-    		<div style="margin-left: -15px;" class="col-sm-12">
-    			<div class="row">
-	    			<div class="col-md-8">
-	    				<h4><strong><a href="#">Title of the post</a></strong></h4>
-	   				</div>
-   				</div>
-    			
-	    		<div class="row">
-	      			<div class="col-md-3">
-	        			<a href="#" class="thumbnail">
-	           				<img src="http://placehold.it/260x180" alt="">
-	        			</a>
-	      			</div>
-	      
-	     			<div class="col-md-9">      
-	        			<p>
-	          				Lorem ipsum dolor sit amet, id nec conceptam conclusionemque. 
-	          				Et eam tation option. Utinam salutatus ex eum. Ne mea dicit tibique facilisi, ea mei omittam explicari conclusionemque, ad nobis propriae quaerendum sea.
-	        			</p>
-	        
-	        			<p><a class="btn btn-sm btn-info" href="#">Read more</a></p>
-	     			</div>
-	    		</div>
-    
-	    		<div class="row">
-	      			<div class="col-md-12" style="margin-top: -20px;">
-		        		<p></p>
-		        
-		        		<p>
-		          			<i class="icon-user"></i> by <a href="#">John</a> 
-		          			| <i class="icon-calendar"></i> Sept 16th, 2012
-		          			| <i class="icon-comment"></i> <a href="#">3 Comments</a>
-		          			| <i class="icon-tags"></i> Tags : <a href="#"><span class="label label-info">Snipp</span></a> 
-		          
-		          			<a href="#"><span class="label label-info">Bootstrap</span></a> 
-		          			<a href="#"><span class="label label-info">UI</span></a> 
-		          			<a href="#"><span class="label label-info">growth</span></a>
-		        		</p>
-		      		</div>
-	    		</div>
-	    	</div>
+    		
+    		{{-- News items --}}
+    			@foreach($news as $article)
+    				<div style="margin-left: -15px;" class="col-sm-12">
+		    			<div class="row">
+			    			<div class="col-md-8">
+			    				<h4><strong><a href="#">{{ $article->heading }}</a></strong></h4>
+			   				</div>
+		   				</div>
+		    			
+			    		<div class="row">
+			      			<div class="col-md-3">
+			        			<a href="#" class="thumbnail">
+			           				<img src="http://placehold.it/260x180" alt="">
+			        			</a>
+			      			</div>
+			      
+			     			<div class="col-md-9">      
+			        			<p>{{ strip_tags($this->cimarkdown->markit($article->message)) }}</p>
+			        			<p><a class="btn btn-sm btn-info" href="#">Lees meer...</a></p>
+			     			</div>
+			    		</div>
+		    
+			    		<div class="row">
+			      			<div class="col-md-12" style="margin-top: -20px;">
+				        		<p></p>
+				        
+				        		<p>
+				          			<i class="icon-user"></i> Autheur: <a href="#">{{ $article->author->name }}</a> 
+				          			| <i class="icon-calendar"></i> {{ $article->created_at }}
+				          			| <i class="icon-comment"></i> <a href="#">{{ count($article->comments) }} Reacties</a>
+				          			| <i class="icon-tags"></i> Tags:
+
+				          			@if ((int) count($article->categories) > 0)
+				          				@foreach($article->categories as $category)
+				          					<a href="#"><span class="label label-info">{{ $category->category }}</span></a> 
+				          				@endforeach
+				          			@else 
+				          				<span class="label label-primary">Geen</span>
+				          			@endif
+				          
+				        		</p>
+				      		</div>
+			    		</div>
+			    	</div>
+    			@endforeach
+    		{{-- /News Items --}}
 
 	    	<div style="margin-left: -15px;" class="col-sm-12">
 	    		{{-- Pagination --}}

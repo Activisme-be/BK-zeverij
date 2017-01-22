@@ -26,7 +26,7 @@ class News extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library(['blade', 'session', 'form_validation', 'pagination']);
+        $this->load->library(['blade','cimarkdown','session', 'form_validation', 'pagination']);
         $this->load->helper(['url']);
 
         $this->user = $this->session->userdata('authencated_user');
@@ -54,7 +54,7 @@ class News extends MY_Controller
     }
 
     /**
-     * Get the front-end for the nws items.
+     * Get the front-end for the news items.
      *
      * @see    GET|HEAD:    http://www.domain.tld/news
      * @return blade view.
@@ -63,9 +63,9 @@ class News extends MY_Controller
     {
         // Needed data for the pagination. 
         $query = Articles::with(['comments', 'author', 'categories']); 
-        $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
+        $page  = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-        $this->pagination->initialize($this->paginationConfig(base_url('news/'), $query->count(), 4, 3));
+        $this->pagination->initialize($this->paginationConfig(base_url('news/index'), $query->count(), 4, 3));
 
         $data['title']      = 'Nieuws';
         $data['news']       = $query->skip($page)->take(4)->get();
@@ -142,8 +142,7 @@ class News extends MY_Controller
      */
     public function store() 
     {
-        // FIXME: Implement gook for setting catories. 
-        // FIXME: Settng model and database.
+        // FIXME: Set method to upload a image (260x180)
         // FIXME: Set markdown support on tehe message
 
         $this->form_validation->set_rules('heading', 'Titel nieuwsbericht', 'trim|required');
@@ -265,7 +264,7 @@ class News extends MY_Controller
         $config['uri_segement'] = $segment;
         $config['num_links']    = round($config['total_rows'] / $config['per_page']);
 
-        $config['page_query_string']    = TRUE;
+        $config['page_query_string']    = false;
         // $config['use_page_numbers']  = TRUE;
         $config['query_string_segment'] = 'page';
         $config['full_tag_open']        = '<ul class="pagination pagination-sm">';
