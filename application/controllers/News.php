@@ -131,7 +131,9 @@ class News extends MY_Controller
         $this->form_validation->set_rules('heading', 'Titel nieuwsbericht', 'trim|required');
         $this->form_validation->set_rules('description', 'Nieuwsbericht', 'trim|required');
 
-        if ($this->form_validation->run() == false) {
+        if ($this->form_validation->run() == false) { // Validation fails. 
+            var_dump(validation_errors()); 
+            die();
             $data['title'] = 'Nieuws management';
             $data['news']       = Articles::with(['comments', 'author', 'categories'])->get();
             $data['categories'] = NewsCategories::all(); 
@@ -150,15 +152,13 @@ class News extends MY_Controller
         $MySQL['create']   = Articles::create($this->security->xss_clean($input));
         
         if (! empty($input['categories'])) { // They are categories set
-            $MYSQL['category'] = Articles::find($MySQL['create']->id)->categories()->sync($input['categories']);
+            $MYSQL['categories'] = Articles::find($MySQL['create']->id)->categories()->sync($input['categories']);
         }
+ 
+        $this->session->set_flashdata('class', 'alert alert-success'); 
+        $this->session->set_flashdata('message', 'The article has been saved');
 
-        if ($MySQL['create'] && $MySQL['categories']) { // The article has been saved. 
-            $this->session->set_flashdata('class', 'alert alert-success'); 
-            $this->session->set_flashdata('message', 'The article has been saved');
-        }
-
-        return redirect($_SERVER['HTTP_REFERER'], 'refresh');
+        return redirect(base_url('news/backend'), 'refresh');
     }
 
     /** 
