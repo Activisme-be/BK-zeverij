@@ -77,7 +77,7 @@ class News extends MY_Controller
     {
         // FIXME: Set pagination for articles. 
         // FIXME: Set pagination for categories. 
-        
+
         $data['title']      = 'Nieuws berichten';
         $data['news']       = Articles::with(['comments', 'author', 'categories'])->get();
         $data['categories'] = NewsCategories::all(); 
@@ -128,25 +128,30 @@ class News extends MY_Controller
         // FIXME: Settng model and database.
         // FIXME: Set markdown support on tehe message
 
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required');
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required');
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required');    
+        $this->form_validation->set_rules('heading', 'Titel nieuwsbericht', 'trim|required');
+        $this->form_validation->set_rules('description', 'Nieuwsbericht', 'trim|required');
 
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Nieuws management';
+            $data['news']       = Articles::with(['comments', 'author', 'categories'])->get();
+            $data['categories'] = NewsCategories::all(); 
             return $this->blade->render('news/backend', $data);
         }
 
         // No validation errors found. SO move on with the logic. 
 
         //> Input's
-        $input['creator_id'] = $this->input->post('creator_id');
-        $input['heading']    = $this->input->post('heading');
-        $input['categories'] = $this->input->post('categories'); 
+        $input['creator_id']  = $this->user['id']; 
+        $input['message']     = $this->input->post('description');
+        $input['heading']     = $this->input->post('heading');
+        $input['categories']  = $this->input->post('categories'); 
 
         //> DB handlings 
         $MySQL['create']   = Articles::create($this->security->xss_clean($input));
-        $MYSQL['category'] = Articles::find($MySQL['create']->id)->categories()->sync($input['categories']);
+        
+        if (! empty($input['categories'])) { // They are categories set
+            $MYSQL['category'] = Articles::find($MySQL['create']->id)->categories()->sync($input['categories']);
+        }
 
         if ($MySQL['create'] && $MySQL['categories']) { // The article has been saved. 
             $this->session->set_flashdata('class', 'alert alert-success'); 

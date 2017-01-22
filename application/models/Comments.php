@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * CommentsModel.
+ * Comments Model.
  *
  * @author    Tim Joosten   <Topairy@gmail.com>
  * @copyright Activisme-BE  <info@activisme.be>
@@ -13,5 +13,24 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Comments extends Model 
 {
-	
+	/** 
+	 * Set the database table used. 
+	 * 
+	 * @return string
+	 */ 
+	protected $table = 'news_comments'; 
+
+	/** 
+	 * Set mass-assign fields.
+	 * 
+	 * @return array
+	 */
+	protected $fillable = ['user_id', 'comment']; 
+
+	/** 
+	 * Enable / Disable timestamps. 
+	 * 
+	 * @return bool 
+	 */ 
+	public $timestamps = true; 
 }
