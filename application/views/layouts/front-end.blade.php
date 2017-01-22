@@ -42,6 +42,7 @@
                         @if ($this->user)
                             <li {{ (current_url() == base_url('ranking')) ? 'class="active"' : '' }}><a href="{{ base_url('ranking') }}">Het Klassement</a></li>
                             <li {{ (current_url() == base_url('participants')) ? 'class="active"' : '' }}><a href="{{ base_url('participants') }}">Onze topsporters</a></li>
+                            <li {{ (current_url() == base_url('news')) ? 'class="active"' : '' }}><a href="{{ base_url('news') }}">Nieuws</a></li>
                         @endif
 
                         <li {{ (current_url() == base_url('disclaimer')) ? 'class="active"' : '' }}><a href="{{ base_url('disclaimer') }}">Disclaimer</a></li>
@@ -60,6 +61,7 @@
 
                                     @if (in_array('admin', $this->user['roles']))
                                         <li role="seperator" class="divider"></li>
+                                        <li><a href="{{ base_url('news/backend') }}"><span class="fa fa-file-text-o"></span> News Management</a></li>
                                         <li><a href="{{ base_url('items') }}"><span class="fa fa-cogs" aria-hidden="true"></span> Item management </a></li>
                                         <li><a href="{{ base_url('users') }}"><span class="fa fa-users" aria-hidden="true"></span> User Management </a></li>
                                     @endif

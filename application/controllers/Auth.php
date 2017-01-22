@@ -83,6 +83,7 @@ class Auth extends MY_Controller
             $permissions  = []; // Empty permission array.
 
             // Build up the session array.
+
             foreach ($MySQL['user']->get() as $user) { // Define the data to the session array.
                 foreach ($user->permissions as $perm) { // Set every permission role to a key,
                     array_push($permissions, $perm->role);    // Push every key invidual to the permissions array.
