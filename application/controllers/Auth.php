@@ -89,6 +89,8 @@ class Auth extends MY_Controller
                     array_push($permissions, $perm->role);    // Push every key invidual to the permissions array.
                 }
 
+                // TODO: GitHub Issue #
+
                 $authencation['id']         = $user->id;
                 $authencation['name']       = $user->name;
                 $authencation['email']      = $user->email;

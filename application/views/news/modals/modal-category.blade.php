@@ -16,7 +16,7 @@
                     </label>
 
                     <div class="col-sm-9">
-                        <input type="text" name="category" placeholder="Categorie naam" class="form-control" />
+                        <input type="text" v-model="coategoryInsert.category" name="category" placeholder="Categorie naam" class="form-control" />
                     </div>
                 </div>
 
@@ -26,13 +26,13 @@
                     </label>
 
                     <div class="col-sm-9">
-                        <textarea rows="8" placeholder="Categorie beschrijving" class="form-control" name="description"></textarea>
+                        <textarea v-model="categoryInsert.description" rows="8" placeholder="Categorie beschrijving" class="form-control" name="description"></textarea>
                     </div>
                 </div>
             </div>
       
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-primary">Aanmaken</button>
+            <div class="modal-footer" v-if="! submitted">
+                <button type="submit" class="btn btn-sm btn-primary" v-attr="disabled: errorsCategory">Aanmaken</button>
                 </form>
                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Sluiten</button>
             </div>

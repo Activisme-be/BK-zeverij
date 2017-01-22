@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form method="POST" action="" class="form-inline pull-left"> 
+				<form method="POST" action="{{ base_url('category/search') }}" class="form-inline pull-left"> 
             		<input @if ((int) count($categories) === 0) disabled  @endif class="form-control" placeholder="Search term" name="term" />
                 	<button type="submit" class="btn btn-danger" @if ((int) count($categories) === 0) disabled  @endif>
                     	<span class="glyphicon glyphicon-search"></span> Zoek
@@ -38,14 +38,13 @@
 										<td> <code>#C{{ $category->id }} </code></td>
 										<td> {{ $category->category }} </td>
 										<td> {{ $category->description }} </td>
-										
+										<td> {{ $category->created_at }} </td>
+
 										{{--  Functions --}}
 										<td>
-											<a class="label label-danger" href="">Verwijder</a>
+											<a class="label label-danger" href="{{ base_url('category/delete/' . $category->id) }}">Verwijder</a>
 										</td>
  										{{--  /Functions --}}
-
-										<td> {{ $category->created_at }} </td>
 									</tr>
 								@endforeach
 							</tbody>

@@ -41,7 +41,7 @@ class NewsCategories extends Model
 	 */ 
 	public function articles() 
 	{
-		return $this->BelongsToMany('Articles', 'pivot_nems_categories', 'category_id', 'post_id')
+		return $this->BelongsToMany('Articles', 'pivot_news_categories', 'category_id', 'news_id')
 			->withTimestamps();
 	}
 }

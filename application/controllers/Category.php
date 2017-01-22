@@ -23,10 +23,10 @@ class Category extends MY_Controller
 	 *
 	 * @return void
 	 */
-	public function __constrcut() 
+	public function __construct() 
 	{
-		parent::__constrcut(); 
-		$this->load->library(['form_validation', 'session']);
+		parent::__construct(); 
+		$this->load->library(['blade', 'form_validation', 'session']);
 		$this->load->helper(['url']);
 
 		$this->user = $this->session->userdata('authencated_user');
@@ -61,14 +61,15 @@ class Category extends MY_Controller
      */
     public function store() 
     {
-    	// FIXME: Set the validation rules
-
-    	$this->form_validation->set_rules('field', 'label', 'rules'); 
-    	$this->form_valîdation->set_rules('field', 'label', 'rules');
+    	$this->form_validation->set_rules('category', 'Categorie label', 'trim|required'); 
+    	$this->form_validation->set_rules('description', 'Categorie beschrijving', 'trim|required');
 
     	if ($this->form_validation->run() === false) { // Validation fails
-    		$data['title'] = 'Nieuws Management';
-    		return $this->blade->render('<blade view name>', $data);
+    		$data['title']      = 'Nieuws berichten';
+            $data['news']       = Articles::with(['comments', 'author', 'categories'])->get();
+            $data['categories'] = NewsCategories::all();
+    		
+            return $this->blade->render('news/backend', $data);
     	}
 
     	// No validation errors found. So move on with our logic. 
@@ -79,7 +80,7 @@ class Category extends MY_Controller
     	$input['description'] = $this->input->post('description');
 
     	//> MySQL Insert
-    	if (NewsCategories::create($this->xss->clean($input))) {
+    	if (NewsCategories::create($this->security->xss_clean($input))) {
     		$this->session->set_flashdata('class', 'alert alert-success');
     		$this->session->set_flashdata('message', 'De Categorie is toegevoegd.');
     	} 
@@ -95,9 +96,20 @@ class Category extends MY_Controller
      */
     public function search() 
     {
-    	$data['title'] = 'Nieuws management'; 
+    	$this->form_validation->set_rules('term', 'Zoek term', 'trim|required'); 
 
-    	return $this->blade->render('<blade view>', $data); 
+      $data['title'] = 'Nieuws management'; 
+      $data['news']  = Articles::with(['comments', 'author', 'categories'])->get();
+
+      if ($this->form_validation->run() === false) { // Fo)rm valodation fails. 
+          $data['categories'] = NewsCategories::all(); 
+          return redirect($_SERVER['HTTP_REFERER'], 'refresh');
+      }
+
+      $term = $this->security->xss_clean($this->input->post('term'));
+      $data['categories'] = NewsCategories::where('heading', 'LIKE', '%' . $term . '%')->get();
+
+    	return $this->blade->render('news/backend', $data); 
     }
 
     /**
@@ -108,14 +120,19 @@ class Category extends MY_Controller
      */
     public function delete()
     {
+        $categoryId = $this->security->xss_clean($this->uri->segment(3)); 
     	//> MYSQL queries
 
-    	//> Needed checksums
-    	if () { //> The relation siblings and category are deleted. 
+        $MySQL['category'] = NewsCategories::find($categoryId); 
+        $MySQL['relation'] = $MySQL['category']->articles()->sync([]);
 
+    	//> Needed checksums
+    	if ($MySQL['category']->delete() && $MySQL['relation']) { //> The relation siblings and category are deleted. 
+            $this->session->set_flashdata('class', 'alert alert-success');
+            $this->session->set_flashdata('message', 'The category has been deleted'); 
     	}
 
-    	return redirect($_SERVER['HTTP_REFERER'] ,'refresh')
+    	return redirect($_SERVER['HTTP_REFERER'] ,'refresh');
     }
 
 }
