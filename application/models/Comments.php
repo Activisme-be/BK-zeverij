@@ -33,4 +33,15 @@ class Comments extends Model
 	 * @return bool 
 	 */ 
 	public $timestamps = true; 
+
+	/**
+     * Get the comments for a news article.
+     *
+     * @return belongsToMany relationship.
+     */
+    public function reactions()
+    {
+    	return $this->belongsToMany('Articles', 'pivot_comments', 'comment_id', 'post_id')
+        	->withTimestamps();
+    }
 }

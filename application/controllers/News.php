@@ -101,10 +101,55 @@ class News extends MY_Controller
      */
     public function show() 
     {
-        $postId = $this->security->xss_clean($this->uri->segment(3)); 
+        $postId             = $this->security->xss_clean($this->uri->segment(3)); 
+        $data['article']    = Articles::with(['comments', 'author', 'categories'])->find($postId); 
 
-        $data['item']  = Articles::with(['comments', 'author', 'categories'])->find($postId); 
-        $data['title'] = $data['title']->heading; 
+        $comments = $data['article']->comments(); // Query Builder object.
+        $page     = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0; 
+
+        //> PAGINATION CONFIG
+        $config['base_url']     = base_url('news/show/' . $data['article']->id);
+        $config['total_rows']   = $data['article']->comments()->count();
+        $config['per_page']     = 4;
+        $config['uri_segement'] = 4;
+        $config['num_links']    = round($config['total_rows'] / $config['per_page']);
+
+        $config['page_query_string']    = true;
+        //$config['use_page_numbers']  = TRUE;
+        $config['query_string_segment'] = 'page';
+        $config['full_tag_open']        = '<ul style="margin-top: -12px; margin-bottom: 3px;" class="pagination pagination-sm">';
+        $config['full_tag_close']       = '</ul><!--pagination-->';
+        $config['first_link']           = '&laquo; First';
+        $config['first_tag_open']       = '<li class="prev page">';
+        $config['first_tag_close']      = '</li>';
+        $config['last_link']            = 'Last &raquo;';
+        $config['last_tag_open']        = '<li class="next page">';
+        $config['last_tag_close']       = '</li>';
+        $config['next_link']            = 'Volgende &rarr;';
+        $config['next_tag_open']        = '<li class="next page">';
+        $config['next_tag_close']       = '</li>';
+        $config['prev_link']            = '&larr; Vorige';
+        $config['prev_tag_open']        = '<li class="prev page">';
+        $config['prev_tag_close']       = '</li>';
+        $config['cur_tag_open']         = '<li class="active"><a href="">';
+        $config['cur_tag_close']        = '</a></li>';
+        $config['num_tag_open']         = '<li class="page">';
+        $config['num_tag_close']        = '</li>';
+        // $config['display_pages']     = FALSE;
+        //
+        $config['anchor_class']         = 'follow_link';
+        //> END PAGINATION CONFIG
+
+        $this->pagination->initialize($config);
+
+        $data['categories']    = NewsCategories::all();
+        $data['comments']      = $comments->skip($this->input->get('page'))->take(4)->get();
+        $data['title']         = $data['article']->heading; 
+        $data['comments_link'] = $this->pagination->create_links(); 
+
+        //var_dump(count($comments)); 
+        // var_dump($data['article']->comments->count()); 
+        //die();
 
         return $this->blade->render('news/show', $data);
     }
@@ -265,7 +310,7 @@ class News extends MY_Controller
         $config['num_links']    = round($config['total_rows'] / $config['per_page']);
 
         $config['page_query_string']    = false;
-        // $config['use_page_numbers']  = TRUE;
+        //$config['use_page_numbers']  = TRUE;
         $config['query_string_segment'] = 'page';
         $config['full_tag_open']        = '<ul class="pagination pagination-sm">';
         $config['full_tag_close']       = '</ul><!--pagination-->';

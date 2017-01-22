@@ -22,13 +22,13 @@
 			    		<div class="row">
 			      			<div class="col-md-3">
 			        			<a href="#" class="thumbnail">
-			           				<img src="http://placehold.it/260x180" alt="">
+			           				<img src="http://placehold.it/260x180" alt="{{ $article->heading }}">
 			        			</a>
 			      			</div>
 			      
 			     			<div class="col-md-9">      
 			        			<p>{{ strip_tags($this->cimarkdown->markit($article->message)) }}</p>
-			        			<p><a class="btn btn-sm btn-info" href="#">Lees meer...</a></p>
+			        			<p><a class="btn btn-sm btn-info" href="{{ base_url('news/show/' . $article->id) }}">Lees meer...</a></p>
 			     			</div>
 			    		</div>
 		    
@@ -37,7 +37,7 @@
 				        		<p></p>
 				        
 				        		<p>
-				          			<i class="icon-user"></i> Autheur: <a href="#">{{ $article->author->name }}</a> 
+				          			<i class="fa fa-user" aria-hidden-true></i> Autheur: <a href="#">{{ $article->author->name }}</a> 
 				          			| <i class="fa fa-calendar" aria-hidden="true"></i> {{ $article->created_at }}
 				          			| <i class="fa fa-comment" aria-hidden="true"></i> <a href="#">{{ count($article->comments) }} Reacties</a>
 				          			| <i class="fa fa-tags" aria-hidden="true"></i> Tags:
