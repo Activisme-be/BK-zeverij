@@ -109,11 +109,21 @@ class News extends MY_Controller
      */
     public function search()
     {
-        $this->$this->form_validation->set_rules('fieldname', 'fieldlabel', 'rules');
+        $this->form_validation->set_rules('term', 'Zoek term', 'trim|required');
+
+        $data['title']      = 'nieuws management';
+        $data['categories'] = NewsCategories::all();
+
+        if ($this->form_validation->run() === false) { // Validation fails.
+            $data['news'] = Articles::with(['comments', 'author', 'categories'])->get();     
+            return $this->blade->render('news/backend', 'refresh');
+        }
 
         // No validation errors. So we can move on with our controller logic. 
 
-        return $this->blade->render('news/index', $data);
+        $data['term'] = $this->security->xss_clean($this->input->post('term')); // Controller only used. Not in the pages.
+        $data['news'] = Articles::with(['comments', 'author', 'categories'])->where('heading', 'LIKE', '%' . $data['term'] . '%')->get();
+        return $this->blade->render('news/backend', $data);
     }
 
     /**

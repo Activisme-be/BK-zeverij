@@ -1,8 +1,15 @@
 @if ((int) count($news) > 0)
+	{{-- TODO: Implement the search feture --}}
+	
 	<div class="col-sm-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				{{-- TODO: Implement the search feture --}}
+				<form method="POST" action="{{ base_url('news/search') }}" class="form-inline pull-left"> 
+            		<input @if ((int) count($categories) === 0) disabled  @endif class="form-control" placeholder="Search term" name="term" />
+                	<button type="submit" class="btn btn-danger" @if ((int) count($categories) === 0) disabled  @endif>
+                    	<span class="glyphicon glyphicon-search"></span> Zoek
+                	</button>
+        		</form>
 			</div>
 		</div>
 	</div>
