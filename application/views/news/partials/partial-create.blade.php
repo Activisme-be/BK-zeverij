@@ -19,7 +19,7 @@
 					</label>
 
 					<div class=" col-sm-5">
-						<select name="category" class="form-control" multiple>
+						<select name="category[]" class="form-control" multiple>
 							@if ((int) count($categories) === 0) 
 								<option value="">Er zijn geen categorieen gevonden</option>
 							@else 

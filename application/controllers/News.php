@@ -146,12 +146,12 @@ class News extends MY_Controller
         $input['creator_id']  = $this->user['id']; 
         $input['message']     = $this->input->post('description');
         $input['heading']     = $this->input->post('heading');
-        $input['categories']  = $this->input->post('categories'); 
+        $input['categories']  = $this->input->post('category'); 
 
         //> DB handlings 
         $MySQL['create']   = Articles::create($this->security->xss_clean($input));
         
-        if (! empty($input['categories'])) { // They are categories set
+        if (! is_null($input['categories'])) { // They are categories set
             $MYSQL['categories'] = Articles::find($MySQL['create']->id)->categories()->sync($input['categories']);
         }
  
@@ -221,7 +221,7 @@ class News extends MY_Controller
 
             $MySQL['article']->comments()->sync([]);    // Disconnect the comments from the article.
             $MySQL['article']->categories()->sync([]);  // Disconnect the categories form the article.
-            $MySQL['article']->delete();               // Delete the article out off the database. 
+            $MySQL['article']->delete();                // Delete the article out off the database. 
 
             $this->session->set_flashdata('class', 'alert alert-success'); 
             $this->session->set_flashdata('message', 'The article has been deleted');
