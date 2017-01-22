@@ -87,8 +87,9 @@
             	<div class="panel-heading"><span class="fa fa-asterisk"></span> Categorieen:</div>
 	    	
             	<div class="panel-body">
-            		<a href="" class="label label-info">Test</a>
-            		<a href="" class="label label-success">Death</a>
+            		@foreach($categories as $category)
+            			<a href="" class="label label-primary">{{ $category->category }}</a>
+            		@endforeach
             	</div>
 	    	</div>
 

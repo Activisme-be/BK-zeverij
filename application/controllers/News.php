@@ -61,8 +61,8 @@ class News extends MY_Controller
      */
     public function index()
     {
-        $data['data'] = 'Nieuws';
-        $data['news'] = Articles::with(['comments', 'author', 'categories'])->get();
+        $data['data']       = 'Nieuws';
+        $data['categories'] = NewsCategories::all(); 
 
         return $this->blade->render('news/index', $data);
     }
