@@ -61,8 +61,16 @@ class News extends MY_Controller
      */
     public function index()
     {
+        // Needed data for the pagination. 
+        $query = Articles::with(['comments', 'author', 'categories']); 
+        $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
+
+        $this->pagination->initialize($this->paginationConfig(base_url('news/'), $query->count(), 4, 3));
+
         $data['title']      = 'Nieuws';
-        $data['categories'] = NewsCategories::all(); 
+        $data['news']       = $query->skip($page)->take(4)->get();
+        $data['categories'] = NewsCategories::all();
+        $data['links']      = $this->pagination->create_links(); 
 
         return $this->blade->render('news/index', $data);
     }
@@ -260,7 +268,7 @@ class News extends MY_Controller
         $config['page_query_string']    = TRUE;
         // $config['use_page_numbers']  = TRUE;
         $config['query_string_segment'] = 'page';
-        $config['full_tag_open']        = '<ul style="margin-top: -10px; margin-bottom: -10px;" class="pagination pagination-sm">';
+        $config['full_tag_open']        = '<ul class="pagination pagination-sm">';
         $config['full_tag_close']       = '</ul><!--pagination-->';
         $config['first_link']           = '&laquo; First';
         $config['first_tag_open']       = '<li class="prev page">';
@@ -268,10 +276,10 @@ class News extends MY_Controller
         $config['last_link']            = 'Last &raquo;';
         $config['last_tag_open']        = '<li class="next page">';
         $config['last_tag_close']       = '</li>';
-        $config['next_link']            = 'Next &rarr;';
+        $config['next_link']            = 'Volgende &rarr;';
         $config['next_tag_open']        = '<li class="next page">';
         $config['next_tag_close']       = '</li>';
-        $config['prev_link']            = '&larr; Previous';
+        $config['prev_link']            = '&larr; Vorige';
         $config['prev_tag_open']        = '<li class="prev page">';
         $config['prev_tag_close']       = '</li>';
         $config['cur_tag_open']         = '<li class="active"><a href="">';

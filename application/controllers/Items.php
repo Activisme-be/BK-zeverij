@@ -64,7 +64,7 @@ class Items extends MY_Controller
      */
     public function index()
     {
-        $term  = $this->security->xss_clean($this->input->get('term'));
+        $term  = $this->security->xss_clean($this->input->get('term')); // NOTE: Check if this can be deleted.
         $query = new Points;
         $page  = ($this->security->xss_clean(3)) ? $this->security->xss_clean($this->uri->segment(3)) : 0;
 

@@ -52,19 +52,9 @@
 	    	</div>
 
 	    	<div style="margin-left: -15px;" class="col-sm-12">
-	    		<ul class="pagination pagination-sm">
-  					<li><a href="#">1</a></li>
-  					<li><a href="#">2</a></li>
-  					<li><a href="#">3</a></li>
-  					<li><a href="#">4</a></li>
-  					<li><a href="#">5</a></li>
-  					
-  					<li>
-     					<a href="#" aria-label="Next">
-        					<span aria-hidden="true">&raquo;</span>
-      					</a>
-    				</li>
-				</ul>
+	    		{{-- Pagination --}}
+	    			{{ $links }}
+	    		{{-- /Pagination --}}
 	    	</div>
 	    </div>
 
