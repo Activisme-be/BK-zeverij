@@ -98,6 +98,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js" async></script>
         <script src="{{ base_url('assets/js/bootstrap.js') }}" async></script>
         <script src="{{ base_url('assets/js/vue-functions.js') }}" async></script>
+        <script src="{{ base_url('assets/js/crud.js') }}" async></script>
 
         {{-- IE10 viewport hack for Surface/desktop Windows 8 bug --}}
         <script src="{{ base_url('assets/js/ie10-viewport-bug-workaround.js') }}"></script>

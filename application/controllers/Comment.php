@@ -86,6 +86,38 @@ class Comment extends MY_Controller
 	}
 
 	/** 
+	 * Report a comment that breaks our policy. 
+	 * 
+	 * @see 	POST: http://www.domain.tld/comment/report
+	 * @return  Response|Redirect
+	 */
+	public function report() 
+	{
+		$this->form_validation->set_rules('id', 'Reactie ID', 'trim|required');
+		$this->form_validation->set_rules('reason', 'rede', 'trim|required');
+
+		if ($this->form_validation->run() === false) { // Form validation fails. 
+			return redirect($_SERVER['HTTP_REFERER'], 'refresh');
+		}
+
+		// No validation errors found so move on with our logic; 
+		$input['user_id'] = $this->security->xss_clean($this->user['id']); 
+		$input['reason']  = $this->security->xss_clean($this->input->post('reason'));
+
+		$reactionId = $this->security->xss_clean($this->input->post('id'));
+
+		$MySQL['create']   = Report::create($input); 
+		$MySQL['relation'] = Report::find($MySQL['create']->id)->reaction()->attach($reactionId); 
+
+		if ($MySQL['create'] && $MySQL['relation']) { // Create and relation OK
+			$this->session->set_flashdata('class', 'alert alert-success'); 
+			$this->session->set_flashdata('message', 'U hebt de reactie successvol gerapporteerd');
+		}
+
+		return redirect($_SERVER['HTTP_REFERER'], 'refresh');
+	}
+
+	/** 
 	 * [INTERNAL]: This function get a specific reaction. 
 	 * 
 	 * - This is needed for reporting a comment.

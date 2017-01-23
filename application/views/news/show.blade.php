@@ -59,7 +59,7 @@
 	    									Media heading <small>- 10/10/1000 - 00:00:00</small> 
 	    									<span class="pull-right">
 	    										<small>
-	    											<a href="">
+	    											<a onclick="edit('{{ base_url('comment/show/' . $comment->id) }}')">
 	    												<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Rapporteer
 	    											</a>
 	    										</small>
@@ -121,7 +121,9 @@
 	            	</div>
 		    	</div>
 
-
+		    	{{-- Modal includes --}}
+		    		@include('news/modals/modal-report')
+		    	{{-- /Modal includes --}}
 			</div>
 		{{-- /Sidebar --}}
 	</div>
