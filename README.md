@@ -1,6 +1,6 @@
 # BK-zeverij
 
-Dit is een spel om de "stomme" media punten van onze politic aan te kaarten.
+Dit is een spel om de "stomme" media punten van onze politic aan te kaarten. Het gebruik van deze broncode valt onder eigen risico en verantwoordelijkheid
 
 ## Veiligheidlekjes.
 
