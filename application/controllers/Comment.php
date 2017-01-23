@@ -84,4 +84,18 @@ class Comment extends MY_Controller
 
 		return redirect($_SERVER['HTTP_REFERER'], 'refresh');
 	}
+
+	/** 
+	 * [INTERNAL]: This function get a specific reaction. 
+	 * 
+	 * - This is needed for reporting a comment.
+	 * 
+	 * @see 	GET|HEAD: http://www.domain.tld/comment/show/{id}
+	 * @return 	JSON|RESPONSE
+	 */
+	public function show()
+	{
+		$commentId = $this->security->xss_clean($this->uri->segment(3));
+		echo json_encode(Comments::find($commentId));
+	}
 }
