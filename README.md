@@ -9,4 +9,4 @@ Alle lekken zullen in alle sereniteit worden opgelost.
 
 ## Rechten & licentie.
 
-De broncode is vrijgegeven onder de MIT License. Voor de recht worden de rechten beheerd door Tim Joosten.
+De broncode is vrijgegeven onder de MIT License. Voor de recht worden de rechten beheerd door Tim Joosten en Activisme-BE.
