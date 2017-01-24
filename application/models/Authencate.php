@@ -21,6 +21,13 @@ class Authencate extends Model
     protected $table = 'users';
 
     /**
+     * Set the database connection. 
+     * 
+     * @return string
+     */
+    protected $connection = 'utility';
+
+    /**
      * Mass-assign fields.
      *
      * @var array

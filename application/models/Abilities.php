@@ -21,6 +21,13 @@ class Abilities extends Model
 	protected $table = 'abilities';
 
 	/**
+     * Set the database connection. 
+     * 
+     * @return string
+     */
+    protected $connection = 'utility';
+
+	/**
 	 * Enable / Disable timestamps 
 	 * 
 	 * @return bool
