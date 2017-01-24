@@ -11,50 +11,56 @@
     	<div class="col-md-9">
     		
     		{{-- News items --}}
-    			@foreach($news as $article)
-    				<div style="margin-left: -15px;" class="col-sm-12">
-		    			<div class="row">
-			    			<div class="col-md-8">
-			    				<h4><strong><a href="#">{{ $article->heading }}</a></strong></h4>
+    			@if ((int) count($news) > 0)
+    				@foreach($news as $article)
+	    				<div style="margin-left: -15px;" class="col-sm-12">
+			    			<div class="row">
+				    			<div class="col-md-8">
+				    				<h4><strong><a href="#">{{ $article->heading }}</a></strong></h4>
+				   				</div>
 			   				</div>
-		   				</div>
-		    			
-			    		<div class="row">
-			      			<div class="col-md-3">
-			        			<a href="#" class="thumbnail">
-			           				<img src="http://placehold.it/260x180" alt="{{ $article->heading }}">
-			        			</a>
-			      			</div>
-			      
-			     			<div class="col-md-9">      
-			        			<p>{{ strip_tags($this->cimarkdown->markit($article->message)) }}</p>
-			        			<p><a class="btn btn-sm btn-info" href="{{ base_url('news/show/' . $article->id) }}">Lees meer...</a></p>
-			     			</div>
-			    		</div>
-		    
-			    		<div class="row">
-			      			<div class="col-md-12" style="margin-top: -20px;">
-				        		<p></p>
-				        
-				        		<p>
-				          			<i class="fa fa-user" aria-hidden-true></i> Autheur: <a href="#">{{ $article->author->name }}</a> 
-				          			| <i class="fa fa-calendar" aria-hidden="true"></i> {{ $article->created_at }}
-				          			| <i class="fa fa-comment" aria-hidden="true"></i> <a href="#">{{ count($article->comments) }} Reacties</a>
-				          			| <i class="fa fa-tags" aria-hidden="true"></i> Tags:
+			    			
+				    		<div class="row">
+				      			<div class="col-md-3">
+				        			<a href="#" class="thumbnail">
+				           				<img src="http://placehold.it/260x180" alt="{{ $article->heading }}">
+				        			</a>
+				      			</div>
+				      
+				     			<div class="col-md-9">      
+				        			<p>{{ strip_tags($this->cimarkdown->markit($article->message)) }}</p>
+				        			<p><a class="btn btn-sm btn-info" href="{{ base_url('news/show/' . $article->id) }}">Lees meer...</a></p>
+				     			</div>
+				    		</div>
+			    
+				    		<div class="row">
+				      			<div class="col-md-12" style="margin-top: -20px;">
+					        		<p></p>
+					        
+					        		<p>
+					          			<i class="fa fa-user" aria-hidden-true></i> Autheur: <a href="#">{{ $article->author->name }}</a> 
+					          			| <i class="fa fa-calendar" aria-hidden="true"></i> {{ $article->created_at }}
+					          			| <i class="fa fa-comment" aria-hidden="true"></i> <a href="#">{{ count($article->comments) }} Reacties</a>
+					          			| <i class="fa fa-tags" aria-hidden="true"></i> Tags:
 
-				          			@if ((int) count($article->categories) > 0)
-				          				@foreach($article->categories as $category)
-				          					<a href="#"><span class="label label-info">{{ $category->category }}</span></a> 
-				          				@endforeach
-				          			@else 
-				          				<span class="label label-primary">Geen</span>
-				          			@endif
-				          
-				        		</p>
-				      		</div>
-			    		</div>
-			    	</div>
-    			@endforeach
+					          			@if ((int) count($article->categories) > 0)
+					          				@foreach($article->categories as $category)
+					          					<a href="#"><span class="label label-info">{{ $category->category }}</span></a> 
+					          				@endforeach
+					          			@else 
+					          				<span class="label label-primary">Geen</span>
+					          			@endif
+					          
+					        		</p>
+					      		</div>
+				    		</div>
+				    	</div>
+	    			@endforeach
+	    		@else
+	    			<div class="alert alert-info" role="alert">
+	    				<strong>Info:</strong> Er zijn nog geen nieuwsberichten omtrent deze actie.
+	    			</div>
+	    		@endif
     		{{-- /News Items --}}
 
 	    	<div style="margin-left: -15px;" class="col-sm-12">
@@ -83,9 +89,13 @@
             	<div class="panel-heading"><span class="fa fa-asterisk"></span> Categorieen:</div>
 	    	
             	<div class="panel-body">
-            		@foreach($categories as $category)
-            			<a href="" class="label label-primary">{{ $category->category }}</a>
-            		@endforeach
+            		@if ((int) count($categories) === 0)
+            			<i class="muted">Er zijn nog geen categorieen.</i>
+            		@else
+            			@foreach($categories as $category)
+            				<a href="" class="label label-primary">{{ $category->category }}</a>
+            			@endforeach 
+            		@endif
             	</div>
 	    	</div>
 
