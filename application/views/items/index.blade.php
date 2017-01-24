@@ -92,7 +92,7 @@
                     </div>
                 </div>
             @else
-                <div class="alert alert-info">
+                <div class="alert alert-info" role="alert">
                     <strong>Info:</strong> ER zijn geen wansmakelijke puntjes gevonden.
                 </div>
             @endif

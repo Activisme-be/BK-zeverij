@@ -29,7 +29,7 @@
         </tbody>
     </table>
 @else
-    <div class="alert alert-info">
+    <div class="alert alert-info" role="alert">
         <strong>Info:</strong> {{ $human->Name }} heeft nog geen wansmakelijke punten vermeld in de media.
     </div>
 @endif
