@@ -117,6 +117,31 @@ class Comment extends MY_Controller
 		return redirect($_SERVER['HTTP_REFERER'], 'refresh');
 	}
 
+	/**
+	 * Delete a reaction. 
+	 * 
+	 * @see    http://www.domain.tld/comment/delete/{id}
+	 * @return Response|Redirect 
+	 */ 
+	public function delete() 
+	{
+		$param = $this->security->xss_clean($this->uri->segment(3));
+
+		try {
+			$MySQL['comment'] = Comments::findOrFail($param);
+			$MySQL['comment']->reactions()->sync([]);
+			$MySQL['comment']->reports()->sync([]);
+			$MySQL['comment']->delete();
+
+			$this->session->set_flashdata('class', 'alert alert-success');
+			$this->session->set_flashdata('class', 'De reactie is verwijderd'); 
+
+			return redirect($_SERVER['HTTP_REFERER']);
+		} catch (Exception $e) {
+			return redirect($_SERVER['HTTP_REFERER']);
+		}
+	}
+
 	/** 
 	 * [INTERNAL]: This function get a specific reaction. 
 	 * 

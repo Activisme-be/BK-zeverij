@@ -44,4 +44,15 @@ class Comments extends Model
     	return $this->belongsToMany('Articles', 'pivot_comments', 'comment_id', 'post_id')
         	->withTimestamps();
     }
+
+    /**
+     * Get al the reports for a reaction. 
+     * 
+     * @return belongsToMany relationship.
+     */
+    public function reports() 
+    {
+    	return $this->belongsToMany('Reports', 'pivot_reaction_report', 'comment_id', 'report_id')
+	 		->withTimestamps();
+    }
 }

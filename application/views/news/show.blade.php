@@ -60,7 +60,11 @@
 	    									<span class="pull-right">
 	    										<small>
 	    											<a onclick="edit('{{ base_url('comment/show/' . $comment->id) }}')">
-	    												<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Rapporteer
+	    												<small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Rapporteer</small>
+	    											</a>
+
+	    											<a href="{{ base_url('comment/delete/' . $comment->id) }}">
+	    												<small><span class="fa fa-close"></span> Verwijder</small>
 	    											</a>
 	    										</small>
 	    									</span>
