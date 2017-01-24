@@ -75,17 +75,22 @@ class Auth extends MY_Controller
     {
         $input['email'] = $this->security->xss_clean($this->input->post('email'));
         $MySQL['user']  = Authencate::where('email', $input['email'])
-            ->with('permissions')
+            ->with(['permissions', 'abilities'])
             ->where('blocked', 'N')
             ->where('password', md5($password));
         if ($MySQL['user']->count()) { // User is found and the password match
             $authencation = []; // Empty authencated session array.
             $permissions  = []; // Empty permission array.
+            $abilities    = []; // Empty abilities array. 
 
             // Build up the session array.
-            foreach ($MySQL['user']->get() as $user) { // Define the data to the session array.
-                foreach ($user->permissions as $perm) { // Set every permission role to a key,
-                    array_push($permissions, $perm->role);    // Push every key invidual to the permissions array.
+            foreach ($MySQL['user']->get() as $user) {          // Define the data to the session array.
+                foreach ($user->permissions as $perm) {         // Set every permission role to a key,
+                    array_push($permissions, $perm->role);      // Push every key invidual to the permissions array.
+                }
+
+                foreach ($user->abilities as $ability) {        // Set every ability role to a key. 
+                    array_push($abilities as $ability->name);   // Push every key invidual to the abilities array.
                 }
 
                 $authencation['id']         = $user->id;
@@ -93,6 +98,7 @@ class Auth extends MY_Controller
                 $authencation['email']      = $user->email;
                 $authencation['username']   = $user->username;
                 $authencation['roles']      = $permissions;
+                $authencation['abilities']  = $abilities;
             }
 
             $this->session->set_userdata('authencated_user', $authencation);

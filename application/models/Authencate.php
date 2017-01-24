@@ -41,7 +41,18 @@ class Authencate extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany('Permissions', 'pivot_login_permissions', 'permissions_id', 'login_id')
+        return $this->belongsToMany('Permissions', 'pivot_login_permissions', 'login_id', 'permissions_id')
             ->withTimestamps();
+    }
+
+    /**
+     * Abiltiess data relation for the user.
+     *
+     * @return array|collection
+     */
+    public function abilities()
+    {
+        return $this->belongsToMany('Abilities', 'pivot_login_abilities', 'login_id', 'ability_id')
+            ->withTimeStamps();
     }
 }
