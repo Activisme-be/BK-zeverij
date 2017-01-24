@@ -41,7 +41,7 @@
 
                         <div class="form-group">
                             <label class="control-label col-md-4">
-                                Wachtwoord: <span class="text-danger">*</span>
+                                Wachtwoord: {{-- <span class="text-danger">*</span> --}}
                             </label>
 
                             <div class="col-md-6">
@@ -51,7 +51,7 @@
 
                         <div class="form-group">
                             <label class="control-label col-md-4">
-                                Wachtwoord bevestiging: <span class="text-danger">*</span>
+                                Wachtwoord bevestiging: {{-- <span class="text-danger">*</span> --}}
                             </label>
 
                             <div class="col-md-6">
