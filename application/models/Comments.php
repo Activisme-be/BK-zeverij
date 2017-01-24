@@ -34,6 +34,11 @@ class Comments extends Model
 	 */ 
 	public $timestamps = true; 
 
+	public function creator()
+	{
+		return $this->belongsTo('Authencate', 'user_id');
+	}
+
 	/**
      * Get the comments for a news article.
      *

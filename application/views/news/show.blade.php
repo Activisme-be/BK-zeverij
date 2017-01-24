@@ -56,7 +56,7 @@
 	  								
 	  								<div class="media-body">
 	    								<h4 class="media-heading">
-	    									Media heading <small>- 10/10/1000 - 00:00:00</small> 
+	    									{{ $comment->creator->name }}<small> - {{ $comment->created_at }}</small> 
 	    									<span class="pull-right">
 	    										<small>
 	    											<a onclick="edit('{{ base_url('comment/show/' . $comment->id) }}')">
