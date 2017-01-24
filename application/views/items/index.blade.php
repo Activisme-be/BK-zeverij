@@ -16,7 +16,6 @@
             {{-- /search form --}}
 
             {{-- Item creation  button --}}
-            {{-- TODO: Create the modal --}}
             <div class="pull-right">
                 <button type="button" data-toggle="modal" data-target="#newItem" class="btn btn-success">Wansmakelijk puntje toevoegen</button>
             </div>
