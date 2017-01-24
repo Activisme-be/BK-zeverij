@@ -78,10 +78,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'activisme.be.mysql',
-	'username' => 'activisme_be_bk',
-	'password' => 'ikbeneenwachtwoord',
-	'database' => 'activisme_be_bk',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => 'root',
+	'database' => 'activisme_bk_zeverij',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -117,7 +117,7 @@ $capsule->addConnection([
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => 'localhost',
-    'database'  => 'activisme_be_utility',
+    'database'  => 'activisme_be_authencation',
     'username'  => 'root',
     'password'  => 'root',
     'charset'   => $db['default']['char_set'],

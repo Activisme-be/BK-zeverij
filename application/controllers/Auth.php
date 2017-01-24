@@ -90,7 +90,7 @@ class Auth extends MY_Controller
                 }
 
                 foreach ($user->abilities as $ability) {        // Set every ability role to a key. 
-                    array_push($abilities as $ability->name);   // Push every key invidual to the abilities array.
+                    array_push($abilities, $ability->name);     // Push every key invidual to the abilities array.
                 }
 
                 $authencation['id']         = $user->id;

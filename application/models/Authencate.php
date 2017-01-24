@@ -48,7 +48,7 @@ class Authencate extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany('Permissions', 'pivot_login_permissions', 'login_id', 'permissions_id')
+        return $this->belongsToMany('Permissions', 'login_permissions', 'login_id', 'permissions_id')
             ->withTimestamps();
     }
 
@@ -59,7 +59,7 @@ class Authencate extends Model
      */
     public function abilities()
     {
-        return $this->belongsToMany('Abilities', 'pivot_login_abilities', 'login_id', 'ability_id')
+        return $this->belongsToMany('Abilities', 'login_abilities', 'login_id', 'ability_id')
             ->withTimeStamps();
     }
 }
