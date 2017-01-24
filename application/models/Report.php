@@ -41,7 +41,7 @@ class Reports extends Model
 	  */
 	 public function reportReaction() 
 	 {
-	 	return $this->belongsToMany('Comments', 'pivot_reactie_report', 'comment_id', 'user_id')
+	 	return $this->belongsToMany('Comments', 'pivot_reaction_report', 'comment_id', 'report_id')
 	 		->withTimestamps();
 	 }
 

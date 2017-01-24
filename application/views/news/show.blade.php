@@ -25,7 +25,7 @@
 					          	| <i class="fa fa-tags" aria-hidden="true"></i> Tags:
 
 					          	@if ((int) count($article->categories) > 0)
-					          		@foreach($article->categories as $category)
+					          		@foreach ($article->categories as $category)
 					          			<a href="#"><span class="label label-info">{{ $category->category }}</span></a> 
 					          		@endforeach
 					          	@else 
@@ -79,7 +79,7 @@
 					<form class="form-horizontal" action="{{ base_url('comment/store/' . $article->id) }}" method="POST">
 						<div class="form-group">
 							<div class="col-md-12">
-								<textarea class="form-control" rows="4" name="comment" placeholder="Uw reactie"></textarea>
+								<textarea class="form-control" rows="4" name="commentUser" placeholder="Uw reactie"></textarea>
 							</div>
 						</div>
 

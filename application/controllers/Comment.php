@@ -71,7 +71,7 @@ class Comment extends MY_Controller
 		$articleId = $this->security->xss_clean($this->uri->segment(3));
 
 		$input['user_id'] = $this->security->xss_clean($this->user['id']); 
-		$input['comment'] = $this->security->xss_clean($this->input->post('comment'));
+		$input['commentUser'] = $this->security->xss_clean($this->input->post('comment'));
 
 		//> MySQL DB Handlings. 
 		$MySQL['comment']  = Comments::create($input); 
