@@ -64,7 +64,7 @@
                                     <td> {{-- Functions --}}
                                         <a href="{{ base_url('users/handlings/' . $user->id) }}" class="label label-info">Bekijk</a>
                                         <a href="#" class="label label-warning">Rechten</a>
-                                        <a href="#" class="label label-danger">Verwijder</a>
+                                        <a href="{{ base_url('users/delete/' . $user->id) }}" class="label label-danger">Verwijder</a>
 
                                         @if ($user->blocked === 'Y')
                                             <a href="{{ base_url('users/unblock/' . $user->id) }}" class="label label-primary">Activeren</a> 

@@ -80,6 +80,30 @@ class Users extends MY_Controller
         return $this->blade->render('users/index', $data);
     }
 
+    /** 
+     * Delete a user from the network. 
+     * 
+     * @see    GET|HEAD:    http://www.domain.tld/users/delete/{id}
+     * @return Response|Redirect 
+     */ 
+    public function delete() 
+    {
+        $term = $this->security->xss_clean($this->uri->segment(3));
+
+        try {
+            $user = Authencate::findOrFail($term); 
+            $user->delete();
+
+            $this->session->set_flashdata('class', 'alert alert-success'); 
+            $this->session->set_flashdata('message', "$user->name is verwijderd uit het systeem");
+        } catch(Exception $e) {
+            $this->session->set_flashdata('class', 'alert alert-danger'); 
+            $this->session->set_flashdata('message', 'We konden de gebruiker niet vinden.');
+        }
+
+        return redirect($_SERVER['HTTP_REFERER']);
+    }
+
     /**
      * Search for a specific user in the platform.
      *
