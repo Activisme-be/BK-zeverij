@@ -155,7 +155,7 @@ class Users extends MY_Controller
     /**
      * Enable that the user can logged in again.
      *
-     * @see    GET|HEAD:    http://www.domain.tld/users/unblock
+     * @see    GET|HEAD:    http://www.domain.tld/users/unblock/{id}
      * @return Response | Redirect
      */
     public function unblock()
@@ -164,11 +164,11 @@ class Users extends MY_Controller
 
         $MySQL['account'] = Authencate::find($userId);
         $MySQL['account']->blocked = 'N';
-        $MySQL['account']->ban_id  = '';
+        $MySQL['account']->ban_id  = 0;
 
         if ($MySQL['account']->save() && Ban::destroy($MySQL['account']->ban_id)) {
             $this->session->set_flashdata('class', 'alert alert-success');
-            $this->session->set_flashdata('message', 'The user is terug actief.');
+            $this->session->set_flashdata('message', 'De gebruiker is terug actief.');
         }
 
         return redirect($_SERVER['HTTP_REFERER']);

@@ -65,6 +65,10 @@
                                         <a href="{{ base_url('users/handlings/' . $user->id) }}" class="label label-info">Bekijk</a>
                                         <a href="#" class="label label-warning">Rechten</a>
                                         <a href="#" class="label label-danger">Verwijder</a>
+
+                                        @if ($user->blocked === 'Y')
+                                            <a href="{{ base_url('users/unblock/' . $user->id) }}" class="label label-primary">Activeren</a> 
+                                        @endif
                                     </td> {{-- /Functions --}}
                                 </tr>
                             @endforeach
