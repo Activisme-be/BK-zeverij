@@ -9,6 +9,8 @@
             </div>
             <div class="modal-body">
                 <form method="POST" class="form-horizontal" action="{{ base_url('auth/reset') }}">
+                    {{-- CSRF --}}
+                    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
 
                     <div class="form-group">
                         <label for="email" class="control-label col-sm-2">
