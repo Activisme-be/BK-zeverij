@@ -13,6 +13,9 @@
 
             <div class="modal-body form">
                 <form action="{{  base_url('comment/report')  }}" id="form" method="POST" class="form-horizontal">
+                    {{-- CSRF --}}
+                    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+
                     <input type="hidden" value="" name="id"/>
 
                     <div class="form-body">

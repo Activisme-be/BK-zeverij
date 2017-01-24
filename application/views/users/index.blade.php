@@ -7,6 +7,9 @@
             {{-- search form --}}
             <div class="pull-left">
                 <form class="form-inline" action="{{ base_url('users/search') }}" method="GET">
+                    {{-- CSRF --}}
+                    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+
                     <input type="text" name="term" placeholder="Zoekterm" class="form-control">
                     <button class="btn btn-danger">
                         <span class="fa fa-search"></span> Zoek

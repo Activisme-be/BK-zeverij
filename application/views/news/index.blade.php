@@ -74,6 +74,9 @@
 
 	    	<div class="well well-sm" style="margin-top: 10px;">
                 <form method="POST" action="">
+                	{{-- CSRF --}}
+                    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+                	
                 	<div class="input-group">
                     	<input type="text" class="form-control" placeholder="Zoek bericht">
                     	<span class="input-group-btn">

@@ -8,7 +8,9 @@
       
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="{{ base_url('category/store') }}">
-            
+                    {{-- CSRF --}}
+                    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+
                     <div class="form-group">
                         <label class="control-label col-sm-3">
                             Categorie: <span class="text-danger">*</span>

@@ -2,6 +2,8 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<form method="POST" action="{{ base_url('news/store') }}" class="form-horizontal">
+				{{-- CSRF --}}
+                <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
 
 				<div class="form-group">
 					<label class="control-label col-sm-2">

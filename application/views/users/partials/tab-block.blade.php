@@ -2,6 +2,9 @@
     <div class="panel-body">
         {{-- Tab content --}}
         <form class="form-horizontal" method="POST" action="{{ base_url('users/block/' . $human->id) }}">
+            {{-- CSRF --}}
+            <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+
             <div class="form-group">
                 <label class="control-label col-sm-2">User:</label>
 
