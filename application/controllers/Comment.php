@@ -61,7 +61,7 @@ class Comment extends MY_Controller
 	 */
 	public function store()
 	{
-		$this->form_validation->set_rules('comment', 'Reactie', 'trim|required'); 
+		$this->form_validation->set_rules('commentUser', 'Reactie', 'trim|required'); 
 
 		if ($this->form_validation->run() === false) { // Validation fails.
 			return redirect($_SERVER['HTTP_REFERER'], 'refresh');
@@ -71,7 +71,7 @@ class Comment extends MY_Controller
 		$articleId = $this->security->xss_clean($this->uri->segment(3));
 
 		$input['user_id'] = $this->security->xss_clean($this->user['id']); 
-		$input['commentUser'] = $this->security->xss_clean($this->input->post('comment'));
+		$input['comment'] = $this->security->xss_clean($this->input->post('commentUser'));
 
 		//> MySQL DB Handlings. 
 		$MySQL['comment']  = Comments::create($input); 
