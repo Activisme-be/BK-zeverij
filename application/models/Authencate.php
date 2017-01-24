@@ -32,7 +32,7 @@ class Authencate extends Model
      *
      * @var array
      */
-    protected $fillable = ['username', 'password', 'blocked', 'email', 'name'];
+    protected $fillable = ['ban_id', 'username', 'password', 'blocked', 'email', 'name'];
 
     /**
      * Disable / Enable timestamps
@@ -61,5 +61,16 @@ class Authencate extends Model
     {
         return $this->belongsToMany('Abilities', 'login_abilities', 'login_id', 'ability_id')
             ->withTimeStamps();
+    }
+
+    public function ban()
+    {
+        return $this->belongsTo('Ban', 'ban_id');
+    }
+
+    public function items()
+    {
+        return $this->belongsToMany('Points', 'pivot_ranking', 'sportsmen_id', 'creator_id')
+            ->withTimestamps();
     }
 }
