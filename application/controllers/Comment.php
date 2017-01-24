@@ -97,6 +97,9 @@ class Comment extends MY_Controller
 		$this->form_validation->set_rules('reason', 'rede', 'trim|required');
 
 		if ($this->form_validation->run() === false) { // Form validation fails. 
+			$this->session->set_flashdata('class', 'alert alert-danger'); 
+			$this->session->set_flashdata('message', 'Wij konden de invoer niet verwerken wegen validatie fouten');
+
 			return redirect($_SERVER['HTTP_REFERER'], 'refresh');
 		}
 
@@ -106,8 +109,8 @@ class Comment extends MY_Controller
 
 		$reactionId = $this->security->xss_clean($this->input->post('id'));
 
-		$MySQL['create']   = Report::create($input); 
-		$MySQL['relation'] = Report::find($reactionId)->reportReaction()->attach($MySQL['create']->id); 
+		$MySQL['create']   = Reports::create($input); 
+		$MySQL['relation'] = Reports::find($MySQL['create']->id)->reportReaction()->attach($reactionId); 
 
 		if ($MySQL['create'] && $MySQL['relation']) { // Create and relation OK
 			$this->session->set_flashdata('class', 'alert alert-success'); 

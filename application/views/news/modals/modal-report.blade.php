@@ -12,7 +12,7 @@
             </div>
 
             <div class="modal-body form">
-                <form action="#" id="form" class="form-horizontal">
+                <form action="{{  base_url('comment/report')  }}" id="form" method="POST" class="form-horizontal">
                     <input type="hidden" value="" name="id"/>
 
                     <div class="form-body">
