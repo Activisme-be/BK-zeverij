@@ -11,8 +11,6 @@
  */
 class Items extends MY_Controller
 {
-    // FIXME: Implement middleware
-
     /**
      * Authencated userdata
      *

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             @if (isset($_SESSION['class']) && isset($_SESSION['message']))
-                <div class="{{ $_SESSION['class']}} alert-dismissible">
+                <div role="alert" class="{{ $_SESSION['class']}} alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <strong>Success:</strong> {{ $_SESSION['message'] }}
                 </div>
