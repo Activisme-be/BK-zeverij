@@ -17,7 +17,7 @@
                             </label>
 
                             <div class="col-md-6">
-                                <input type="name" value="{{ $this->user['name'] }}" placeholder="Uw naam" class="form-control" name="name">
+                                <input type="name" v-model="accountSettings.name" value="{{ $this->user['name'] }}" placeholder="Uw naam" class="form-control" name="name">
                             </div>
                         </div>
 
@@ -27,7 +27,7 @@
                             </label>
 
                             <div class="col-md-6">
-                                <input name="username" class="form-control" placeholder="Gebruikersnaam" value="{{ $this->user['username'] }}" type="text">
+                                <input name="username" v-model="accountSettings.username" class="form-control" placeholder="Gebruikersnaam" value="{{ $this->user['username'] }}" type="text">
                             </div>
                         </div>
 
@@ -37,13 +37,13 @@
                             </label>
 
                             <div class="col-md-6">
-                                <input type="text" name="email" value="{{ $this->user['email'] }}" placeholder="Email adres" class="form-control">
+                                <input type="text" name="email" v-model="accountSettings.email" value="{{ $this->user['email'] }}" placeholder="Email adres" class="form-control">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-4">
-                                Wachtwoord: <span class="text-danger">*</span>
+                                Wachtwoord: {{-- <span class="text-danger">*</span> --}}
                             </label>
 
                             <div class="col-md-6">
@@ -53,7 +53,7 @@
 
                         <div class="form-group">
                             <label class="control-label col-md-4">
-                                Wachtwoord bevestiging: <span class="text-danger">*</span>
+                                Wachtwoord bevestiging: {{-- <span class="text-danger">*</span> --}}
                             </label>
 
                             <div class="col-md-6">
@@ -61,9 +61,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" v-if="! submitted">
                             <div class="col-md-offset-4 col-md-6">
-                                <button type="submit" class="btn btn-default">Wijzigen</button>
+                                <button type="submit" v-attr="disabled: errorsSettings" class="btn btn-default">Registreer</button>
                                 <button type="reset" class="btn btn-danger">Reset</button>
                             </div>
                         </div>

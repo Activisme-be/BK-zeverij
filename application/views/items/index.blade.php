@@ -16,7 +16,6 @@
             {{-- /search form --}}
 
             {{-- Item creation  button --}}
-            {{-- TODO: Create the modal --}}
             <div class="pull-right">
                 <button type="button" data-toggle="modal" data-target="#newItem" class="btn btn-success">Wansmakelijk puntje toevoegen</button>
             </div>
@@ -63,7 +62,7 @@
                                         {{-- /Status --}}
 
                                         <td>{{ $item->govMember->Name }}</td>
-                                        <td><a href="{{ $item->media_url }}">{{ $item->point }}</a></td>
+                                        <td><a href="{{ $item->media_url }}">{{substr($item->point, 0, 67) }}...</a></td>
 
                                         {{-- Functions --}}
                                         <td>
@@ -86,10 +85,13 @@
                         </table>
                         {{-- /item table --}}
 
+                        {{-- pagination --}}
+                            {{ $links }}
+                        {{-- /pagination --}}
                     </div>
                 </div>
             @else
-                <div class="alert alert-info">
+                <div class="alert alert-info" role="alert">
                     <strong>Info:</strong> ER zijn geen wansmakelijke puntjes gevonden.
                 </div>
             @endif

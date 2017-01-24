@@ -4,46 +4,32 @@ var gulp        = require('gulp');
 var sass        = require('gulp-sass');
 
 /**
- *
- */
-gulp.task('default', function () {
-
-});
-
-/**
- *
- */
-gulp.task('clean', function () {
-
-});
-
-/**
- *
+ * COMMAND: scripts
  */
 gulp.task('scripts', function () {
-    return gulp.src('./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js')
-        .pipe(gulp.dest('./assets/js'));
+    gulp.src('./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js').pipe(gulp.dest('./assets/js'));
+    gulp.src('./resources/js/*.js').pipe(gulp.dest('./assets/js'));
 });
 
 /**
- *
+ * COMMAND: sass-watch
  */
-gulp.task('scss:watch', function () {
-
+gulp.task('sass-watch', function () {
+    gulp.watch('./resources/sass/*.scss', ['sass']);
 });
 
 /**
- *
+ * COMMAND: copy-fonts
  */
 gulp.task('copy-fonts', function () {
-    
+    gulp.src('./node_modules/bootstrap-sass/assets/fonts/bootstrap/*.{ttf,woff,woff2,eot,svg}').pipe(gulp.dest('./assets/fonts/bootstrap'));
 });
 
 /**
- * COMMAND:
+ * COMMAND: sass
  */
 gulp.task('sass', function () {
-    return gulp.src('./resources/sass/master.scss')
+    return gulp.src('./resources/sass/*.scss')
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./assets/css'));
 });

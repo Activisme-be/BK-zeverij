@@ -41,8 +41,7 @@ class Sportsmen extends Model
      */
     public function union()
     {
-        return $this->belongsTo('Teams', 'Union_id')
-            ->withTimestamps();
+        return $this->belongsTo('Teams', 'Union_id');
     }
 
     /**
@@ -53,6 +52,7 @@ class Sportsmen extends Model
     public function items()
     {
         return $this->belongsToMany('Points', 'pivot_items', 'sportsmen_id', 'item_id')
+            ->withPivot('creator_id')
             ->withTimestamps();
     }
 
@@ -63,7 +63,7 @@ class Sportsmen extends Model
      */
     public function points()
     {
-        return $this->belongsToMany('Points', 'pivot_ranking', 'sportsmen_id', 'item_id')
+        return $this->belongsToMany('Points', 'activisme_bk_zeverij.pivot_ranking', 'sportsmen_id', 'item_id')
             ->withPivot('user_id')
             ->withTimestamps();
     }

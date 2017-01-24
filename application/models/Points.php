@@ -41,8 +41,7 @@ class Points extends Model
      */
     public function govMember()
     {
-        return $this->belongsTo('Sportsmen', 'sportsmen_id')
-            ->withTimestamps();
+        return $this->belongsTo('Sportsmen', 'sportsmen_id');
     }
 
     /**
@@ -52,7 +51,18 @@ class Points extends Model
      */
     public function creator()
     {
-        return $this->belongsTo('Authencate', 'creator_id')
+        return $this->belongsTo('Authencate', 'creator_id');
+    }
+
+    /**
+     * Relation for getting the voted users. 
+     *
+     * @return belognsToMany relationship
+     */
+    public function usersWhoVoted()
+    {
+        // Rel throws error.
+        return $this->belongsToMany('Authencate', 'activisme_bk_zeverij.pivot_ranking', 'item_id', 'user_id')
             ->withTimestamps();
     }
 }

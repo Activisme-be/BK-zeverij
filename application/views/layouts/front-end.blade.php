@@ -23,7 +23,7 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body id="application">
 
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -42,6 +42,7 @@
                         @if ($this->user)
                             <li {{ (current_url() == base_url('ranking')) ? 'class="active"' : '' }}><a href="{{ base_url('ranking') }}">Het Klassement</a></li>
                             <li {{ (current_url() == base_url('participants')) ? 'class="active"' : '' }}><a href="{{ base_url('participants') }}">Onze topsporters</a></li>
+                            <li {{ (current_url() == base_url('news')) ? 'class="active"' : '' }}><a href="{{ base_url('news') }}">Nieuws</a></li>
                         @endif
 
                         <li {{ (current_url() == base_url('disclaimer')) ? 'class="active"' : '' }}><a href="{{ base_url('disclaimer') }}">Disclaimer</a></li>
@@ -59,8 +60,10 @@
                                     <li><a href="{{ base_url('account/settings') }}"><span class="fa fa-cog" aria-hidden="true"></span> Account instellingen</a></li>
 
                                     @if (in_array('admin', $this->user['roles']))
-                                        <li><a href="{{ base_url('items') }}"><span class="fa fa-cogs" aria-hidden="true"> Item management </a></li>
-                                        <li><a href="{{ base_url('users') }}"><span class="fa fa-users" aria-hidden="true"> User Management </a></li>
+                                        <li role="seperator" class="divider"></li>
+                                        <li><a href="{{ base_url('news/backend') }}"><span class="fa fa-file-text-o"></span> News Management</a></li>
+                                        <li><a href="{{ base_url('items') }}"><span class="fa fa-cogs" aria-hidden="true"></span> Item management </a></li>
+                                        <li><a href="{{ base_url('users') }}"><span class="fa fa-users" aria-hidden="true"></span> User Management </a></li>
                                     @endif
 
                                     <li role="separator" class="divider"></li>
@@ -92,11 +95,10 @@
         {{-- Core JavaScript --}}
         {{-- ============================================= --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="{{ base_url('assets/js/bootstrap.js') }}"></script>
-
-        {{-- FIXME: Implement minified vue.js --}}
-        {{-- FIXME: Implement minified vue-resource.js --}}
-        {{-- FIXME: Implement vue.js functions. --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js" async></script>
+        <script src="{{ base_url('assets/js/bootstrap.js') }}" async></script>
+        <script src="{{ base_url('assets/js/vue-functions.js') }}" async></script>
+        <script src="{{ base_url('assets/js/crud.js') }}" async></script>
 
         {{-- IE10 viewport hack for Surface/desktop Windows 8 bug --}}
         <script src="{{ base_url('assets/js/ie10-viewport-bug-workaround.js') }}"></script>
