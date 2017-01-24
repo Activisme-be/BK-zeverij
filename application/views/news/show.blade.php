@@ -63,9 +63,11 @@
 	    												<small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Rapporteer</small>
 	    											</a>
 
-	    											<a href="{{ base_url('comment/delete/' . $comment->id) }}">
-	    												<small><span class="fa fa-close"></span> Verwijder</small>
-	    											</a>
+	    											@if ($this->user['id'] === $comment->user_id) 
+	    												<a href="{{ base_url('comment/delete/' . $comment->id) }}">
+	    													<small><span class="fa fa-close"></span> Verwijder</small>
+	    												</a>
+	    											@endif 
 	    										</small>
 	    									</span>
 	    								</h4>

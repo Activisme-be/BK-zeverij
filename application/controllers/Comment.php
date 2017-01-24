@@ -129,17 +129,21 @@ class Comment extends MY_Controller
 	public function delete() 
 	{
 		$param = $this->security->xss_clean($this->uri->segment(3));
+		$MySQL['comment'] = Comments::findOrFail($param);
 
 		try {
-			$MySQL['comment'] = Comments::findOrFail($param);
-			$MySQL['comment']->reactions()->sync([]);
-			$MySQL['comment']->reports()->sync([]);
-			$MySQL['comment']->delete();
+			if ($this->user['id'] === $MySQL['comment']->user_id) { // The logged in user is the author off the comment.
+				$MySQL['comment']->reactions()->sync([]);
+				$MySQL['comment']->reports()->sync([]);
+				$MySQL['comment']->delete();
 
-			$this->session->set_flashdata('class', 'alert alert-success');
-			$this->session->set_flashdata('class', 'De reactie is verwijderd'); 
+				$this->session->set_flashdata('class', 'alert alert-success');
+				$this->session->set_flashdata('class', 'De reactie is verwijderd'); 
 
-			return redirect($_SERVER['HTTP_REFERER']);
+				return redirect($_SERVER['HTTP_REFERER']);
+			} else { // Authencated user !== author.
+				return show_404();
+			}
 		} catch (Exception $e) {
 			return redirect($_SERVER['HTTP_REFERER']);
 		}
