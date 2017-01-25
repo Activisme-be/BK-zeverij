@@ -61,8 +61,10 @@ class News extends MY_Controller
      */
     public function index()
     {
+        $authorInfo = function ($query) { $query->withTrashed(); }; 
+        
         // Needed data for the pagination. 
-        $query = Articles::with(['comments', 'author', 'categories']); 
+        $query = Articles::with(['comments', 'author' => $authorInfo, 'categories']); 
         $page  = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         $this->pagination->initialize($this->paginationConfig(base_url('news/index'), $query->count(), 4, 3));
@@ -270,6 +272,8 @@ class News extends MY_Controller
      */
     public function delete() 
     {
+        $authorRel = function ($query) { $query->withTrashed(); };
+
         $param['id']      = $this->security->xss_clean($this->uri->segment(3));
         $MySQL['article'] = Articles::with(['comments', 'author', 'categories'])->find($param['id']);
 

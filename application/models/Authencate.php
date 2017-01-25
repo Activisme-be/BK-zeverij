@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Authencation Model.
@@ -13,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Authencate extends Model
 {
+    use SoftDeletes; 
+    
     /**
      * Database table
      *
@@ -40,6 +43,13 @@ class Authencate extends Model
      * @var bool
      */
     public $timestamps = true;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Permissions data relation for the user.
