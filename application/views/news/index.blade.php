@@ -83,8 +83,8 @@
 	                   		<button v-attr="disabled: errorsSearch" class="btn btn-success" type="button">
 	                   			<i class="fa fa-search" aria-hidden="true"></i>
 	                   		</button>
-	                   	</span>
-	               	</div>
+	                    </span>
+	                </div>
                 </form>
             </div>
 

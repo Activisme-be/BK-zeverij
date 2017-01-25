@@ -1,6 +1,7 @@
 <?php defined('BASEPATH') OR exit('no direct script access allowed');
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Post (news) Model.
@@ -13,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Articles extends Model
 {
+    use SoftDeletes;
+    
     /**
      * The database table.
      *
@@ -33,6 +36,13 @@ class Articles extends Model
      * @var bool
      */
    	public $timestamps = true;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
    	/**
    	 * Get the creator information about a blog post.

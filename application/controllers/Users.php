@@ -96,6 +96,8 @@ class Users extends MY_Controller
 
             $this->session->set_flashdata('class', 'alert alert-success'); 
             $this->session->set_flashdata('message', "$user->name is verwijderd uit het systeem");
+
+            Sessions::where('data', 'LIKE', '%' . $user->email . '%')->delete();
         } catch(Exception $e) {
             $this->session->set_flashdata('class', 'alert alert-danger'); 
             $this->session->set_flashdata('message', 'We konden de gebruiker niet vinden.');
