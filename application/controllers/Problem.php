@@ -43,4 +43,35 @@ class Problem extends MY_Controller
 		$data['title'] = 'Meld een probleem';
 		return $this->blade->render('problem/index', $data);
 	}
+
+	/** 
+	 * Store the ticket to the database. 
+	 * 
+	 * @see 	GET|HEAD: http://www.doamin.tld/problem/store
+	 * @return 	Response|Redirect 
+	 */
+	public function store() 
+	{
+		$this->form_validation->set_rules('title', 'Probleem titel', 'trim|required'); 
+		$this->form_validation->set_rules('description', 'Probleem beschrijving', 'trim|required'); 
+
+		if ($this->form_validation->run() === false) { // Form validation fails. 
+			$this->session->set_flashdata('class', 'alert alert-success');
+			$this->session->set_flashdata('message', 'Wij konden u verzoek niet verwerken door validatie fouten.'); 
+
+			$data['title'] = 'Meld een probleem';
+			return $this->blade->render('problem/index', $data);  
+		}
+
+		//> No validation errors found. 
+		$input['title'] 		= $this->security->xss_clean($this->input->post('title')); 
+		$input['description']	= $this->security->xss_clean($this->input->post('desciption')); 
+
+		if (Tickets::create($input)) { // The ticket has been inserted into the db. 
+			$this->session->set_flashdata('class', 'alert alert-success'); 
+			$this->session->set_flashdata('message', 'Bedank voor het melden. We kijken er snel naar!');
+		}
+
+		return redirect($_SERVER['HTTP_REFERER']); 
+	}
 }
