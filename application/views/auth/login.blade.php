@@ -35,8 +35,8 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">Inloggen</button>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resetPass">Wachtwoord vergeten</button>
+                                <button type="submit" class="btn btn-primary"><span class="fa fa-sign-in" aria-hidden="true"></span> Inloggen</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resetPass"><span class="fa fa-key" aria-hidden="true"></span> Wachtwoord vergeten</button>
                             </div>
                         </div>
 

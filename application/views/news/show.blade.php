@@ -122,7 +122,7 @@
 	                    	<input type="text" class="form-control" placeholder="Zoek bericht">
 	                    	<span class="input-group-btn">
 	                    		<button class="btn btn-success" type="button">
-	                    			<i class="fa fa-search"></i>
+	                    			<i class="fa fa-search" aria-hidden="true"></i>
 	                     		</button>
 	                    	</span>
 	                	</div>
