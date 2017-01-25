@@ -63,7 +63,7 @@
 	    												<small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Rapporteer</small>
 	    											</a>
 
-	    											@if ($this->user['id'] === $comment->user_id) 
+	    											@if ($this->user && $this->user['id'] === $comment->user_id) 
 	    												<a href="{{ base_url('comment/delete/' . $comment->id) }}">
 	    													<small><span class="fa fa-close"></span> Verwijder</small>
 	    												</a>
@@ -83,6 +83,9 @@
 
 					{{-- Comment box --}}
 					<form class="form-horizontal" action="{{ base_url('comment/store/' . $article->id) }}" method="POST">
+						{{-- CSRF --}}
+                        <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+                        
 						<div class="form-group">
 							<div class="col-md-12">
 								<textarea class="form-control" rows="4" name="commentUser" placeholder="Uw reactie"></textarea>
