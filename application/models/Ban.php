@@ -21,13 +21,6 @@ class Ban extends Model
     protected $table = 'bans';
 
     /**
-     * Set the database connection. 
-     * 
-     * @return string
-     */
-    protected $connection = 'utility';
-
-    /**
      * Mass-assign fields
      *
      * @var array

@@ -105,7 +105,7 @@ class News extends MY_Controller
      */
     public function show() 
     {
-        $authorInfo = function ($query) { $authorInfo->withTrashed(); };
+        $authorInfo = function ($query) { $query->withTrashed(); };
 
         $postId             = $this->security->xss_clean($this->uri->segment(3)); 
         $data['article']    = Articles::with(['comments', 'author' => $authorInfo, 'categories'])->find($postId); 
@@ -200,8 +200,9 @@ class News extends MY_Controller
         $this->form_validation->set_rules('description', 'Nieuwsbericht', 'trim|required');
 
         if ($this->form_validation->run() == false) { // Validation fails. 
-            var_dump(validation_errors()); 
-            die();
+            // var_dump(validation_errors());         // For debugging proposes
+            // die();                                 // For debugging proposes
+
             $data['title'] = 'Nieuws management';
             $data['news']       = Articles::with(['comments', 'author', 'categories'])->get();
             $data['categories'] = NewsCategories::all(); 
@@ -253,9 +254,8 @@ class News extends MY_Controller
      */
     public function update() 
     {
-        $this->form_validation->set_rules('', '', '');
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
-        $this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
+        $this->form_validation->set_rules('heading', 'Titel nieuwsbericht', 'trim|required');
+        $this->form_validation->set_rules('description', 'Nieuwsbericht', 'trim|required');
 
         if ($this->form_validation->run() == false) { // Validation errors.
             $data['title'] = 'Nieuws';

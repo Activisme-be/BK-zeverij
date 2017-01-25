@@ -15,21 +15,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Authencate extends Model
 {
     use SoftDeletes; 
-    
+
     /**
      * Database table
      *
      * @var string
      */
     protected $table = 'users';
-
-    /**
-     * Set the database connection. 
-     * 
-     * @return string
-     */
-    protected $connection = 'utility';
-
+    
     /**
      * Mass-assign fields.
      *
@@ -80,7 +73,7 @@ class Authencate extends Model
 
     public function items()
     {
-        return $this->belongsToMany('Points', 'pivot_ranking', 'sportsmen_id', 'creator_id')
+        return $this->belongsToMany('Points', 'activisme_be_activisme_zeverij.pivot_ranking', 'sportsmen_id', 'creator_id')
             ->withTimestamps();
     }
 }

@@ -78,10 +78,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'activisme_bk_zeverij',
+	'hostname' => 'activisme.be.mysql',
+	'username' => 'activisme_be_activisme_zeverij',
+	'password' => 'wachtwoord3',
+	'database' => 'activisme_be_activisme_zeverij',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
@@ -113,28 +113,6 @@ $capsule->addConnection([
     'collation' => $db['default']['dbcollat'],
     'prefix'    => $db['default']['dbprefix'],
 ], 'default');
-
-$capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'activisme_be_authencation',
-    'username'  => 'root',
-    'password'  => 'root',
-    'charset'   => $db['default']['char_set'],
-    'collation' => $db['default']['dbcollat'],
-    'prefix'    => $db['default']['dbprefix'],
-], 'utility');
-
-$capsule->addConnection([
-    'driver'    => 'mysql',
-    'host'      => 'localhost',
-    'database'  => 'activisme_be_utility',
-    'username'  => 'root',
-    'password'  => 'root',
-    'charset'   => $db['default']['char_set'],
-    'collation' => $db['default']['dbcollat'],
-    'prefix'    => $db['default']['dbprefix'],
-], 'resources');
 
 $capsule->setAsGlobal();    // Make this Capsule instance available globally via static methods... (optional)
 $capsule->bootEloquent();   // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())

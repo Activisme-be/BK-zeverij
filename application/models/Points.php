@@ -62,7 +62,7 @@ class Points extends Model
     public function usersWhoVoted()
     {
         // Rel throws error.
-        return $this->belongsToMany('Authencate', 'activisme_bk_zeverij.pivot_ranking', 'item_id', 'user_id')
+        return $this->belongsToMany('Authencate', 'activisme_be_activisme_zeverij.pivot_ranking', 'item_id', 'user_id')
             ->withTimestamps();
     }
 }
