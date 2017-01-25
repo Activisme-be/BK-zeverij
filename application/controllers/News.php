@@ -62,7 +62,7 @@ class News extends MY_Controller
     public function index()
     {
         $authorInfo = function ($query) { $query->withTrashed(); }; 
-        
+
         // Needed data for the pagination. 
         $query = Articles::with(['comments', 'author' => $authorInfo, 'categories']); 
         $page  = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
@@ -85,11 +85,13 @@ class News extends MY_Controller
      */
     public function backend() 
     {
+        $authorInfo = function ($query) { $query->withTrashed(); };
+
         // FIXME: Set pagination for articles. 
         // FIXME: Set pagination for categories. 
 
         $data['title']      = 'Nieuws berichten';
-        $data['news']       = Articles::with(['comments', 'author', 'categories'])->get();
+        $data['news']       = Articles::with(['comments', 'author' => $authorInfo, 'categories'])->get();
         $data['categories'] = NewsCategories::all(); 
 
         return $this->blade->render('news/backend', $data); 
@@ -103,8 +105,10 @@ class News extends MY_Controller
      */
     public function show() 
     {
+        $authorInfo = function ($query) { $authorInfo->withTrashed(); };
+
         $postId             = $this->security->xss_clean($this->uri->segment(3)); 
-        $data['article']    = Articles::with(['comments', 'author', 'categories'])->find($postId); 
+        $data['article']    = Articles::with(['comments', 'author' => $authorInfo, 'categories'])->find($postId); 
 
         $comments = $data['article']->comments(); // Query Builder object.
         $page     = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0; 
