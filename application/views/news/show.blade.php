@@ -82,23 +82,29 @@
 					{{-- /Reactions --}}
 
 					{{-- Comment box --}}
-					<form class="form-horizontal" action="{{ base_url('comment/store/' . $article->id) }}" method="POST">
-						{{-- CSRF --}}
-                        <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
-                        
-						<div class="form-group">
-							<div class="col-md-12">
-								<textarea class="form-control" rows="4" name="commentUser" placeholder="Uw reactie"></textarea>
+					@if ($this->user)
+						<form class="form-horizontal" action="{{ base_url('comment/store/' . $article->id) }}" method="POST">
+							{{-- CSRF --}}
+	                        <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+	                        
+							<div class="form-group">
+								<div class="col-md-12">
+									<textarea class="form-control" rows="4" name="commentUser" placeholder="Uw reactie"></textarea>
+								</div>
 							</div>
-						</div>
 
-						<div class="form-group">
-							<div class="col-sm-6">
-								<button type="submit" class="btn btn-sm btn-success">Reageer</button>
-								<button type="reset" class="btn btn-sm btn-danger">Reset</button>
+							<div class="form-group">
+								<div class="col-sm-6">
+									<button type="submit" class="btn btn-sm btn-success">Reageer</button>
+									<button type="reset" class="btn btn-sm btn-danger">Reset</button>
+								</div>
 							</div>
+						</form>
+					@else
+						<div class="alert alert-info" role="alert">
+							<strong><span class="fa fa-info-circle" aria-hidden="true"></span> Info:</strong> U moet ingelogd zijn om te kunnen reageren.
 						</div>
-					</form>
+					@endif
 					{{-- /Comment box --}}
 				{{-- /Comments --}}
 			</div>

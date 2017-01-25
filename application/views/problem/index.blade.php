@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-sm-8">
 			@if (isset($_SESSION['class']) && isset($_SESSION['message']) && isset($_SESSION['status']))
-				<div class="{{ $_SESSION['class'] }} alert-dismissable"> 
+				<div class="{{ $_SESSION['class'] }} alert-dismissable" role="alert"> 
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong> {{ $_SESSION['status'] }}: </strong> {{ $_SESSION['message'] }}
 				</div>
