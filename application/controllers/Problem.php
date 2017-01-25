@@ -56,9 +56,6 @@ class Problem extends MY_Controller
 		$this->form_validation->set_rules('description', 'Probleem beschrijving', 'trim|required'); 
 
 		if ($this->form_validation->run() === false) { // Form validation fails. 
-			$this->session->set_flashdata('class', 'alert alert-success');
-			$this->session->set_flashdata('message', 'Wij konden u verzoek niet verwerken door validatie fouten.'); 
-
 			$data['title'] = 'Meld een probleem';
 			return $this->blade->render('problem/index', $data);  
 		}
@@ -69,6 +66,7 @@ class Problem extends MY_Controller
 
 		if (Tickets::create($input)) { // The ticket has been inserted into the db. 
 			$this->session->set_flashdata('class', 'alert alert-success'); 
+			$this->session->set_flashdata('status', 'Success');
 			$this->session->set_flashdata('message', 'Bedank voor het melden. We kijken er snel naar!');
 		}
 
