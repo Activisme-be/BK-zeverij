@@ -63,7 +63,7 @@
 	    												<small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Rapporteer</small>
 	    											</a>
 
-	    											@if ($this->user && $this->user['id'] === $comment->user_id) 
+	    											@if ($this->user && $this->user['id'] === $comment->user_id || in_array('admin', $this->user['roles'])) 
 	    												<a href="{{ base_url('comment/delete/' . $comment->id) }}">
 	    													<small><span class="fa fa-close"></span> Verwijder</small>
 	    												</a>

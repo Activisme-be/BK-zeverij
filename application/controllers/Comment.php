@@ -132,7 +132,8 @@ class Comment extends MY_Controller
 		$MySQL['comment'] = Comments::findOrFail($param);
 
 		try {
-			if ($this->user['id'] === $MySQL['comment']->user_id) { // The logged in user is the author off the comment.
+			if ($this->user['id'] === $MySQL['comment']->user_id || in_array('admin', $this->user['roles'])) { 
+				// The logged in user is the author off the comment or is an admin.
 				$MySQL['comment']->reactions()->sync([]);
 				$MySQL['comment']->reports()->sync([]);
 				$MySQL['comment']->delete();
