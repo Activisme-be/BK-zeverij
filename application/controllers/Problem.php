@@ -65,7 +65,7 @@ class Problem extends MY_Controller
 
 		//> No validation errors found. 
 		$input['title'] 		= $this->security->xss_clean($this->input->post('title')); 
-		$input['description']	= $this->security->xss_clean($this->input->post('desciption')); 
+		$input['description']	= $this->security->xss_clean($this->input->post('description')); 
 
 		if (Tickets::create($input)) { // The ticket has been inserted into the db. 
 			$this->session->set_flashdata('class', 'alert alert-success'); 
