@@ -50,7 +50,7 @@ class News extends MY_Controller
         // someother|except:index,list   // This will be only applied to posts()
         // yet_another_one|only:index    // This will be only applied to index()
         //
-        return [];
+        return ['admin_auth|only:backend,store,edit,update,delete'];
     }
 
     /**
