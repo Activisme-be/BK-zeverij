@@ -125,6 +125,17 @@ $capsule->addConnection([
     'prefix'    => $db['default']['dbprefix'],
 ], 'utility');
 
+$capsule->addConnection([
+    'driver'    => 'mysql',
+    'host'      => 'localhost',
+    'database'  => 'activisme_be_utility',
+    'username'  => 'root',
+    'password'  => 'root',
+    'charset'   => $db['default']['char_set'],
+    'collation' => $db['default']['dbcollat'],
+    'prefix'    => $db['default']['dbprefix'],
+], 'resources');
+
 $capsule->setAsGlobal();    // Make this Capsule instance available globally via static methods... (optional)
 $capsule->bootEloquent();   // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 
