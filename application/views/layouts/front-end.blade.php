@@ -58,6 +58,7 @@
 
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ base_url('account/settings') }}"><span class="fa fa-cog" aria-hidden="true"></span> Account instellingen</a></li>
+                                    <li><a href="{{ base_url('problem') }}"><span class="fa fa-bug" aria-hidden="true"></span> Meld een probleem</a></li>
 
                                     @if (in_array('admin', $this->user['roles']))
                                         <li role="seperator" class="divider"></li>
