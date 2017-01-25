@@ -40,12 +40,12 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         @if ($this->user)
-                            <li {{ (current_url() == base_url('ranking')) ? 'class="active"' : '' }}><a href="{{ base_url('ranking') }}">Het Klassement</a></li>
-                            <li {{ (current_url() == base_url('participants')) ? 'class="active"' : '' }}><a href="{{ base_url('participants') }}">Onze topsporters</a></li>
+                            <li {{ (current_url() == base_url('ranking')) ? 'class="active"' : '' }}><a href="{{ base_url('ranking') }}"><i class="fa fa-bars" aria-hidden="true"></i> Het Klassement</a></li>
+                            <li {{ (current_url() == base_url('participants')) ? 'class="active"' : '' }}><a href="{{ base_url('participants') }}"><i class="fa fa-users" aria-hidden="true"></i> Onze topsporters</a></li>
                         @endif
 
-                        <li {{ (current_url() == base_url('news')) ? 'class="active"' : '' }}><a href="{{ base_url('news') }}">Nieuws</a></li>
-                        <li {{ (current_url() == base_url('disclaimer')) ? 'class="active"' : '' }}><a href="{{ base_url('disclaimer') }}">Disclaimer</a></li>
+                        <li {{ (current_url() == base_url('news')) ? 'class="active"' : '' }}><a href="{{ base_url('news') }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Nieuws</a></li>
+                        <li {{ (current_url() == base_url('disclaimer')) ? 'class="active"' : '' }}><a href="{{ base_url('disclaimer') }}"><i class="fa fa-file-text-o" aria-hidden="true"></i> Disclaimer</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">

@@ -105,7 +105,7 @@
                         <div class="form-group" v-if="! submitted">
                             <div class="col-md-offset-4 col-md-6">
                                 <button type="submit" v-attr="disabled: errorsRegister" class="btn btn-default">Registreer</button>
-                                <button type="reset" class="btn btn-danger">Reset</button>
+                                <button type="reset" class="btn btn-danger"><span class="fa fa-close" aria-hidden="true"></span> Reset</button>
                             </div>
                         </div>
 
