@@ -2,12 +2,12 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form method="POST" action="{{ base_url('category/search') }}" class="form-inline pull-left"> 
+				<form method="POST" action="{{ base_url('category/search') }}" class="form-inline pull-left" v-if="! submitted"> 
 					{{-- CSRF --}}
                     <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
                     
-            		<input @if ((int) count($categories) === 0) disabled  @endif class="form-control" placeholder="Search term" name="term" />
-                	<button type="submit" class="btn btn-danger" @if ((int) count($categories) === 0) disabled  @endif>
+            		<input v-model="search.model" @if ((int) count($categories) === 0) disabled  @endif class="form-control" placeholder="Search term" name="term" />
+                	<button v-attr="disabled: errorsSearch" type="submit" class="btn btn-danger" @if ((int) count($categories) === 0) disabled  @endif>
                     	<span class="glyphicon glyphicon-search"></span> Zoek
                 	</button>
         		</form>

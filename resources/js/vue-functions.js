@@ -4,7 +4,8 @@ new Vue({
     data : {
         register         : { username : '', email : '', name : '', password : '', password_confirm : '', disclaimer : '' },
         accountSettings  : { username : '', email : '', name : ''},
-        categoryInsert : { category : '', description : ''},
+        categoryInsert   : { category : '', description : ''},
+        search           : { term : ''},
         submitted        : false
     },
 
@@ -24,8 +25,17 @@ new Vue({
             }
         },
 
+        // FIXME: missing if
         errorsCategory: function () {
-            for (var key in this.categoryInsert[key]) return true;
+            for (var key in this.categoryInsert[key]) {
+                return true;
+            }
+        },
+
+        errorsSearch: function () {
+            for (var key in this.search) {
+                if (! this.search[key]) return true;  
+            }
         }
     }
 

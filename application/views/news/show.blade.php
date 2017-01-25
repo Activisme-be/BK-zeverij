@@ -118,10 +118,10 @@
 	                	{{-- CSRF --}}
                         <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
                         
-	                	<div class="input-group">
-	                    	<input type="text" class="form-control" placeholder="Zoek bericht">
+	                	<div class="input-group" v-if="! submitted">
+	                    	<input type="text" name="term" v-model="search.term" class="form-control" placeholder="Zoek bericht">
 	                    	<span class="input-group-btn">
-	                    		<button class="btn btn-success" type="button">
+	                    		<button v-attr="disabled: errorsSearch" class="btn btn-success" type="button">
 	                    			<i class="fa fa-search" aria-hidden="true"></i>
 	                     		</button>
 	                    	</span>
