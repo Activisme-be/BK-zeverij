@@ -50,7 +50,7 @@ class Comment extends MY_Controller
         // someother|except:index,list   // This will be only applied to posts()
         // yet_another_one|only:index    // This will be only applied to index()
         //
-        return ['auth'];
+        return ['auth|except:show,report'];
     }                   
 
 	/**
@@ -104,8 +104,8 @@ class Comment extends MY_Controller
 		}
 
 		// No validation errors found so move on with our logic; 
-		$input['user_id'] = $this->security->xss_clean($this->user['id']); 
-		$input['reason']  = $this->security->xss_clean($this->input->post('reason'));
+		$input['user_id'] = $this->user ? $this->security->xss_clean($this->user['id']) : 0;
+		$input['reason']  = $this->security->xss_clean($this->input->post('reason')); 
 
 		$reactionId = $this->security->xss_clean($this->input->post('id'));
 
