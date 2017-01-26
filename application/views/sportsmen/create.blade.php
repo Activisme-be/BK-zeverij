@@ -1,4 +1,6 @@
 <form class="form-horizontal" action="{{ base_url('items/create') }}" method="POST">
+    {{-- CSRF --}}
+    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
 
     {{-- Hidden inputs --}}
     {{-- ==================================== --}}

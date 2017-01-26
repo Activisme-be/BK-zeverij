@@ -86,7 +86,6 @@ class Participants extends MY_Controller
         $paramId = $this->security->xss_clean($this->uri->segment(3));
 
         $data['human'] = Sportsmen::withCount($this->relations)->find($paramId);
-        $data['items'] = Points::where('status', 1)->where('sportsmen_id', $data['human']->id)->get();
         $data['title'] = $data['human']->union->name_abbr . ': ' . $data['human']->Name;
 
         return $this->blade->render('sportsmen/show', $data);

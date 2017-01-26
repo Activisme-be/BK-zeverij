@@ -13,18 +13,23 @@
                 <div class="panel-body">
                     <h2>Belgisch Kampioenschap van de wansmaak</h2>
 
+                    <p class="lead">Stem op de wansmakelijkste politici!</p>
+
                     <p>
-                        Onze politici geven zichzelf erg graag complimentjes en goede rapporten. Alles is een success,elke uitspraak is gerechtvaardigd, en elke opinie is redelijk, bedaard en gematigd.
+                        Onze politici geven zichzelf erg graag complimentjes en goede rapporten. Ze vinden hun eigen optredens vaak een succes, hun uitspraken gerechtvaardigd en hun meningen doordacht.
+                    </p>
+
+                    <p>                       
+                        Maar net zoals in school is het rapport dat de politicus zichzelf geeft niet echt betrouwbaar. 
+                        De burgers zijn degenen die het beste kunnen beoordelen of de politicus getuigt van goede smaak. Daarom deze site.
                     </p>
 
                     <p>
-                        Maar net zoals in school is het rapport dat dat de leerling zichzelf geeft niet echt betrouwbaar.
                         Zo ook met onze politici. De burgers zijn degene die hen moeten beoordelen, niemand anders.
-                        Daarom deze site.
                     </p>
 
                     <p>
-                        Geef onze politici hier punten voor wansmaak. Telkens ze iets verklaren of beargumenteren kan
+                        Geef onze politici hier punten voor wansmaak. Telkens als ze iets verklaren of beargumenteren kan
                         je hen een score geven. En op het einde van het jaar reiken we een trofee uit aan degene
                         die het hoogst scoort in de wansmaak-index. Die wordt dan Belgisch Kampioen van de Wansmaak.
                     </p>

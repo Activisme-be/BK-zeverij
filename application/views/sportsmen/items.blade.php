@@ -1,4 +1,4 @@
-@if (count($items) > 0)
+@if (count($human->items) > 0)
     <table class="table table-condensed table-hover table-bordered">
         <thead>
             <tr>
@@ -7,13 +7,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($items as $item)
+            @foreach($human->items as $item)
                 <tr>
                     <td><code>#{{ $item->id }}</code></td>
                     <td>{{ $item->point }}</td>
 
                     <td> {{-- Functions --}}
-                        <a class="label label-success" href="{{ base_url('items/vote/' . $human->id . '/' . $item->id ) }}">Stem</a>
+                        {{-- (!is_null($point->user_votes()->find($user_id))) --}}
+                        @if (! is_null($item->usersWhoVoted()->find($this->user['id'])))
+                            <span class="label label-info">Al gestemd</span>
+                        @else
+                            <a class="label label-success" href="{{ base_url('items/vote/' . $human->id . '/' . $item->id ) }}">Stem</a>
+                        @endif
 
                         @if (in_array('admin', $this->user['roles']))
                             <a class="label label-danger" href="">Verwijder</a>
@@ -24,7 +29,7 @@
         </tbody>
     </table>
 @else
-    <div class="alert alert-info">
+    <div class="alert alert-info" role="alert">
         <strong>Info:</strong> {{ $human->Name }} heeft nog geen wansmakelijke punten vermeld in de media.
     </div>
 @endif

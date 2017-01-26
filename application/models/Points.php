@@ -53,4 +53,16 @@ class Points extends Model
     {
         return $this->belongsTo('Authencate', 'creator_id');
     }
+
+    /**
+     * Relation for getting the voted users. 
+     *
+     * @return belognsToMany relationship
+     */
+    public function usersWhoVoted()
+    {
+        // Rel throws error.
+        return $this->belongsToMany('Authencate', 'activisme_be_activisme_zeverij.pivot_ranking', 'item_id', 'user_id')
+            ->withTimestamps();
+    }
 }

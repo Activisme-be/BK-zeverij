@@ -14,6 +14,8 @@
 
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{ base_url('auth/verify') }}" method="post">
+                        {{-- CSRF --}}
+                        <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
 
                         <div class="form-group">
                             <label class="control-label col-sm-4">Email adres: </label>
@@ -33,8 +35,8 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">Inloggen</button>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resetPass">Wachtwoord vergeten</button>
+                                <button type="submit" class="btn btn-primary"><span class="fa fa-sign-in" aria-hidden="true"></span> Inloggen</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#resetPass"><span class="fa fa-key" aria-hidden="true"></span> Wachtwoord vergeten</button>
                             </div>
                         </div>
 

@@ -7,7 +7,7 @@
                 <li role="presentation" class="active">
                     <a href="#invidueel" aria-controls="home" role="tab" data-toggle="tab">Invidueel klassement</a>
                 </li>
-                
+
                 {{--
                 <li role="presentation">
                     <a href="#ploegen" aria-controls="profile" role="tab" data-toggle="tab">Ploegen klassement</a>
@@ -35,7 +35,7 @@
                                         <tr>
                                             <td><strong>{{ $position++ }}</strong></td>
                                             <td><span class="label {{ $human->union->label }}">{{ $human->union->name_abbr }}</span></td>
-                                            <td>{{ $human->Name }}</td>
+                                            <td><a href="{{ base_url('participants/show/' . $human->id) }}">{{ $human->Name }}</a></td>
                                             <td>{{ $human->points_count; }} punten</td>
                                         </tr>
                                     @endforeach

@@ -8,13 +8,7 @@
 
                 <div class="panel-body">
                     <p>
-                        Dit spel is bedoeld als parodie ter voorbereiding van de opkomende verkiezingen. Wij duiden ook tevens aan. Dat we geen schade willen berokken aan politici,
-                        Want ja wij kiezen niet hoe zij bepaalde punten verkonidigen op media platformen.
-                    </p>
-
-                    <p>
-                        Voor de rest is dit burgerinitiatief gestart onafhankelijk van een politieke partij. De bedoeling van dit initiatief is louter bedoeld als komische actie naar onze
-                        beleidsmakers toe omtrent de punten die hij/zij vertegenwoordigd. 
+                        Dit spel is een parodie. Dat wil zeggen dat het ludiek bedoeld is. We zijn er niet op uit zijn om politici te beschadigen en we zijn niet verbonden aan een politieke partij. De koplopers in dit spel kiezen zelf hoe ze hun boodschap verkondigen. Als ze daarmee de aandacht trekken, hebben ze dat aan zichzelf te danken. Don't shoot the messenger. 
                     </p>
 
                     <h3>Garanties:</h3>
@@ -22,8 +16,8 @@
                     <p>Wij bieden je de volgende garanties:</p>
 
                     <ul>
-                        <li> Je persoonsgegevens worden niet bekendgemaakt aan derden. </li>
-                        <li> Ze worden ook niet gebruik voor marketingdoeleinden. </li>
+                        <li> Je persoonsgegevens worden niet doorgegeven aan derden. </li>
+                        <li> Ze worden ook niet gebruikt voor marketingdoeleinden. </li>
                         <li> De verwerking van je persoonsgegevens blijft beperkt tot de beoogde doelstelling. </li>
                         <li> Wij treffen de beste maatregelen om jouw gegevens te beschermen. </li>
                     </ul>

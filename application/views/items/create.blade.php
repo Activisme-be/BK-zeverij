@@ -10,6 +10,8 @@
 
             <div class="modal-body">
                 <form class="form-horizontal" action="{{ base_url('items/create') }}" method="post">
+                    {{-- CSRF --}}
+                    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
 
                     <div class="form-group">
                         <label for="politics" class="col-md-3 control-label">

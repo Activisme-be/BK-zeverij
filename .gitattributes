@@ -1,0 +1,9 @@
+/.gitattributes  		export-ignore
+/.gitignore      		export-ignore
+/composer.lock   		export-ignore
+/database.sql	 		export-ignore
+/LICENSE         		export-ignore
+/README.md       		export-ignore
+/CONTRIBUTING.md 		export-ignore
+/CONDUCT.md		 		export-ignore
+/ISSUE_TEMPLATE.md		export-ignore

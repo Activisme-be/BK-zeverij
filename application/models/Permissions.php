@@ -19,12 +19,14 @@ class Permissions extends Eloquent
      * @var string
      */
     protected $table = 'permissions';
+
     /**
      * Mass-assign fields.
      *
      * @var array
      */
-    protected $fillable = ['role', 'description'];
+    protected $fillable = ['name', 'description'];
+
     /**
      * Disable timestamps.
      *
