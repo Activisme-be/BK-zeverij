@@ -81,7 +81,7 @@ class Auth extends MY_Controller
         if ($MySQL['user']->count()) { // User is found and the password match
             $authencation = []; // Empty authencated session array.
             $permissions  = []; // Empty permission array.
-            $abilities    = []; // Empty abilities array. 
+            $abilities    = []; // Empty abilities array.
 
             // Build up the session array.
             foreach ($MySQL['user']->get() as $user) {          // Define the data to the session array.
@@ -89,7 +89,7 @@ class Auth extends MY_Controller
                     array_push($permissions, $perm->name);      // Push every key invidual to the permissions array.
                 }
 
-                foreach ($user->abilities as $ability) {        // Set every ability role to a key. 
+                foreach ($user->abilities as $ability) {        // Set every ability role to a key.
                     array_push($abilities, $ability->name);     // Push every key invidual to the abilities array.
                 }
 
@@ -199,7 +199,7 @@ class Auth extends MY_Controller
     public function store()
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]');
         $this->form_validation->set_rules('name', 'Naam', 'trim|required');
         $this->form_validation->set_rules('password', 'Wachtwoord', 'trim|required|min_length[6]|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', 'Wachtwoord confirmaties', 'trim|required');
