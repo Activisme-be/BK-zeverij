@@ -28,8 +28,8 @@ class Participants extends MY_Controller
          $this->load->helper(['url']);
 
          $this->user        = $this->session->userdata('authencated_user');
-         $this->permissions = $this->session->userdata('permissions');
-         $this->abilities   = $this->session->userdata('abilities');
+         $this->permissions = $this->session->userdata('authencated_permissions');
+         $this->abilities   = $this->session->userdata('authencated_abilities');
          $this->relations   = ['union', 'items', 'points'];
      }
 

@@ -14,7 +14,7 @@ class Items extends MY_Controller
     public $user        = []; /** @var array  $user         The authencated user data                 **/
     public $permissions = []; /** @var array  $permissions  The permissions for the authencated user  **/
     public $abilities   = []; /** @var array  $abilities    The abilities for the given user.         **/
-    
+
     /**
      * Items constructor
      *
@@ -26,7 +26,9 @@ class Items extends MY_Controller
         $this->load->library(['blade', 'session', 'form_validation', 'pagination']);
         $this->load->helper(['url']);
 
-        $this->user = $this->session->userdata('authencated_user');
+        $this->user        = $this->session->userdata('authencated_user');
+        $this->permissions = $this->session->userdata('authencated_permissions')
+        $this->abilities   = $this->session->userdata('authencated_abilities');
     }
 
     /**

@@ -26,7 +26,9 @@ class Disclaimer extends MY_Controller
         $this->load->library(['blade', 'session']);
         $this->load->helper(['url']);
 
-        $this->user = $this->session->userdata('authencated_user');
+        $this->user        = $this->session->userdata('authencated_user');
+        $this->permissions = $this->session->userdata('authencated_permissions');
+        $this->abilities   = $this->session->userdata('authencation_abilities');
     }
 
     /**

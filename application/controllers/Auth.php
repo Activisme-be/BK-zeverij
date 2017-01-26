@@ -24,7 +24,9 @@ class Auth extends MY_Controller
         $this->load->library(['session', 'blade', 'email', 'form_validation']);
         $this->load->helper(['url', 'string']);
 
-        $this->user = $this->session->userdata('authencated_user');
+        $this->user        = $this->session->userdata('authencated_user');
+        $this->permissions = $this->session->userdata('authencated_permissions');
+        $this->abilities   = $this->session->userdata('authencated_abilities');
     }
 
     /**

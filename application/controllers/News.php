@@ -26,7 +26,9 @@ class News extends MY_Controller
         $this->load->library(['blade','cimarkdown','session', 'form_validation', 'pagination']);
         $this->load->helper(['url']);
 
-        $this->user = $this->session->userdata('authencated_user');
+        $this->user        = $this->session->userdata('authencated_user');
+        $this->permissions = $this->session->userdata('authencated_permissions')
+        $this->abilities   = $this->session->userdata('authencated_abilities');
     }
 
     /**
