@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); 
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * Comment Controller.
@@ -9,7 +9,7 @@
  * @since     2017
  * @package   BK-wansmaak
  */
-class Comment extends MY_Controller 
+class Comment extends MY_Controller
 {
 	/**
      * Authencated user data.
@@ -17,13 +17,15 @@ class Comment extends MY_Controller
      * @var array $user
      */
     public $user = [];
+    public $permissions = [];
+    public $abilities = [];
 
-	/** 
+	/**
 	 * Comment constructor
-	 * 
+	 *
 	 * @return void
-	 */ 
-	public function __construct() 
+	 */
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library(['blade', 'form_validation', 'session']);
@@ -51,69 +53,69 @@ class Comment extends MY_Controller
         // yet_another_one|only:index    // This will be only applied to index()
         //
         return ['auth|except:show,report'];
-    }                   
+    }
 
 	/**
-	 * Store a new comment in the database. 
-	 * 
+	 * Store a new comment in the database.
+	 *
 	 * @see 	GET|HEAD:	http://www.domain.tld/comment/store/{articleId}
 	 * @return 	Response | Response
 	 */
 	public function store()
 	{
-		$this->form_validation->set_rules('commentUser', 'Reactie', 'trim|required'); 
+		$this->form_validation->set_rules('commentUser', 'Reactie', 'trim|required');
 
 		if ($this->form_validation->run() === false) { // Validation fails.
 			return redirect($_SERVER['HTTP_REFERER'], 'refresh');
 		}
 
-		// No validation errors found. So we can move on with out logic. 
+		// No validation errors found. So we can move on with out logic.
 		$articleId = $this->security->xss_clean($this->uri->segment(3));
 
-		$input['user_id'] = $this->security->xss_clean($this->user['id']); 
+		$input['user_id'] = $this->security->xss_clean($this->user['id']);
 		$input['comment'] = $this->security->xss_clean($this->input->post('commentUser'));
 
-		//> MySQL DB Handlings. 
-		$MySQL['comment']  = Comments::create($input); 
-		$MySQL['relation'] = Comments::find($MySQL['comment']->id)->reactions()->attach($articleId); 
+		//> MySQL DB Handlings.
+		$MySQL['comment']  = Comments::create($input);
+		$MySQL['relation'] = Comments::find($MySQL['comment']->id)->reactions()->attach($articleId);
 
-		if ($MySQL['comment'] && $MySQL['relation']) { // Relation and reaction inserted. 
+		if ($MySQL['comment'] && $MySQL['relation']) { // Relation and reaction inserted.
 			$this->session->set_flashdata('class', 'alert alert-success');
-			$this->session->set_flashdata('message', 'De reactie is toegevoegd.'); 
+			$this->session->set_flashdata('message', 'De reactie is toegevoegd.');
 		}
 
 		return redirect($_SERVER['HTTP_REFERER'], 'refresh');
 	}
 
-	/** 
-	 * Report a comment that breaks our policy. 
-	 * 
+	/**
+	 * Report a comment that breaks our policy.
+	 *
 	 * @see 	POST: http://www.domain.tld/comment/report
 	 * @return  Response|Redirect
 	 */
-	public function report() 
+	public function report()
 	{
 		$this->form_validation->set_rules('id', 'Reactie ID', 'trim|required');
 		$this->form_validation->set_rules('reason', 'rede', 'trim|required');
 
-		if ($this->form_validation->run() === false) { // Form validation fails. 
-			$this->session->set_flashdata('class', 'alert alert-danger'); 
+		if ($this->form_validation->run() === false) { // Form validation fails.
+			$this->session->set_flashdata('class', 'alert alert-danger');
 			$this->session->set_flashdata('message', 'Wij konden de invoer niet verwerken wegen validatie fouten');
 
 			return redirect($_SERVER['HTTP_REFERER'], 'refresh');
 		}
 
-		// No validation errors found so move on with our logic; 
+		// No validation errors found so move on with our logic;
 		$input['user_id'] = $this->user ? $this->security->xss_clean($this->user['id']) : 0;
-		$input['reason']  = $this->security->xss_clean($this->input->post('reason')); 
+		$input['reason']  = $this->security->xss_clean($this->input->post('reason'));
 
 		$reactionId = $this->security->xss_clean($this->input->post('id'));
 
-		$MySQL['create']   = Reports::create($input); 
-		$MySQL['relation'] = Reports::find($MySQL['create']->id)->reportReaction()->attach($reactionId); 
+		$MySQL['create']   = Reports::create($input);
+		$MySQL['relation'] = Reports::find($MySQL['create']->id)->reportReaction()->attach($reactionId);
 
 		if ($MySQL['create'] && $MySQL['relation']) { // Create and relation OK
-			$this->session->set_flashdata('class', 'alert alert-success'); 
+			$this->session->set_flashdata('class', 'alert alert-success');
 			$this->session->set_flashdata('message', 'U hebt de reactie successvol gerapporteerd');
 		}
 
@@ -121,25 +123,25 @@ class Comment extends MY_Controller
 	}
 
 	/**
-	 * Delete a reaction. 
-	 * 
+	 * Delete a reaction.
+	 *
 	 * @see    http://www.domain.tld/comment/delete/{id}
-	 * @return Response|Redirect 
-	 */ 
-	public function delete() 
+	 * @return Response|Redirect
+	 */
+	public function delete()
 	{
 		$param = $this->security->xss_clean($this->uri->segment(3));
 		$MySQL['comment'] = Comments::findOrFail($param);
 
 		try {
-			if ($this->user['id'] === $MySQL['comment']->user_id || in_array('admin', $this->user['roles'])) { 
+			if ($this->user['id'] === $MySQL['comment']->user_id || in_array('admin', $this->user['roles'])) {
 				// The logged in user is the author off the comment or is an admin.
 				$MySQL['comment']->reactions()->sync([]);
 				$MySQL['comment']->reports()->sync([]);
 				$MySQL['comment']->delete();
 
 				$this->session->set_flashdata('class', 'alert alert-success');
-				$this->session->set_flashdata('class', 'De reactie is verwijderd'); 
+				$this->session->set_flashdata('class', 'De reactie is verwijderd');
 
 				return redirect($_SERVER['HTTP_REFERER']);
 			} else { // Authencated user !== author.
@@ -150,11 +152,11 @@ class Comment extends MY_Controller
 		}
 	}
 
-	/** 
-	 * [INTERNAL]: This function get a specific reaction. 
-	 * 
+	/**
+	 * [INTERNAL]: This function get a specific reaction.
+	 *
 	 * - This is needed for reporting a comment.
-	 * 
+	 *
 	 * @see 	GET|HEAD: http://www.domain.tld/comment/show/{id}
 	 * @return 	JSON|RESPONSE
 	 */

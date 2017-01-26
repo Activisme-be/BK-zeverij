@@ -11,12 +11,9 @@
  */
 class Users extends MY_Controller
 {
-    /**
-     * Authencated user data.
-     *
-     * @var array $user
-     */
-    public $user = [];
+    public $user        = []; /** @var array  $user         The authencated user data                 **/
+    public $permissions = []; /** @var array  $permissions  The permissions for the authencated user  **/
+    public $abilities   = []; /** @var array  $abilities    The abilities for the given user.         **/
 
     /**
      * Users constrcutor.
@@ -80,26 +77,26 @@ class Users extends MY_Controller
         return $this->blade->render('users/index', $data);
     }
 
-    /** 
-     * Delete a user from the network. 
-     * 
+    /**
+     * Delete a user from the network.
+     *
      * @see    GET|HEAD:    http://www.domain.tld/users/delete/{id}
-     * @return Response|Redirect 
-     */ 
-    public function delete() 
+     * @return Response|Redirect
+     */
+    public function delete()
     {
         $term = $this->security->xss_clean($this->uri->segment(3));
 
         try {
-            $user = Authencate::findOrFail($term); 
+            $user = Authencate::findOrFail($term);
             $user->delete();
 
-            $this->session->set_flashdata('class', 'alert alert-success'); 
+            $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', "$user->name is verwijderd uit het systeem");
 
             Sessions::where('data', 'LIKE', '%' . $user->email . '%')->delete();
         } catch(Exception $e) {
-            $this->session->set_flashdata('class', 'alert alert-danger'); 
+            $this->session->set_flashdata('class', 'alert alert-danger');
             $this->session->set_flashdata('message', 'We konden de gebruiker niet vinden.');
         }
 

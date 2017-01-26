@@ -11,13 +11,10 @@
  */
 class Items extends MY_Controller
 {
-    /**
-     * Authencated userdata
-     *
-     * @var array
-     */
-    public $user = [];
-
+    public $user        = []; /** @var array  $user         The authencated user data                 **/
+    public $permissions = []; /** @var array  $permissions  The permissions for the authencated user  **/
+    public $abilities   = []; /** @var array  $abilities    The abilities for the given user.         **/
+    
     /**
      * Items constructor
      *

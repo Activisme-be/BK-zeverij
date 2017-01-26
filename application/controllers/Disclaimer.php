@@ -11,12 +11,9 @@
  */
 class Disclaimer extends MY_Controller
 {
-    /**
-     * Authencated userdata.
-     *
-     * @var array $user
-     */
-    public $user = [];
+    public $user        = []; /** @var array  $user         The authencated user data                 **/
+    public $permissions = []; /** @var array  $permissions  The permissions for the authencated user  **/
+    public $abilities   = []; /** @var array  $abilities    The abilities for the given user.         **/
 
     /**
      * Disclaimer Controller Construcot

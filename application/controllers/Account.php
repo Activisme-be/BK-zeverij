@@ -11,12 +11,9 @@
  */
 class Account extends MY_Controller
 {
-    /**
-     * Authencated user data.
-     *
-     * @return array $user
-     */
-    public $user = [];
+    public $user        = []; /** @var array  $user         The authencated user data                 **/
+    public $permissions = []; /** @var array  $permissions  The permissions for the authencated user  **/
+    public $abilities   = []; /** @var array  $abilities    The abilities for the given user.         **/
 
     /**
      * Account constrcutor.

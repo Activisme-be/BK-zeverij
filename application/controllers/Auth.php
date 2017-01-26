@@ -11,12 +11,9 @@
  */
 class Auth extends MY_Controller
 {
-    /**
-     * Authencated user data.
-     *
-     * @var array
-     */
-    public $user = [];
+    public $user        = []; /** @var array  $user         The authencated user data                 **/
+    public $permissions = []; /** @var array  $permissions  The permissions for the authencated user  **/
+    public $abilities   = []; /** @var array  $abilities    The abilities for the given user.         **/
 
     /**
      * Auth constructor
@@ -81,7 +78,7 @@ class Auth extends MY_Controller
         if ($MySQL['user']->count()) { // User is found and the password match
             $authencation = []; // Empty authencated session array.
             $permissions  = []; // Empty permission array.
-            $abilities    = []; // Empty abilities array. 
+            $abilities    = []; // Empty abilities array.
 
             // Build up the session array.
             foreach ($MySQL['user']->get() as $user) {          // Define the data to the session array.
@@ -89,7 +86,7 @@ class Auth extends MY_Controller
                     array_push($permissions, $perm->name);      // Push every key invidual to the permissions array.
                 }
 
-                foreach ($user->abilities as $ability) {        // Set every ability role to a key. 
+                foreach ($user->abilities as $ability) {        // Set every ability role to a key.
                     array_push($abilities, $ability->name);     // Push every key invidual to the abilities array.
                 }
 
