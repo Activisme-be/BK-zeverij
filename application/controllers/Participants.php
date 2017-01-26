@@ -11,19 +11,10 @@
  */
 class Participants extends MY_Controller
 {
-    /**
-     * Userdata when the user is authencated.
-     *
-     * @var array
-     */
-    public $user = [];
-
-    /**
-     * The database relations.
-     *
-     * @var array
-     */
-     public $relations = [];
+    public $user        = [];  /** @var array Userdata when the user is authencated. **/
+    public $permissions = [];  /** @var array The permissions for the authencated user. **/
+    public $abilities   = [];  /** @var array The abilities for the given user. **/
+    public $relations   = [];  /** @var array The database relations **/
 
     /**
      * Sportsmen constructor.
@@ -37,6 +28,8 @@ class Participants extends MY_Controller
          $this->load->helper(['url']);
 
          $this->user        = $this->session->userdata('authencated_user');
+         $this->permissions = $this->session->userdata('permissions');
+         $this->abilities   = $this->session->userdata('abilities');
          $this->relations   = ['union', 'items', 'points'];
      }
 
