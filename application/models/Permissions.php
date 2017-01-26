@@ -21,13 +21,6 @@ class Permissions extends Eloquent
     protected $table = 'permissions';
 
     /**
-     * Set the database connection. 
-     * 
-     * @return string
-     */
-    protected $connection = 'utility';
-
-    /**
      * Mass-assign fields.
      *
      * @var array

@@ -22,8 +22,10 @@
                     <p>                       
                         Maar net zoals in school is het rapport dat de politicus zichzelf geeft niet echt betrouwbaar. 
                         De burgers zijn degenen die het beste kunnen beoordelen of de politicus getuigt van goede smaak. Daarom deze site.
+                    </p>
+
+                    <p>
                         Zo ook met onze politici. De burgers zijn degene die hen moeten beoordelen, niemand anders.
-                        Daarom deze site.
                     </p>
 
                     <p>
