@@ -43,6 +43,11 @@ class Helpdesk extends MY_Controller
 		return $this->blade->render('helpdesk/index', $data);
 	}
 
+	public function rules()
+	{
+		
+	}
+
     public function backend()
     {
 
