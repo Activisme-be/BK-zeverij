@@ -36,7 +36,7 @@ class Questions extends MY_Controller
     public function index()
     {
         $data['title']     = 'Vragen';
-        $data['questions'] = Report::with('author')->all();
+        $data['questions'] = Reports::all();
 
         return $this->blade->render('helpdesk/questions/index', $data);
     }
