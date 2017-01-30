@@ -11,35 +11,35 @@ use Illuminate\Database\Eloquent\Model;
  * @since     2017
  * @package   BK-wansmaak
  */
-class NewsCategories extends Model 
+class NewsCategories extends Model
 {
 	/**
-	 * Set the database table name. 
-	 * 
+	 * Set the database table name.
+	 *
 	 * @var string
 	 */
-	protected $table = 'categories'; 
+	protected $table = 'categories';
 
 	/**
-	 * Set the mass-assign fields. 
-	 * 
+	 * Set the mass-assign fields.
+	 *
 	 * @var array
 	 */
-	protected $fillable = ['creator_id', 'category', 'description'];
+	protected $fillable = ['creator_id', 'module' 'category', 'description'];
 
 	/**
-	 * Enable or disable timestamps. 
-	 * 
+	 * Enable or disable timestamps.
+	 *
 	 * @return bool
 	 */
-	public $timestamps = true; 
+	public $timestamps = true;
 
 	/**
-	 * Get tha articles for a specific label. 
-	 * 
+	 * Get tha articles for a specific label.
+	 *
 	 * @return Collection|BelongsToMany relationship.
-	 */ 
-	public function articles() 
+	 */
+	public function articles()
 	{
 		return $this->BelongsToMany('Articles', 'pivot_news_categories', 'category_id', 'news_id')
 			->withTimestamps();
