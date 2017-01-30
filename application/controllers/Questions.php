@@ -75,9 +75,17 @@ class Questions extends MY_Controller
      */
     public function store()
     {
+        $this->form_validation->set_rules('title', 'Titel', 'trim|required');
+        $this->form_validation->set_rules('description', 'Vraag beschrijving', 'trim|required');
+        $this->form_validation->set_rules('category', 'Categorie', 'trim|required');
+        $this->form_validation->set_rules('publish', 'Publiek', 'trim|required');
+        $this->form_validation->set_rules('agreements', 'Voorwaarden', 'trim|required');
+
         if ($this->validation->run() === false) { // Validation fails
-            $data['title'] = '';
-            return $this->blade->render('', $data);
+            $data['title']      = 'Stel een niewe vraag.';
+            $data['categories'] = NewsCategories::where('module', 'helpdesk')->get();
+
+            return $this->blade->render('helpdesk/questions/create', $data);
         }
 
         // Move on with the logic. Because there are no validation errors found.
@@ -85,8 +93,14 @@ class Questions extends MY_Controller
 
         $input['title']         = $this->security->xss_clean($this->input->post('title'));
         $input['description']   = $this->security->xss_clean($this->input->post('description'));
+        $input['category']      = $this->security->xss_clean($this->input->post('category'));
+        $input['publish']       = $this->security->xss_clean($this->input->post('publish'));
+        $input['status']        = 'Open';
 
         // Database queries.
+        // TODO: Set publishn status and category to the database.
+        // TODO: Set belongsTo relation for category
+
         $MySQL['create']   = Reports::create($input);
         $MySQL['relation'] = Reports::find($MySQL['create']->id)->category()->attach($category);
 
