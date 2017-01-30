@@ -64,19 +64,21 @@
                         </div>
                     </div>
 
-                    <div class="list-group-item">
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object img-thumbnail img-rounded" style="width: 64px; height:64px;" src="{{ base_url('assets/img/control-panel.svg') }}" alt="...">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Control panel vragen.</h4>
-                                Het controle paneel voor alle vragen die mensen stellen.
+                    @if (in_array('admin', $this->user['roles']))
+                        <div class="list-group-item">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="{{ base_url('questions/backend') }}">
+                                        <img class="media-object img-thumbnail img-rounded" style="width: 64px; height:64px;" src="{{ base_url('assets/img/control-panel.svg') }}" alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Control panel vragen.</h4>
+                                    Het controle paneel voor alle vragen die mensen stellen.
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                 </div>
 

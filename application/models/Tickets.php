@@ -11,34 +11,26 @@ use Illuminate\Database\Eloquent\Model;
  * @since     2017
  * @package   BK-wansmaak
  */
-class Tickets extends Model 
+class Tickets extends Model
 {
 	/**
-     * Set the database connection. 
-     * 
-     * @return string
-     */
-    protected $connection = 'resources';
-
-
-	/** 
-	 * Enable / Disable timestamps. 
-	 * 
+	 * Enable / Disable timestamps.
+	 *
 	 * @return bool
 	 */
-	public $timestamps = true; 
+	public $timestamps = true;
 
-	/** 
-	 * Set the database table. 
-	 * 
+	/**
+	 * Set the database table.
+	 *
 	 * @return string
-	 */ 
-	protected $table = 'tickets'; 
+	 */
+	protected $table = 'tickets';
 
-	/** 
-	 * Mass-assign fields. 
-	 * 
+	/**
+	 * Mass-assign fields.
+	 *
 	 * @return array
-	 */ 
-	protected $fillable = ['title', 'description'];
+	 */
+	protected $fillable = ['title', 'description', 'publish', 'creator_id', 'category', 'status'];
 }

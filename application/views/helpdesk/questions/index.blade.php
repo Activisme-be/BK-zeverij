@@ -5,7 +5,11 @@
 
         <div class="col-sm-12">
             <div class="panel panel-default">
-                <div class="panel-heading"><span class="fa fa-question-circle-o" aria-hidden="true"></span> Vragen:</div>
+                <div class="panel-heading">
+                    <span class="fa fa-question-circle-o" aria-hidden="true"></span> Vragen:
+                    <a href="{{ base_url('helpdesk') }}" class="pull-right label label-primary">Terug naar de helpdesk</a>
+                </div>
+
                 <div class="panel-body">
                     <div class="media">
                         <div class="media-left">
@@ -52,8 +56,8 @@
 
                 <div class="list-group">
                     <a href="{{ base_url('questions/create') }}" class="list-group-item"><span class="fa fa-btn fa-plus" aria-hidden="true"></span> Stel een nieuwe vraag.</a>
-                    <a href="#" class="list-group-item"><span class="fa fa-btn fa-user" aria-hidden="true"></span> Bekijk jouw vragen.</a>
-                    <a href="#" class="list-group-item"><span class="fa fa-btn fa-globe" aria-hidden="true"></span> Bekijk de publieke vragen.</a>
+                    <a href="{{ base_url('questions/user') }}" class="list-group-item"><span class="fa fa-btn fa-user" aria-hidden="true"></span> Bekijk jouw vragen.</a>
+                    <a href="{{ base_url('questions/visible') }}" class="list-group-item"><span class="fa fa-btn fa-globe" aria-hidden="true"></span> Bekijk de publieke vragen.</a>
                 </div>
             </div>
         </div>

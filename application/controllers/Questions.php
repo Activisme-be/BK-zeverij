@@ -11,6 +11,8 @@
  */
 class Questions extends MY_Controller
 {
+    // FIXME: Rename the Tickets model to Question.
+
     /**
      * Questions constructor.
      *
@@ -36,9 +38,14 @@ class Questions extends MY_Controller
     public function index()
     {
         $data['title']   = 'Vragen';
-        $data['all']     = Reports::count(); // Count all records.
+        $data['all']     = Tickets::count(); // Count all records.
 
         return $this->blade->render('helpdesk/questions/index', $data);
+    }
+
+    public function backend()
+    {
+        
     }
 
     /**
@@ -62,9 +69,12 @@ class Questions extends MY_Controller
      */
     public function show()
     {
-        $data['title']      = '';
-        $data['question']   = '';
-        return $this->blade->render('', $data);
+        $questionId = $this->security->xss_clean($this->uri->segment(3));
+
+        $data['question']   = Tickets::find($quetionId);
+        $data['title']      = $data['question']->title;
+
+        return $this->blade->render('helpdesk/questions/show', $data);
     }
 
     /**
@@ -79,9 +89,9 @@ class Questions extends MY_Controller
         $this->form_validation->set_rules('description', 'Vraag beschrijving', 'trim|required');
         $this->form_validation->set_rules('category', 'Categorie', 'trim|required');
         $this->form_validation->set_rules('publish', 'Publiek', 'trim|required');
-        $this->form_validation->set_rules('agreements', 'Voorwaarden', 'trim|required');
+        $this->form_validation->set_rules('agreement', 'Voorwaarden', 'trim|required');
 
-        if ($this->validation->run() === false) { // Validation fails
+        if ($this->form_validation->run() === false) { // Validation fails
             $data['title']      = 'Stel een niewe vraag.';
             $data['categories'] = NewsCategories::where('module', 'helpdesk')->get();
 
@@ -95,14 +105,14 @@ class Questions extends MY_Controller
         $input['description']   = $this->security->xss_clean($this->input->post('description'));
         $input['category']      = $this->security->xss_clean($this->input->post('category'));
         $input['publish']       = $this->security->xss_clean($this->input->post('publish'));
+        $input['creator_id']    = $this->user['id'];
         $input['status']        = 'Open';
 
         // Database queries.
-        // TODO: Set publishn status and category to the database.
         // TODO: Set belongsTo relation for category
 
-        $MySQL['create']   = Reports::create($input);
-        $MySQL['relation'] = Reports::find($MySQL['create']->id)->category()->attach($category);
+        $MySQL['create']   = Tickets::create($input);
+        $MySQL['relation'] = Tickets::find($MySQL['create']->id)->category()->attach($category);
 
         if ($MySQL['create']) { // The question has been inserted.
             $this->session->set_flashdata('class', 'alert alert-success');
@@ -114,15 +124,61 @@ class Questions extends MY_Controller
     /**
      * Determine the status for a question.
      *
-     * @see
-     * @return
+     * @see    GET|HEAD:
+     * @return Redirect|Response
      */
     public function status()
     {
         $questionId = $this->security->xss_clean($this->uri->segment(3));
         $statusId   = $this->security->xss_clean($this->uri->segment(4));
 
+        $MySQL['find'] = Tickets::find($questionId);
 
+        if ((int) $statusId === 1) {
+            $MySQL['find']->update(['status' => 'Open']);
+            $message = 'Het ticket is geopend.';
+        } elseif ((int) $statusId === 0) {
+            $MySQL['find']->update(['status' => 'Closed']);
+            $message = 'Het ticket is gesloten';
+        }
+
+        // Flash sessions and redirect
+        $this->session->set_flashdata('class', 'alert alert-success');
+        $this->session->set_flashdata('message', $message);
+
+        return redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * Get all the public questions.
+     *
+     * @see
+     * @return Blade view.
+     */
+    public function visible()
+    {
+        // TODO: Set pagination.
+
+        $data['title']     = 'Publieke vragen.';
+        $data['questions'] = Tickets::all();
+
+        return $this->blade->render('helpdesk/questions/list-questions', $data);
+    }
+
+    /**
+     * Get all the questions for the authencated user.
+     *
+     * @see
+     * @return Blade view
+     */
+    public function user()
+    {
+        // TODO: Set pagination.
+
+        $data['title']     = 'Mijn vragen';
+        $data['questions'] = Tickets::all();
+
+        return $this->blade->render('helpdesk/questions/list-questions', $data);
     }
 
     /**
@@ -135,7 +191,7 @@ class Questions extends MY_Controller
     {
         $questionId = $this->security->xss_clean($this->uri->segment(3));
 
-        if (Reports::find($questionId)->delete()) {
+        if (Tickets::find($questionId)->delete()) {
             $this->session->set_flashdata('class', 'alert alert-sucess');
             $this->session->set_flashdata('message', 'De vraag is verwijderd.');
         }
