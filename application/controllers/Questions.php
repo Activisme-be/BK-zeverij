@@ -36,7 +36,7 @@ class Questions extends MY_Controller
     public function index()
     {
         $data['title']   = 'Vragen';
-        $data['all']     = Reports::count(); // Count all records. 
+        $data['all']     = Reports::count(); // Count all records.
 
         return $this->blade->render('helpdesk/questions/index', $data);
     }
@@ -49,7 +49,8 @@ class Questions extends MY_Controller
      */
     public function create()
     {
-        $data['title'] = 'Stel een niewe vraag.';
+        $data['title']      = 'Stel een niewe vraag.';
+        $data['categories'] = NewsCategories::where('module', 'helpdesk')->get();
         return $this->blade->render('helpdesk/questions/create', $data);
     }
 
@@ -62,7 +63,7 @@ class Questions extends MY_Controller
     public function show()
     {
         $data['title']      = '';
-        $data['question']   = ''; 
+        $data['question']   = '';
         return $this->blade->render('', $data);
     }
 
@@ -82,37 +83,37 @@ class Questions extends MY_Controller
         // Move on with the logic. Because there are no validation errors found.
         $category = $this->security->xss_clean($this->input->post('category'));
 
-        $input['title']         = $this->security->xss_clean($this->input->post('title')); 
+        $input['title']         = $this->security->xss_clean($this->input->post('title'));
         $input['description']   = $this->security->xss_clean($this->input->post('description'));
 
-        // Database queries. 
-        $MySQL['create']   = Reports::create($input); 
+        // Database queries.
+        $MySQL['create']   = Reports::create($input);
         $MySQL['relation'] = Reports::find($MySQL['create']->id)->category()->attach($category);
 
-        if ($MySQL['create']) { // The question has been inserted. 
+        if ($MySQL['create']) { // The question has been inserted.
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'Uw vraag zal zo snel mogelijk gehandeld worden');
         }
     }
 
-   
+
     /**
-     * Determine the status for a question. 
+     * Determine the status for a question.
      *
-     * @see 
-     * @return 
+     * @see
+     * @return
      */
-    public function status() 
+    public function status()
     {
         $questionId = $this->security->xss_clean($this->uri->segment(3));
         $statusId   = $this->security->xss_clean($this->uri->segment(4));
 
-         
+
     }
 
     /**
-     * Delete a ticket out off the application. 
-     * 
+     * Delete a ticket out off the application.
+     *
      * @see    GET|HEAD:
      * @return Redirect|Response
      */

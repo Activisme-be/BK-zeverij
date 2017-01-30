@@ -64,8 +64,49 @@
                                     <option value="">-- Selecteer de categorie: --</option>
 
                                     @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category }}</span>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                Vraag: <span class="text-danger">*</span>
+                            </label>
+
+                            <div class="col-sm-6">
+                                <textarea name="description" rows="8" class="form-control" placeholder="Uw vraag"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                Publiek: <span class="text-danger">*</span>
+                            </label>
+
+                            <div class="col-sm-4">
+                                <div class="radio">
+                                    <label style="margin-right: 10px;"><input type="radio" name="optradio">Ja</label>
+                                    <label><input type="radio" name="optradio">Nee</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">
+                                Voorwaarden: <span class="text-danger">*</span>
+                            </label>
+
+                            <div class="col-sm-4">
+                                <label class="checkbox-inline"><input type="checkbox" value="">Ik accepteer de voorwaarden.</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-success"><span class="fa fa-plus" aria-hidden="true"></span> Insturen</button>
+                                <button type="reset" class="btn btn-sm btn-danger"><span class="fa fa-close" aria-hidden="true"></span> Reset</button>
                             </div>
                         </div>
 

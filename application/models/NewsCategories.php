@@ -25,7 +25,7 @@ class NewsCategories extends Model
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['creator_id', 'module' 'category', 'description'];
+	protected $fillable = ['creator_id', 'module', 'category', 'description'];
 
 	/**
 	 * Enable or disable timestamps.
