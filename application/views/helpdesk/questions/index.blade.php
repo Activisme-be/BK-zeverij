@@ -40,7 +40,7 @@
 
                     <a href="#" class="list-group-item">
                         <span class="fa fa-asterisk fa-btn" aria-hidden="true"></span> Totaal aantal vragen:
-                        <span class="label label-info pull-right">2558</span>
+                        <span class="label label-info pull-right">{{ $all }}</span>
                     </a>
                 </div>
             </div>

@@ -35,8 +35,8 @@ class Questions extends MY_Controller
      */
     public function index()
     {
-        $data['title']     = 'Vragen';
-        $data['questions'] = Reports::all();
+        $data['title']   = 'Vragen';
+        $data['all']     = Reports::count(); // Count all records. 
 
         return $this->blade->render('helpdesk/questions/index', $data);
     }
@@ -49,25 +49,82 @@ class Questions extends MY_Controller
      */
     public function create()
     {
+        $data['title'] = 'Stel een niewe vraag.';
         return $this->blade->render('helpdesk/questions/create', $data);
     }
 
     /**
+     * Show a specific question.
      *
-     *
+     * @see
+     * @return
      */
     public function show()
     {
+        $data['title']      = '';
+        $data['question']   = ''; 
+        return $this->blade->render('', $data);
     }
 
     /**
      * Store the question in the database.
-
+     *
      * @see    POST: http://www.domain.tld/questions/store
      * @return Redirect|Response
      */
     public function store()
     {
-        //
+        if ($this->validation->run() === false) { // Validation fails
+            $data['title'] = '';
+            return $this->blade->render('', $data);
+        }
+
+        // Move on with the logic. Because there are no validation errors found.
+        $category = $this->security->xss_clean($this->input->post('category'));
+
+        $input['title']         = $this->security->xss_clean($this->input->post('title')); 
+        $input['description']   = $this->security->xss_clean($this->input->post('description'));
+
+        // Database queries. 
+        $MySQL['create']   = Reports::create($input); 
+        $MySQL['relation'] = Reports::find($MySQL['create']->id)->category()->attach($category);
+
+        if ($MySQL['create']) { // The question has been inserted. 
+            $this->session->set_flashdata('class', 'alert alert-success');
+            $this->session->set_flashdata('message', 'Uw vraag zal zo snel mogelijk gehandeld worden');
+        }
+    }
+
+   
+    /**
+     * Determine the status for a question. 
+     *
+     * @see 
+     * @return 
+     */
+    public function status() 
+    {
+        $questionId = $this->security->xss_clean($this->uri->segment(3));
+        $statusId   = $this->security->xss_clean($this->uri->segment(4));
+
+         
+    }
+
+    /**
+     * Delete a ticket out off the application. 
+     * 
+     * @see    GET|HEAD:
+     * @return Redirect|Response
+     */
+    public function destroy()
+    {
+        $questionId = $this->security->xss_clean($this->uri->segment(3));
+
+        if (Reports::find($questionId)->delete()) {
+            $this->session->set_flashdata('class', 'alert alert-sucess');
+            $this->session->set_flashdata('message', 'De vraag is verwijderd.');
+        }
+
+        return redirect($_SERVER['HTTP_REFERER'], 'refresh');
     }
 }
