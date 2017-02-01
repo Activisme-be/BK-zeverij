@@ -44,4 +44,25 @@ class NewsCategories extends Model
 		return $this->BelongsToMany('Articles', 'pivot_news_categories', 'category_id', 'news_id')
 			->withTimestamps();
 	}
+
+	/**
+	 * Get the creator information for the category.
+	 *
+	 * @return Collection|BelongsTo relation
+	 */
+	public function creator()
+	{
+		return $this->belongsTo('Authencate', 'creator_id');
+	}
+
+	/**
+	 * Get all the question for aa specific category.
+	 *
+	 * @return Collection|BelongsToMay relationship
+	 */
+	public function questions()
+	{
+		return $this->belongsToMany('Tickets', 'pivot_helpdesk_category', 'category_id', 'ticket_id')
+			->withTimestamps();
+	}
 }

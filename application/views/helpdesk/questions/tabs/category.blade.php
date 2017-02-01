@@ -9,17 +9,23 @@
             <tr>
                 <th>#</th>
                 <th>Aangemaakt door:</th>
+                <th>Vragen</th>
                 <th colspan="2">Categorie:</th> {{-- Colspan 2 is needed because the functions are embedded. --}}
             </tr>
         </thead>
         <tbody>
             @foreach($categories as $category)
                 <tr>
-                    <td></td>
+                    <td><code>#C{{ $category->id }}</code></td>
+                    <td>{{ $category->creator->name }}</td>
                     <td></td>
                     <td></td>
 
                     {{-- Functions --}}
+                        <td>
+                            <a href="#" class="label label-success">Bekijken</a>
+                            <a href="#" class="label label-danger">Verwijder</a>
+                        </td>
                     {{-- /Functions --}}
                 </tr>
             @endforeach

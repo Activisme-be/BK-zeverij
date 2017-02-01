@@ -32,5 +32,26 @@ class Tickets extends Model
 	 *
 	 * @return array
 	 */
-	protected $fillable = ['title', 'description', 'publish', 'creator_id', 'category', 'status'];
+	protected $fillable = ['title', 'description', 'publish', 'creator_id', 'status'];
+
+	/**
+	 * Get the creator data for a ticket.
+	 *
+	 * @return Collection|BelongsTo relation.
+	 */
+	public function creator()
+	{
+		return $this->belongsTo('Authencate', 'creator_id');
+	}
+
+	/**
+	 * Get the category for a ticket.
+	 *
+	 * @return Collection|BelongsToMany relation
+	 */
+	public function category()
+	{
+		return $this->belongsToMany('NewsCategories', 'pivot_helpdesk_category', 'ticket_id', 'category_id')
+			->withTimestamps();
+	}
 }
