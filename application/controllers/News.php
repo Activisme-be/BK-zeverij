@@ -71,7 +71,7 @@ class News extends MY_Controller
 
         $data['title']      = 'Nieuws';
         $data['news']       = $query->skip($page)->take(4)->get();
-        $data['categories'] = NewsCategories->where('module', 'news')->get();
+        $data['categories'] = NewsCategories::where('module', 'news')->get();
         $data['links']      = $this->pagination->create_links();
 
         return $this->blade->render('news/index', $data);
@@ -148,7 +148,7 @@ class News extends MY_Controller
 
         $this->pagination->initialize($config);
 
-        $data['categories']    = NewsCategories::->where('module', 'news')->where('module', 'news')->get();
+        $data['categories']    = NewsCategories::where('module', 'news')->where('module', 'news')->get();
         $data['comments']      = $comments->skip($this->input->get('page'))->take(4)->get();
         $data['title']         = $data['article']->heading;
         $data['comments_link'] = $this->pagination->create_links();

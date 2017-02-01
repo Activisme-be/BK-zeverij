@@ -2,8 +2,13 @@
 
 @section('content')
     <div class="row">
-        {{-- --}}
-        {{-- --}}
+        {{-- Flash session --}}
+        @if (isset($_SESSION['class']) && $_SESSION['message'])
+            <div class="{{ $_SESSION['class'] }}" role="alert">
+                {{ $_SESSION['messag'] }}
+            </div>
+        @endif
+        {{-- /Flash ession --}}
 
         <div class="col-sm-12">
 

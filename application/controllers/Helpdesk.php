@@ -43,25 +43,17 @@ class Helpdesk extends MY_Controller
 		return $this->blade->render('helpdesk/index', $data);
 	}
 
+    /**
+     * Get the action rules for this system.
+     *
+     * @see    GET|HEAD: http://www.domain.tld/helpdesk/rules
+     * @return Blade View
+     */
 	public function rules()
 	{
-		
+        $data['title'] = 'Regels van deze actie';
+        return $this->blade->render('', $data); 
 	}
-
-    public function backend()
-    {
-
-    }
-
-    public function comment()
-    {
-
-    }
-
-    public function close()
-    {
-
-    }
 
 	/**
 	 * Store the ticket to the database.

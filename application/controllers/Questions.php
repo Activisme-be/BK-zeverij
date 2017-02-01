@@ -43,9 +43,19 @@ class Questions extends MY_Controller
         return $this->blade->render('helpdesk/questions/index', $data);
     }
 
+    /**
+     * The control management view for a question.
+     *
+     * @see    GET|HEAD: http://www.doamin.tld/questions/backend
+     * @return Blade view
+     */
     public function backend()
     {
-        
+        $data['title']      = 'Helpdesk controle paneel.';
+        $data['questions']  = Tickets::all(); 
+        $data['categories'] = NewsCategories::where('module', 'helpdesk')->get();
+
+        return $this->blade->render('helpdesk/questions/backend', $data);
     }
 
     /**
@@ -176,7 +186,7 @@ class Questions extends MY_Controller
         // TODO: Set pagination.
 
         $data['title']     = 'Mijn vragen';
-        $data['questions'] = Tickets::all();
+        $data['questions'] = Tickets::where('creator_id', $this->user['id'])->get();
 
         return $this->blade->render('helpdesk/questions/list-questions', $data);
     }
@@ -197,5 +207,15 @@ class Questions extends MY_Controller
         }
 
         return redirect($_SERVER['HTTP_REFERER'], 'refresh');
+    }
+
+    /**
+     * [INTERNAL]: The class for the pagination config.
+     *
+     * @return array $config
+     */
+    public function paginationConfig()
+    {
+        return $config;
     }
 }
