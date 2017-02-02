@@ -9,8 +9,8 @@
             <tr>
                 <th>#</th>
                 <th>Aangemaakt door:</th>
-                <th>Vragen</th>
-                <th colspan="2">Categorie:</th> {{-- Colspan 2 is needed because the functions are embedded. --}}
+                <th>Categorie:</th>
+                <th colspan="2">Vragen:</th> {{-- Colspan 2 is needed because the functions are embedded. --}}
             </tr>
         </thead>
         <tbody>
@@ -18,8 +18,8 @@
                 <tr>
                     <td><code>#C{{ $category->id }}</code></td>
                     <td>{{ $category->creator->name }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ $category->category }}</td>
+                    <td><span class="label label-primary">{{ count($category->question) }} Vragen </span></td>
 
                     {{-- Functions --}}
                         <td>

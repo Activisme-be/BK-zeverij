@@ -52,8 +52,8 @@ class Questions extends MY_Controller
     public function backend()
     {
         $data['title']      = 'Helpdesk controle paneel.';
-        $data['questions']  = Tickets::all();
-        $data['categories'] = NewsCategories::with('creator')->where('module', 'helpdesk')->get();
+        $data['questions']  = Tickets::with('category')->get();
+        $data['categories'] = NewsCategories::with(['creator', 'questions'])->where('module', 'helpdesk')->get();
 
         return $this->blade->render('helpdesk/questions/backend', $data);
     }
