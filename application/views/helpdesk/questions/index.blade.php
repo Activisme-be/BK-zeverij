@@ -34,12 +34,12 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item">
                         <span class="fa fa-asterisk fa-btn" aria-hidden="true"></span> Aantal vragen behandeld.
-                        <span class="label label-danger pull-right">2000</span>
+                        <span class="label label-danger pull-right">{{ $closed }}</span>
                     </a>
 
                     <a href="#" class="list-group-item">
                         <span class="fa fa-asterisk fa-btn" aria-hidden="true"></span> Aantal vragen onbehandeld:
-                        <span class="label label-success pull-right">558</span>
+                        <span class="label label-success pull-right">{{ $open }}</span>
                     </a>
 
                     <a href="#" class="list-group-item">

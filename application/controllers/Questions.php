@@ -37,8 +37,10 @@ class Questions extends MY_Controller
      */
     public function index()
     {
-        $data['title']   = 'Vragen';
-        $data['all']     = Tickets::count(); // Count all records.
+        $data['title']  = 'Vragen';
+        $data['all']    = Tickets::count();                            // Count all records.
+        $data['open']   = Tickets::where('status', 'open')->count();   // Get all the questions where answer given.
+        $data['closed'] = Tickets::where('status', 'closed')->count(); // Get all the closed question.
 
         return $this->blade->render('helpdesk/questions/index', $data);
     }
