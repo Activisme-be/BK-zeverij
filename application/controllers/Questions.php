@@ -137,7 +137,7 @@ class Questions extends MY_Controller
     /**
      * Determine the status for a question.
      *
-     * @see    GET|HEAD:
+     * @see    GET|HEAD:    http://www.domain.tld/status/{questionId}/{$statusId}
      * @return Redirect|Response
      */
     public function status()
@@ -189,7 +189,7 @@ class Questions extends MY_Controller
         // TODO: Set pagination.
 
         $data['title']     = 'Mijn vragen';
-        $data['questions'] = Tickets::where('creator_id', $this->user['id'])->get();
+        $data['questions'] = Tickets::where('creator_id', $this->user['id'])->where('status', 'Open')->get();
 
         return $this->blade->render('helpdesk/questions/list-questions', $data);
     }

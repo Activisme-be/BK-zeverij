@@ -33,7 +33,7 @@
                                     {{-- Functions --}}
                                         <td>
                                             <a href="#" class="label label-success">Bekijken</a>
-                                            <a href="{{ base_url('questions/status/' . . '/' .) }}" class="label label-danger">
+                                            <a href="{{ base_url('questions/status/' . $question->id . '/0') }}" class="label label-danger">
                                                 Sluiten
                                             </a>
                                         </td>
