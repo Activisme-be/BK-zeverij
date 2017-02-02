@@ -23,8 +23,8 @@
 
                     {{-- Functions --}}
                         <td>
-                            <a href="#" class="label label-success">Bekijken</a>
-                            <a href="#" class="label label-danger">Verwijder</a>
+                            <a href="{{ base_url() }}" class="label label-success">Bekijken</a>
+                            <a href="{{ base_url('category/destroy/', $category->id) }}" class="label label-danger">Verwijder</a>
                         </td>
                     {{-- /Functions --}}
                 </tr>
