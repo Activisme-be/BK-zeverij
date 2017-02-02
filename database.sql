@@ -1,4 +1,3 @@
--- MySQL dump 10.13  Distrib 5.5.52, for Win64 (x86)
 --
 -- Host: localhost    Database: activisme_be
 -- ------------------------------------------------------
@@ -241,6 +240,21 @@ CREATE TABLE `pivot_news_categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `pivot_helpdesk_category`
+--
+DROP TABLE IF EXISTS `pivot_helpdesk_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pivot_helpdesk_category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ticket_id` int(11) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `pivot_ranking`
