@@ -63,6 +63,7 @@ class Category extends MY_Controller
     {
     	$this->form_validation->set_rules('category', 'Categorie label', 'trim|required');
     	$this->form_validation->set_rules('description', 'Categorie beschrijving', 'trim|required');
+		$this->form_validation->set_rules('module', 'Type', 'trim|required');
 
     	if ($this->form_validation->run() === false) { // Validation fails
     		$data['title']      = 'Nieuws berichten';
@@ -78,7 +79,7 @@ class Category extends MY_Controller
     	$input['creator_id']  = $this->user['id'];
     	$input['category']    = $this->input->post('category');
     	$input['description'] = $this->input->post('description');
-        $input['module']      = 'news';
+        $input['module']      = $this->input->post('module');
 
     	//> MySQL Insert
     	if (NewsCategories::create($this->security->xss_clean($input))) {

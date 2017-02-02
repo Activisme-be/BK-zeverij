@@ -5,11 +5,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Nieuwe categorie toevoegen.</h4>
             </div>
-      
+
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="{{ base_url('category/store') }}">
                     {{-- CSRF --}}
                     <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+
+                    <input type="hidden" name="module" value="news">
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">

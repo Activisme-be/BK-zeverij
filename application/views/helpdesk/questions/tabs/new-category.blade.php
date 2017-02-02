@@ -1,5 +1,8 @@
-<form class="form-horizontal" action="" method="post">
-     {{-- FIXME: Implement csrf token --}}
+<form class="form-horizontal" action="{{ base_url('category/store') }}" method="post">
+    {{-- CSRF --}}
+    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+
+    <input type="hidden" name="module" value="helpdesk">
 
      <div class="form-group">
          <label class="control-label col-sm-2">
@@ -7,7 +10,7 @@
          </label>
 
          <div class="col-sm-4">
-             <input name="" placeholder="Naam categorie" class="form-control" type="text">
+             <input name="category" placeholder="Naam categorie" class="form-control" type="text">
          </div>
      </div>
 
@@ -17,7 +20,7 @@
          </label>
 
          <div class="col-sm-8">
-             <textarea name="" placeholder="Categorie beschrijving" class="form-control" type="text" rows="7"></textarea>
+             <textarea name="description" placeholder="Categorie beschrijving" class="form-control" type="text" rows="7"></textarea>
          </div>
      </div>
 
