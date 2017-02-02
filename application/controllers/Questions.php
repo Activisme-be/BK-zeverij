@@ -127,6 +127,8 @@ class Questions extends MY_Controller
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'Uw vraag zal zo snel mogelijk gehandeld worden');
         }
+
+        return redirect($_SERVER['HTTP_REFERER']);
     }
 
 
