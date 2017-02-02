@@ -341,6 +341,7 @@ DROP TABLE IF EXISTS `tickets`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `creator_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text,
   `created_at` timestamp NULL DEFAULT NULL,
