@@ -113,7 +113,6 @@ class Questions extends MY_Controller
 
         $input['title']         = $this->security->xss_clean($this->input->post('title'));
         $input['description']   = $this->security->xss_clean($this->input->post('description'));
-        $input['category']      = $this->security->xss_clean($this->input->post('category'));
         $input['publish']       = $this->security->xss_clean($this->input->post('publish'));
         $input['creator_id']    = $this->user['id'];
         $input['status']        = 'Open';

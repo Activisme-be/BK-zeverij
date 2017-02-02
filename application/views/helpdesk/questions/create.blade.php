@@ -5,7 +5,7 @@
         {{-- Flash session --}}
         @if (isset($_SESSION['class']) && $_SESSION['message'])
             <div class="{{ $_SESSION['class'] }}" role="alert">
-                {{ $_SESSION['messag'] }}
+                {{ $_SESSION['message'] }}
             </div>
         @endif
         {{-- /Flash ession --}}
@@ -110,8 +110,8 @@
 
                             <div class="col-sm-4">
                                 <div class="radio">
-                                    <label style="margin-right: 10px;"><input type="radio" name="publish">Ja</label>
-                                    <label><input type="radio" name="publish">Nee</label>
+                                    <label style="margin-right: 10px;"><input type="radio" name="publish" value="Y">Ja</label>
+                                    <label><input type="radio" name="publish" value="N">Nee</label>
                                 </div>
 
                                 @if (form_error('publish'))

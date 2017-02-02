@@ -358,6 +358,8 @@ CREATE TABLE `tickets` (
   `creator_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text,
+  `publish` varchar(255) DEFAULT NULL,
+  `status` varchar(60) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
