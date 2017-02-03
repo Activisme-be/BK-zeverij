@@ -22,8 +22,9 @@ SET time_zone = "+00:00";
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Database: `activisme_be_activisme_zeverij`
+-- Database: `activisme_be`
 --
+DROP DATABASE IF EXISTS activisme_be;
 CREATE DATABASE activisme_be DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE activisme_be;
 
@@ -42,7 +43,7 @@ CREATE TABLE IF NOT EXISTS abilities (
     name        VARCHAR(255)  DEFAULT NULL,
     description VARCHAR(255)  DEFAULT NULL,
     created_at  TIMESTAMP     NULL DEFAULT NULL,
-    updated_at  TIMESTAMP     NULL DEFAULT NULL,
+    updated_at  TIMESTAMP     NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -67,6 +68,30 @@ CREATE TABLE IF NOT EXISTS bans (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS notifications;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE IF NOT EXISTS notifications (
+    PRIMARY KEY (id),
+    id          INT(11)         NOT NULL AUTO_INCREMENT,
+    creator_id  INT(11)         NULL DEFAULT NULL,
+    deliver_id  INT(11)         NULL DEFAULT NULL,
+    is_read     VARCHAR(1)      NOT NULL DEFAULT 'N',
+    message     VARCHAR(255)    NULL DEFAULT NULL,
+    link        VARCHAR(255)    NULL DEFAULT NULL,
+    created_at  TIMESTAMP       NULL DEFAULT NULL,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL,
+    deleted_at  TIMESTAMP       NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `categories`
 --
 
@@ -80,7 +105,7 @@ CREATE TABLE IF NOT EXISTS categories (
     category    VARCHAR(40) DEFAULT NULL,
     description TEXT,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -102,7 +127,7 @@ CREATE TABLE IF NOT EXISTS gov_members (
     Information VARCHAR(500)  DEFAULT NULL,
     photo       VARCHAR(255)  DEFAULT NULL,
     created_at  TIMESTAMP     NULL DEFAULT NULL,
-    updated_at  TIMESTAMP     NULL DEFAULT NULL,
+    updated_at  TIMESTAMP     NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -122,7 +147,7 @@ CREATE TABLE IF NOT EXISTS gov_unions (
     color       VARCHAR(10)     DEFAULT NULL,
     label       VARCHAR(255)    DEFAULT NULL,
     created_at  TIMESTAMP       NULL DEFAULT NULL,
-    updated_at  TIMESTAMP       NULL DEFAULT NULL,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -176,12 +201,12 @@ DROP TABLE IF EXISTS new_items;
 CREATE TABLE IF NOT EXISTS new_items (
     PRIMARY KEY (id),
     id          INT(10)         NOT NULL AUTO_INCREMENT,
-    heading     TIMESTAMP(255)  DEFAULT NULL,
+    heading     VARCHAR(255)    NULL DEFAULT NULL,
     message     TEXT,
     created_at  TIMESTAMP       NULL DEFAULT NULL,
     updated_at  TIMESTAMP       NULL DEFAULT NULL,
     creator_id  INT(11)         DEFAULT NULL,
-    deleted_at  TIMESTAMP       NULL DEFAULT NULL,
+    deleted_at  TIMESTAMP       NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -200,7 +225,7 @@ CREATE TABLE IF NOT EXISTS news_comments (
     user_id     INT(11)     DEFAULT NULL,
     comment     TEXT,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -219,7 +244,7 @@ CREATE TABLE IF NOT EXISTS permissions (
     name        VARCHAR(255)    DEFAULT NULL,
     description TEXT,
     created_at  TIMESTAMP       NULL DEFAULT NULL,
-    updated_at  TIMESTAMP       NULL DEFAULT NULL,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -234,7 +259,7 @@ LOCK TABLES permissions WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
 INSERT INTO permissions (name, description)
      VALUES ('admin', 'The administrator role for the application.'),
-            ('guest', 'Normal permissions role for the application');
+            ('guest', 'The normal permissions role for the application,');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
 UNLOCK TABLES;
@@ -254,7 +279,7 @@ CREATE TABLE IF NOT EXISTS pivot_comments (
     post_id     INT(11)     DEFAULT NULL,
     comment_id  INT(11)     DEFAULT NULL,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -274,7 +299,7 @@ CREATE TABLE IF NOT EXISTS pivot_items (
     item_id         INT(11)     DEFAULT NULL,
     creator_id      INT(11)     DEFAULT NULL,
     created_at      TIMESTAMP   NULL DEFAULT NULL,
-    updated_at      TIMESTAMP   NULL DEFAULT NULL,
+    updated_at      TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -293,23 +318,23 @@ CREATE TABLE IF NOT EXISTS pivot_news_categories (
     category_id INT(11)     DEFAULT NULL,
     news_id     INT(11)     DEFAULT NULL,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `pivot_helpdesk_category`
 --
-DROP TABLE IF EXISTS `pivot_helpdesk_category`;
+DROP TABLE IF EXISTS pivot_helpdesk_category;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pivot_helpdesk_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ticket_id` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE pivot_helpdesk_category (
+    PRIMARY KEY (id),
+    id            INT(11)   NOT NULL AUTO_INCREMENT,
+    ticket_id     INT(11)   DEFAULT NULL,
+    category_id   INT(11)   DEFAULT NULL,
+    created_at    TIMESTAMP     NULL DEFAULT NULL,
+    updated_at    TIMESTAMP     NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -326,7 +351,7 @@ CREATE TABLE IF NOT EXISTS pivot_ranking (
     created_at      TIMESTAMP   NULL DEFAULT NULL,
     updated_at      TIMESTAMP   NULL DEFAULT NULL,
     item_id         INT(11)     DEFAULT NULL,
-    user_id         INT(11)     DEFAULT NULL,
+    user_id         INT(11)     DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -345,7 +370,7 @@ CREATE TABLE IF NOT EXISTS pivot_reaction_report (
     comment_id  INT(11)     DEFAULT NULL,
     report_id   INT(11)     DEFAULT NULL,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -368,7 +393,7 @@ CREATE TABLE IF NOT EXISTS points (
     media_url       VARCHAR(255)    DEFAULT NULL,
     description     TEXT,
     created_at      TIMESTAMP       NULL DEFAULT NULL,
-    updated_at      TIMESTAMP       NULL DEFAULT NULL,
+    updated_at      TIMESTAMP       NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -388,7 +413,7 @@ CREATE TABLE IF NOT EXISTS reactions_reports (
     user_id     INT(11)     DEFAULT NULL,
     reason      TEXT,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -426,7 +451,7 @@ CREATE TABLE IF NOT EXISTS tickets (
     title       VARCHAR(255)    DEFAULT NULL,
     description TEXT,
     created_at  TIMESTAMP       NULL DEFAULT NULL,
-    updated_at  TIMESTAMP       NULL DEFAULT NULL,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -452,7 +477,7 @@ CREATE TABLE IF NOT EXISTS users (
     email           VARCHAR(255)    DEFAULT NULL,
     updated_at      TIMESTAMP NULL  DEFAULT NULL,
     created_at      TIMESTAMP NULL  DEFAULT NULL,
-    deleted_at      TIMESTAMP NULL  DEFAULT NULL,
+    deleted_at      TIMESTAMP NULL  DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

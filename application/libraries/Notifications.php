@@ -62,7 +62,7 @@ class  Notifications
      */
     public function createNotification($data)
     {
-
+        return (Notify::create($data)) ? true : false;
     }
 
     /**
@@ -79,13 +79,12 @@ class  Notifications
     /**
      * Set an unread notification as read.
      *
-     * @param  int|null $userId          The id from the given user.
      * @param  int|null $notificationId  The id off the given notication.
-     * @return void
+     * @return bool
      */
-    public function markAsRead($userId = null $notificationId = null)
+    public function markAsRead($notificationId = null)
     {
-
+        return (Notify::find($notificationId)->update(['is_read' => 'Y'])) ? true : false;
     }
 
     /**
