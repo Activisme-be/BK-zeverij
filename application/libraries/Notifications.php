@@ -2,13 +2,10 @@
 
 class  Notifications
 {
-    // TODO: Implement database. DB LINT: |id|creator_id|user_id|is_read|message|link|created_at|updated_at|deleted_at|
-    // TODO: Register the library to the autoload.
     // TODO: Implement the database model.
-    // TODO: Create the creator and reciever relation.
+    // TODO: Create the reciever relation.
     // TODO: Set up reference document
     // TODO: Implement copyright docblock.
-    // TODO: Implement library in the view.
     // TODO: Set mark as read all to the view.
 
     /**
@@ -19,18 +16,6 @@ class  Notifications
     protected $CI;
 
     /**
-     * Notifications constructor.
-     *
-     * @param  array $config The library config.
-     * @return void
-     */
-    public function __construct($config = [])
-    {
-        parent::__construct($config);
-        $this->CI =& get_instance();
-    }
-
-    /**
      * Get the notification data for the navbar. (max. 3)
      *
      * @param  int|null    $userId  The id for the given user.
@@ -38,7 +23,7 @@ class  Notifications
      */
     public function dataNavbar($userId = null)
     {
-        $data = Notify::with(['creator'])->where('is_read', 'N')->where('user_id', $userId)->take(3)->get();
+        $data = Notify::with(['creator'])->where('is_read', 'N')->where('deliver_id', $userId)->take(3)->get();
         return $data;
     }
 
@@ -50,7 +35,7 @@ class  Notifications
      */
     public function allNotificationsCount($userId = null)
     {
-        $count = Notify::where('is_read', 'N')->where('user_id', $userId)->count();
+        $count = Notify::where('is_read', 'N')->where('deliver_id', $userId)->count();
         return $count;
     }
 

@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS notifications (
     deliver_id  INT(11)         NULL DEFAULT NULL,
     is_read     VARCHAR(1)      NOT NULL DEFAULT 'N',
     message     VARCHAR(255)    NULL DEFAULT NULL,
+    sub_message VARCHAR(255)    NULL DEFAULT NULL,
     link        VARCHAR(255)    NULL DEFAULT NULL,
     created_at  TIMESTAMP       NULL DEFAULT NULL,
     updated_at  TIMESTAMP       NULL DEFAULT NULL,
@@ -103,6 +104,7 @@ CREATE TABLE IF NOT EXISTS categories (
     id          INT(11)     NOT NULL AUTO_INCREMENT,
     creator_id  INT(11)     DEFAULT NULL,
     category    VARCHAR(40) DEFAULT NULL,
+    module      VARCHAR(40) DEFAULT NULL,
     description TEXT,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
     updated_at  TIMESTAMP   NULL DEFAULT NULL
@@ -136,7 +138,7 @@ CREATE TABLE IF NOT EXISTS gov_members (
 -- Table structure for table `gov_unions`
 --
 
-DROP TABLE IF EXISTS gov_members;
+DROP TABLE IF EXISTS gov_unions;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE IF NOT EXISTS gov_unions (
@@ -188,6 +190,21 @@ CREATE TABLE IF NOT EXISTS login_permissions (
     updated_at      TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `permissions`
+--
+
+LOCK TABLES login_permissions WRITE;
+
+/*!40000 ALTER TABLE `login_permissions` DISABLE KEYS */;
+INSERT INTO login_permissions (permissions_id, login_id)
+     VALUES (1, 1);
+/*!40000 ALTER TABLE `login_permissions` ENABLE KEYS */;
+
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -480,6 +497,23 @@ CREATE TABLE IF NOT EXISTS users (
     deleted_at      TIMESTAMP NULL  DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `permissions`
+--
+
+LOCK TABLES users WRITE;
+
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO users (username, name, blocked, password, email)
+     VALUES ('Topairy', 'Tim Joosten', 'N', MD5('root1995'), 'Topairy@gmail.com');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+UNLOCK TABLES;
+
+-- --------------------------------------------------------
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
