@@ -326,6 +326,8 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ban_id` int(11) DEFAULT '0',
+  `avatar` varchar(255) DEFAULT NULL,
+  `avatar_name` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `blocked` varchar(1) DEFAULT NULL,

@@ -7,6 +7,8 @@ application/cache/*
 application/logs/*
 node_modules/*
 
+assets/avatars/*
+
 !application/logs/index.html
 !application/logs/.htaccess
 

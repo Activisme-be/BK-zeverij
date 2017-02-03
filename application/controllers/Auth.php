@@ -198,6 +198,8 @@ class Auth extends MY_Controller
      */
     public function store()
     {
+        // TODO: Set default avatar.
+        
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]');
         $this->form_validation->set_rules('name', 'Naam', 'trim|required');

@@ -96,8 +96,6 @@ class Account extends MY_Controller
         $input['email']    = $this->security->xss_clean($this->input->post('email'));
         $input['username'] = $this->security->xss_clean($this->input->post('username'));
 
-        var_dump($this->user);
-
         $MySQL['update']           = Authencate::find($this->user['id']);
         $MYSQL['update']->name     = $input['name'];
         $MySQL['update']->email    = $input['email'];
@@ -107,25 +105,101 @@ class Account extends MY_Controller
             $MySQL['update']->password = $this->security->xss_clean($this->input->post('pasword'));
         }
 
-        if ($MySQL['update']->save()) { // Update -> Success
-            $permissions = [];
+        //> Start avatar upload.
+        if (! empty($_FILES['picture']['name'])) { // The post field avatar is not empty
+            $config['upload_path']   = 'assets/avatars';
+            $config['allowed_types'] = 'gif|jpg|jpeg|png';
+            $config['max_size']      = '5000';
+            $config['max_width']     = '1907';
+            $config['max_height']    = '1280';
 
-            foreach (Authencate::where('email', $MySQL['update']->email)->permissions as $permission) { // Set every permission role to a key,
-                array_push($permissions, $permission->role);                                            // Push every key invidual to the permissions array.
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            if (! $this->upload->do_upload('picture')) { // The image isn't uploaded.
+                 return $this->upload->display_errors();
+            } else {
+                $data['finfo']     = $this->upload->data();
+                $data['thumbnail'] = $data['finfo']['raw_name'] . '_thumb' . $data['finfo']['file_ext'];
+
+                $this->deleteAvatar($MySQL['update']->avatar_name);
+                $this->createThumbail($data['finfo']['file_name']);
+
+                // Set avatar to the database.
+                $MySQL['update']->avatar      = base_url('assets/avatars/' . $data['thumbnail']);
+                $MySQL['update']->avatar_name = $data['thumbnail'];
+                $MySQL['update']->save();
+
+                // You can view content of the $finfo with the code block below.
+                // echo '<pre>';
+                // print_r($sata['finfo']);
+                // echo '</pre>';
             }
+        }
+        //> END avatar upload.
 
-            $this->session->set_userdata('authencated_user', [
-                'id'       => $MySQL['update']->id,
-                'name'     => $input['name'],
-                'email'    => $input['email'],
-                'username' => $input['username'],
-                'roles'    => $permissions
-            ]);
+        if ($MySQL['update']->save()) { // Update -> Success
+            $user = Authencate::where('email', $MySQL['update']->email)->with(['permissions'])->get();
+
+            if ((int) count($user->permissions) > 0) {
+                $permissions = [];
+
+                foreach ($user->permissions as $permission) {                   // Set every permission role to a key,
+                    array_push($permissions, $permission->role);  // Push every key invidual to the permissions array.
+                }
+
+                $this->session->set_userdata('authencated_user', [
+                    'id'       => $MySQL['update']->id,
+                    'name'     => $input['name'],
+                    'email'    => $input['email'],
+                    'username' => $input['username'],
+                    'roles'    => $permissions
+                ]);
+            }
 
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('name', 'Je account instelingen zijn successvol aangepast');
         }
 
         return redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * [INTERNAL]: Create a thumbnail for the uploaded avatar.
+     *
+     * @param  string  $avatarName  The name for the uploaded avatar.
+     * @return void
+     */
+    public function createThumbail($avatarName)
+    {
+        $config['image_library']   = 'gd2';
+        $config['source_image']    = './assets/avatars/' . $avatarName;
+        $config['create_thumb']    = true;
+        $config['maintain_ration'] = true;
+        $config['width']           = 64;
+        $config['height']          = 64;
+
+        $this->load->library('image_lib', $config);
+
+        if (! $this->image_lib->resize()) { // The image cannot be resize.
+            return $this->image_lib->display_errors();
+        } else {
+            unlink($config['source_image']);
+        }
+    }
+
+    /**
+     * [INTERNAL]: Upload the previous avatar.
+     *
+     * - If the user want a new avatar to upload. This function will be triggered.
+     *
+     * @param  string  $avatarName  The avatar name from the user.
+     * @return void
+     */
+    public function deleteAvatar($avatarName)
+    {
+        if (! unlink('./assets/avatars/' . $avatarName)) {
+            log_message('ERROR', $avatarName . ': Could not delete the previous avatar from the user.');
+        }
     }
 }
