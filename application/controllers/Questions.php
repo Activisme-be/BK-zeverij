@@ -12,7 +12,8 @@
 class Questions extends MY_Controller
 {
     // FIXME: Rename the Tickets model to Question.
-
+    // FIXME: Set proper middleware to the controller.
+    
     /**
      * Questions constructor.
      *
