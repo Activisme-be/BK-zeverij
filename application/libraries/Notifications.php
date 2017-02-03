@@ -9,7 +9,7 @@ class  Notifications
     // TODO: Set up reference document
     // TODO: Implement copyright docblock.
     // TODO: Implement library in the view.
-    // TODO: Set mark as read all to the view. 
+    // TODO: Set mark as read all to the view.
 
     /**
      * Variable for the codeigniter instance.
@@ -60,17 +60,41 @@ class  Notifications
      * @param  array $data. The data that's need to be inserted.
      * @return bool
      */
-    public function createNotification()
+    public function createNotification($data)
     {
 
     }
 
-    public function UnreadNotifications()
+    /**
+     * Get all the unread notications.
+     *
+     * @param  int|null   $userId  The id from the given user.
+     * @return Collection $data
+     */
+    public function UnreadNotifications($userId = null)
     {
 
     }
 
-    public function markAsRead()
+    /**
+     * Set an unread notification as read.
+     *
+     * @param  int|null $userId          The id from the given user.
+     * @param  int|null $notificationId  The id off the given notication.
+     * @return void
+     */
+    public function markAsRead($userId = null $notificationId = null)
+    {
+
+    }
+
+    /**
+     * Mark all unread notification as read.
+     *
+     * @param  int|null $userId  The id from the given user.
+     * @return void
+     */
+    public function markAsReadAll($userid = null)
     {
 
     }
