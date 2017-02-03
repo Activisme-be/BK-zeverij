@@ -28,14 +28,14 @@ USE `activisme_be_activisme_zeverij`;
 -- Table structure for table `abilities`
 --
 
-CREATE TABLE IF NOT EXISTS `abilities` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS abilities (
+    PRIMARY KEY (id),
+    id          INT(11)       NOT NULL AUTO_INCREMENT,
+    name        VARCHAR(255)  DEFAULT NULL,
+    description VARCHAR(255)  DEFAULT NULL,
+    created_at  TIMESTAMP     NULL DEFAULT NULL,
+    updated_at  TIMESTAMP     NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -43,11 +43,12 @@ CREATE TABLE IF NOT EXISTS `abilities` (
 -- Table structure for table `bans`
 --
 
-CREATE TABLE IF NOT EXISTS `bans` (
-  `id` int(11) DEFAULT NULL,
-  `reason` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+CREATE TABLE IF NOT EXISTS bans (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    reason      TEXT,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -56,15 +57,15 @@ CREATE TABLE IF NOT EXISTS `bans` (
 -- Table structure for table `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `creator_id` int(11) DEFAULT NULL,
-  `category` varchar(40) DEFAULT NULL,
-  `description` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE IF NOT EXISTS categories (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    creator_id  INT(11)     DEFAULT NULL,
+    category    VARCHAR(40) DEFAULT NULL,
+    description TEXT,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -72,17 +73,17 @@ CREATE TABLE IF NOT EXISTS `categories` (
 -- Table structure for table `gov_members`
 --
 
-CREATE TABLE IF NOT EXISTS `gov_members` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) DEFAULT NULL,
-  `Function` varchar(255) DEFAULT NULL,
-  `Union_id` int(11) DEFAULT NULL,
-  `Information` varchar(500) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+CREATE TABLE IF NOT EXISTS gov_members (
+    PRIMARY KEY (id),
+    id          INT(11)       NOT NULL AUTO_INCREMENT,
+    Name        VARCHAR(255)  DEFAULT NULL,
+    Function    VARCHAR(255)  DEFAULT NULL,
+    Union_id    INT(11)       DEFAULT NULL,
+    Information VARCHAR(500)  DEFAULT NULL,
+    photo       VARCHAR(255)  DEFAULT NULL,
+    created_at  TIMESTAMP     NULL DEFAULT NULL,
+    updated_at  TIMESTAMP     NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -90,16 +91,16 @@ CREATE TABLE IF NOT EXISTS `gov_members` (
 -- Table structure for table `gov_unions`
 --
 
-CREATE TABLE IF NOT EXISTS `gov_unions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name_full` varchar(255) DEFAULT NULL,
-  `name_abbr` varchar(255) DEFAULT NULL,
-  `color` varchar(10) DEFAULT NULL,
-  `label` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+CREATE TABLE IF NOT EXISTS gov_unions (
+    PRIMARY KEY (id),
+    id          INT(11)         NOT NULL AUTO_INCREMENT,
+    name_full   VARCHAR(255)    DEFAULT NULL,
+    name_abbr   VARCHAR(255)    DEFAULT NULL,
+    color       VARCHAR(10)     DEFAULT NULL,
+    label       VARCHAR(255)    DEFAULT NULL,
+    created_at  TIMESTAMP       NULL DEFAULT NULL,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -107,12 +108,13 @@ CREATE TABLE IF NOT EXISTS `gov_unions` (
 -- Table structure for table `login_abilities`
 --
 
-CREATE TABLE IF NOT EXISTS `login_abilities` (
-  `id` int(11) DEFAULT NULL,
-  `login_id` int(11) DEFAULT NULL,
-  `ability_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+CREATE TABLE IF NOT EXISTS login_abilities (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    login_id    INT(11)     DEFAULT NULL,
+    ability_id  INT(11)     DEFAULT NULL,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -121,12 +123,13 @@ CREATE TABLE IF NOT EXISTS `login_abilities` (
 -- Table structure for table `login_permissions`
 --
 
-CREATE TABLE IF NOT EXISTS `login_permissions` (
-  `id` int(11) DEFAULT NULL,
-  `permissions_id` int(11) DEFAULT NULL,
-  `login_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+CREATE TABLE IF NOT EXISTS login_permissions (
+    PRIMARY KEY (id),
+    id              INT(11)     NOT NULL AUTO_INCREMENT,
+    permissions_id  INT(11)     DEFAULT NULL,
+    login_id        INT(11)     DEFAULT NULL,
+    created_at      TIMESTAMP   NULL DEFAULT NULL,
+    updated_at      TIMESTAMP   NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -135,16 +138,16 @@ CREATE TABLE IF NOT EXISTS `login_permissions` (
 -- Table structure for table `new_items`
 --
 
-CREATE TABLE IF NOT EXISTS `new_items` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `heading` varchar(255) DEFAULT NULL,
-  `message` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `creator_id` int(11) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE IF NOT EXISTS new_items (
+    PRIMARY KEY (id),
+    id          INT(10)         NOT NULL AUTO_INCREMENT,
+    heading     TIMESTAMP(255)  DEFAULT NULL,
+    message     TEXT,
+    created_at  TIMESTAMP       NULL DEFAULT NULL,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL,
+    creator_id  INT(11)         DEFAULT NULL,
+    deleted_at  TIMESTAMP       NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -152,14 +155,14 @@ CREATE TABLE IF NOT EXISTS `new_items` (
 -- Table structure for table `news_comments`
 --
 
-CREATE TABLE IF NOT EXISTS `news_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `comment` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE IF NOT EXISTS news_comments (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    user_id     INT(11)     DEFAULT NULL,
+    comment     TEXT,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -167,14 +170,14 @@ CREATE TABLE IF NOT EXISTS `news_comments` (
 -- Table structure for table `permissions`
 --
 
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE IF NOT EXISTS permissions (
+    PRIMARY KEY (id),
+    id          INT(11)         NOT NULL AUTO_INCREMENT,
+    name        VARCHAR(255)    DEFAULT NULL,
+    description TEXT,
+    created_at  TIMESTAMP       NULL DEFAULT NULL,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL,
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -182,14 +185,14 @@ CREATE TABLE IF NOT EXISTS `permissions` (
 -- Table structure for table `pivot_comments`
 --
 
-CREATE TABLE IF NOT EXISTS `pivot_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `post_id` int(11) DEFAULT NULL,
-  `comment_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+CREATE TABLE IF NOT EXISTS pivot_comments (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    post_id     INT(11)     DEFAULT NULL,
+    comment_id  INT(11)     DEFAULT NULL,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -197,15 +200,15 @@ CREATE TABLE IF NOT EXISTS `pivot_comments` (
 -- Table structure for table `pivot_items`
 --
 
-CREATE TABLE IF NOT EXISTS `pivot_items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sportsmen_id` int(11) DEFAULT NULL,
-  `item_id` int(11) DEFAULT NULL,
-  `creator_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+CREATE TABLE IF NOT EXISTS pivot_items (
+    PRIMARY KEY (id),
+    id              INT(11)     NOT NULL AUTO_INCREMENT,
+    sportsmen_id    INT(11)     DEFAULT NULL,
+    item_id         INT(11)     DEFAULT NULL,
+    creator_id      INT(11)     DEFAULT NULL,
+    created_at      TIMESTAMP   NULL DEFAULT NULL,
+    updated_at      TIMESTAMP   NULL DEFAULT NULL,
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -213,14 +216,14 @@ CREATE TABLE IF NOT EXISTS `pivot_items` (
 -- Table structure for table `pivot_news_categories`
 --
 
-CREATE TABLE IF NOT EXISTS `pivot_news_categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_id` int(11) DEFAULT NULL,
-  `news_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE IF NOT EXISTS pivot_news_categories (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    category_id INT(11)     DEFAULT NULL,
+    news_id     INT(11)     DEFAULT NULL,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -228,15 +231,15 @@ CREATE TABLE IF NOT EXISTS `pivot_news_categories` (
 -- Table structure for table `pivot_ranking`
 --
 
-CREATE TABLE IF NOT EXISTS `pivot_ranking` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sportsmen_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `item_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+CREATE TABLE IF NOT EXISTS pivot_ranking (
+    PRIMARY KEY (id),
+    id              INT(11)     NOT NULL AUTO_INCREMENT,
+    sportsmen_id    INT(11)     DEFAULT NULL,
+    created_at      TIMESTAMP   NULL DEFAULT NULL,
+    updated_at      TIMESTAMP   NULL DEFAULT NULL,
+    item_id         INT(11)     DEFAULT NULL,
+    user_id         INT(11)     DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -244,33 +247,33 @@ CREATE TABLE IF NOT EXISTS `pivot_ranking` (
 -- Table structure for table `pivot_reaction_report`
 --
 
-CREATE TABLE IF NOT EXISTS `pivot_reaction_report` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `comment_id` int(11) DEFAULT NULL,
-  `report_id` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE IF NOT EXISTS pivot_reaction_report (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    comment_id  INT(11)     DEFAULT NULL,
+    report_id   INT(11)     DEFAULT NULL,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `points`
+-- Table structure for table `poINTs`
 --
 
-CREATE TABLE IF NOT EXISTS `points` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `creator_id` int(11) DEFAULT NULL,
-  `sportsmen_id` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `point` varchar(255) DEFAULT NULL,
-  `media_url` varchar(255) DEFAULT NULL,
-  `description` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+CREATE TABLE IF NOT EXISTS points (
+    PRIMARY KEY (id),
+    id              INT(11)         NOT NULL AUTO_INCREMENT,
+    creator_id      INT(11)         DEFAULT NULL,
+    sportsmen_id    INT(11)         DEFAULT NULL,
+    status          INT(11)         DEFAULT NULL,
+    point           VARCHAR(255)    DEFAULT NULL,
+    media_url       VARCHAR(255)    DEFAULT NULL,
+    description     TEXT,
+    created_at      TIMESTAMP       NULL DEFAULT NULL,
+    updated_at      TIMESTAMP       NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -278,14 +281,14 @@ CREATE TABLE IF NOT EXISTS `points` (
 -- Table structure for table `reactions_reports`
 --
 
-CREATE TABLE IF NOT EXISTS `reactions_reports` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `reason` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE IF NOT EXISTS reactions_reports (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    user_id     INT(11)     DEFAULT NULL,
+    reason      TEXT,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -293,13 +296,13 @@ CREATE TABLE IF NOT EXISTS `reactions_reports` (
 -- Table structure for table `sessions`
 --
 
-CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` varchar(128) NOT NULL,
-  `ip_address` varchar(45) NOT NULL,
-  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
-  `data` blob NOT NULL,
-  PRIMARY KEY (`id`,`ip_address`),
-  KEY `ci_sessions_timestamp` (`timestamp`)
+CREATE TABLE IF NOT EXISTS sessions (
+    PRIMARY KEY (id, ip_address),
+    id          VARCHAR(128) NOT NULL,
+    ip_address  VARCHAR(45) NOT NULL,
+    TIMESTAMP   INT(10) unsigned NOT NULL DEFAULT '0',
+    data        BLOB NOT NULL,
+                KEY ci_sessions_TIMESTAMP(TIMESTAMP)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -308,14 +311,14 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 -- Table structure for table `tickets`
 --
 
-CREATE TABLE IF NOT EXISTS `tickets` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `description` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+CREATE TABLE IF NOT EXISTS tickets (
+    PRIMARY KEY (id),
+    id          INT(11)         NOT NULL AUTO_INCREMENT,
+    title       VARCHAR(255)    DEFAULT NULL,
+    description TEXT,
+    created_at  TIMESTAMP       NULL DEFAULT NULL,
+    updated_at  TIMESTAMP       NULL DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -323,21 +326,21 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ban_id` int(11) DEFAULT '0',
-  `avatar` varchar(255) DEFAULT NULL,
-  `avatar_name` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `blocked` varchar(1) DEFAULT NULL,
-  `password` varchar(125) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+CREATE TABLE IF NOT EXISTS users (
+    PRIMARY KEY (id),
+    id              INT(11)         NOT NULL AUTO_INCREMENT,
+    ban_id          INT(11)         DEFAULT '0',
+    avatar          VARCHAR(255)    DEFAULT NULL,
+    avatar_name     VARCHAR(255)    DEFAULT NULL,
+    username        VARCHAR(255)    DEFAULT NULL,
+    name            VARCHAR(255)    DEFAULT NULL,
+    blocked         VARCHAR(1)      DEFAULT NULL,
+    password        VARCHAR(125)    DEFAULT NULL,
+    email           VARCHAR(255)    DEFAULT NULL,
+    updated_at      TIMESTAMP NULL  DEFAULT NULL,
+    created_at      TIMESTAMP NULL  DEFAULT NULL,
+    deleted_at      TIMESTAMP NULL  DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
