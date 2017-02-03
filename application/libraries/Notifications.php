@@ -45,7 +45,7 @@ class  Notifications
      * @param  array $data. The data that's need to be inserted.
      * @return bool
      */
-    public function createNotification($data)
+    public function createNotification(array $data)
     {
         return (Notify::create($data)) ? true : false;
     }
@@ -58,7 +58,7 @@ class  Notifications
      */
     public function UnreadNotifications($userId = null)
     {
-
+        // TODO: build up the logic
     }
 
     /**
@@ -80,6 +80,12 @@ class  Notifications
      */
     public function markAsReadAll($userid = null)
     {
+        $notifications = Notify::where('deliver_id', $userId)->where('is_read', 'N')get();
 
+        foreach ($notications as $notification) {
+            $notication->update('is_read' => 'Y');
+        }
+
+        return true;
     }
 }
