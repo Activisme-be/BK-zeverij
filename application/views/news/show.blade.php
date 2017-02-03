@@ -20,15 +20,15 @@
 							<hr>
 
 							<p style="margin-top: -10px;margin-bottom: -3px;">
-								<i class="fa fa-user" aria-hidden="true"></i> Autheur: <a href="#">{{ $article->author->name }}</a> 
+								<i class="fa fa-user" aria-hidden="true"></i> Autheur: <a href="#">{{ $article->author->name }}</a>
 					          	| <i class="fa fa-calendar" aria-hidden="true"></i> {{ $article->created_at }}
 					          	| <i class="fa fa-tags" aria-hidden="true"></i> Tags:
 
 					          	@if ((int) count($article->categories) > 0)
 					          		@foreach ($article->categories as $category)
-					          			<a href="#"><span class="label label-info">{{ $category->category }}</span></a> 
+					          			<a href="#"><span class="label label-info">{{ $category->category }}</span></a>
 					          		@endforeach
-					          	@else 
+					          	@else
 					          		<span class="label label-primary">Geen</span>
 					          	@endif
 					          </p>
@@ -44,35 +44,35 @@
 				{{-- Comments --}}
 					{{-- Reactions --}}
 						{{ $comments_link }}
-							
+
 						@foreach ($comments as $comment)
 							<div class="well well-sm" style="margin-bottom:10px;">
 								<div class="media">
 	  								<div class="media-left">
 	    								<a href="#">
-	      									<img style="width: 64px; height:64px;" class=" img-rounded media-object" src="http://placehold.it/64x64" alt="...">
+	      									<img style="width: 64px; height:64px;" class=" img-rounded media-object" src="{{ $comment->creator->avatar }}" alt="...">
 	    								</a>
 	  								</div>
-	  								
+
 	  								<div class="media-body">
 	    								<h4 class="media-heading">
-	    									{{ $comment->creator->name }}<small> - {{ $comment->created_at }}</small> 
+	    									{{ $comment->creator->name }}<small> - {{ $comment->created_at }}</small>
 	    									<span class="pull-right">
 	    										<small>
 	    											<a onclick="edit('{{ base_url('comment/show/' . $comment->id) }}')">
 	    												<small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Rapporteer</small>
 	    											</a>
 
-	    											@if ($this->user && $this->user['id'] === $comment->user_id || in_array('admin', $this->user['roles'])) 
+	    											@if ($this->user && $this->user['id'] === $comment->user_id || in_array('admin', $this->user['roles']))
 	    												<a href="{{ base_url('comment/delete/' . $comment->id) }}">
 	    													<small><span class="fa fa-close"></span> Verwijder</small>
 	    												</a>
-	    											@endif 
+	    											@endif
 	    										</small>
 	    									</span>
 	    								</h4>
 
-	    								{{ $comment->comment }} 
+	    								{{ $comment->comment }}
 	  								</div>
 								</div>
 							</div>
@@ -86,7 +86,7 @@
 						<form class="form-horizontal" action="{{ base_url('comment/store/' . $article->id) }}" method="POST">
 							{{-- CSRF --}}
 	                        <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
-	                        
+
 							<div class="form-group">
 								<div class="col-md-12">
 									<textarea class="form-control" rows="4" name="commentUser" placeholder="Uw reactie"></textarea>
@@ -117,7 +117,7 @@
 	                <form method="POST" action="">
 	                	{{-- CSRF --}}
                         <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
-                        
+
 	                	<div class="input-group" v-if="! submitted">
 	                    	<input type="text" name="term" v-model="search.term" class="form-control" placeholder="Zoek bericht">
 	                    	<span class="input-group-btn">
@@ -131,7 +131,7 @@
 
 	            <div class="panel panel-default">
 	            	<div class="panel-heading"><span class="fa fa-asterisk"></span> Categorieen:</div>
-		    	
+
 	            	<div class="panel-body">
 	            		@foreach($categories as $category)
 	            			<a href="" class="label label-primary">{{ $category->category }}</a>
