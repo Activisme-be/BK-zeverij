@@ -63,6 +63,8 @@
                                         </div> {{-- /dropdown toolbar  --}}
 
                                         <ul class="dropdown-menu notifications">
+                                            {{-- Max 3 panels --}}
+                                            
                                             <li class="notification">
                                                 <div class="media">
                                                     <div class="media-left">
