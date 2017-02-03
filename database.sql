@@ -526,7 +526,9 @@ DROP TABLE IF EXISTS tickets;
 CREATE TABLE IF NOT EXISTS tickets (
     PRIMARY KEY (id),
     id          INT(11)         NOT NULL AUTO_INCREMENT,
+    creator_id  INT(11)         NULL DEFAULT NULL,
     status      VARCHAR(255)    NULL DEFAULT NULL,
+    publish     VARCHAR(50)     NULL DEFAULT NULL,
     title       VARCHAR(255)    DEFAULT NULL,
     description TEXT,
     created_at  TIMESTAMP       NULL DEFAULT NULL,
