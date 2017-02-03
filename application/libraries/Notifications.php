@@ -80,10 +80,10 @@ class  Notifications
      */
     public function markAsReadAll($userid = null)
     {
-        $notifications = Notify::where('deliver_id', $userId)->where('is_read', 'N')get();
+        $notifications = Notify::where('deliver_id', $userId)->where('is_read', 'N')->get();
 
         foreach ($notications as $notification) {
-            $notication->update('is_read' => 'Y');
+            $notication->update(['is_read' => 'Y']);
         }
 
         return true;

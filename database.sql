@@ -134,6 +134,40 @@ CREATE TABLE IF NOT EXISTS gov_members (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 -- --------------------------------------------------------
+
+--
+-- Dumping data for table `gov_members`
+--
+
+LOCK TABLES gov_members WRITE;
+
+/*!40000 ALTER TABLE `gov_members` DISABLE KEYS */;
+INSERT INTO gov_members (Name, Function, Union_id, Information, photo)
+     VALUES ('Charles Michel', 'Eerste Minister', 6, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_charles_michel', 'charles_michel.jpg'),
+            ('Kris Peeters', 'Vice-eersteminister en minister van Werk, Economie en Consumenten, belast met Buitenlandse Handel', 1, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_kris_peeters', 'kris_peeters.jpg'),
+            ('Jan Jambon', 'Vice-eersteminister en minister van Veiligheid en Binnenlandse Zaken, belast met de Regie der gebouwen', 7, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_jan_jambon', 'jan_jambon.jpg'),
+            ('Alexander De Croo', 'Ontwikkelingssamenwerking, Digitale Agenda, Telecommunicatie en Post', 8, 'http://www.belgium.be/nl/over#_belgie/overheid/federale#_overheid/federale#_regering/samenstelling#_regering/index#_alexander#_de#_croo', 'alexander_de_croo.jpg'),
+            ('Didier Reynders', 'Vice-eersteminister en minister van Buitenlandse Zaken en Europese Zaken, belast met Beliris en de Federale Culturele Instellingen', 6, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_didier_reynders', 'didier_reynders.jpg'),
+            ('Koen Geens', 'Minister van Justitie', 1, 'http://www.belgium.be/nl/over#_belgie/overheid/federale#_overheid/federale#_regering/samenstelling#_regering/index#_koen#_geens', 'koen_geens.jpg'),
+            ('Maggie De Block', 'Minister van Sociale Zaken en Volksgezondheid', 8, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_maggie_de_block', 'maggie_de_block.jpg'),
+            ('Daniel Bacquelaine', 'Minister van Pensioenen', 6, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_daniel_bacquelaine', 'daniel_bacquelaine.jpg'),
+            ('Johan Van Overtveldt', 'Minister van Financien, belast met Bestrijding van de fiscale fraude', 7, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_johan_van_overtveldt', 'johan_van_overtveldt.jpg'),
+            ('Willy Borsus', "Minister van Middenstand, Zelfstandigen, KMO's, Landbouw en Maatschappelijke Integratie", 6, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_willy_borsus', 'willy_borsus.jpg'),
+            ('Marie Christine Marghem', 'Minister van Energie, Leefmilieu en Duurzame Ontwikkeling', 6, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_marie_christine_marghem', 'Marie-christine_marghem.jpg'),
+            ('Steven Vandeput', 'Minister van Defensie, belast met Ambtenarenzaken', 7, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_steven_vandeput', 'steven_vandeput.jpg'),
+            ('Sophie Wilmes', 'Minister van Begroting, belast met de Nationale Loterij', 6, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_sophie_wilmes', 'sophie_wilmes_1.jpg'),
+            ('Francois Bellot', 'Minister van Mobiliteit, belast met Belgocontrol en de Nationale Maatschappij der Belgische Spoorwegen', 6, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_francois_bellot', 'bellot.jpg'),
+            ('Pieter De Crem', 'Staatssecretaris voor Buitenlandse Handel, toegevoegd aan de minister belast met Buitenlandse Handel', 1, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_pieter_de_crem', 'Pieter_de_crem.jpg'),
+            ('Elke Sleurs', 'Staatssecretaris voor Armoedebestrijding, Gelijke Kansen, Personen met een beperking, en Wetenschapsbeleid, belast met Grote Steden, toegevoegd aan de minister van Financien', 7, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_elke_sleurs', 'Elke_Sleurs.jpg'),
+            ('Theo Francken', 'Staatssecretaris voor Asiel en Migratie, belast met Administratieve Vereenvoudiging, toegevoegd aan de minister van Veiligheid en Binnenlandse Zaken', 7, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_theo_francken', 'theo_francken.jpg'),
+            ('Philipple De Backer', 'Staatssecretaris voor Bestrijding van de sociale fraude, Privacy en Noordzee, toegevoegd aan de minister van Sociale Zaken en Volksgezondheid', 8, 'http://www.belgium.be/nl/over_belgie/overheid/federale_overheid/federale_regering/samenstelling_regering/index_philippe_de_backer', 'de_backer.jpg');
+
+/*!40000 ALTER TABLE `gov_members` ENABLE KEYS */;
+
+UNLOCK TABLES;
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `gov_unions`
 --
@@ -152,6 +186,33 @@ CREATE TABLE IF NOT EXISTS gov_unions (
     updated_at  TIMESTAMP       NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `gov_unions`
+--
+
+LOCK TABLES gov_unions WRITE;
+
+/*!40000 ALTER TABLE `gov_unions` DISABLE KEYS */;
+INSERT INTO gov_unions (name_full, name_abbr, color, label)
+     VALUES ('Christen-Democratisch & Vlaams', 'CD&V', '#f47d2a', 'label-cdv'),
+            ('Centre Democrate Humaniste', 'cdH', '#b64330', 'label-cdh'),
+            ("Ecologistes Confederes pour l' Organisation de Luttes Originales", 'ECOLO', '#8cc63f', 'label-ecolo'),
+            ('Federalistes Democrates Francophones', 'FDF', '#cb0167', 'label-fdf'),
+            ('Groen!', 'Groen', '#008479', 'label-groen'),
+            ('Mouvement Reformateur', 'MR', '#044679', 'label-mr'),
+            ('Nieuw-Vlaamse Alliantie', 'N-VA', '#f9b919', 'label-nva'),
+            ('Open Vlaamse Liberalen en Democraten', 'Open VLD', '#275ca5', 'label-ovld'),
+            ('Parti Populaire', 'PP', '#773179', 'label-pp'),
+            ('Parti socialiste', 'PS', '#ff0000', 'label-ps'),
+            ("Parti du Travail de Belgique - Gauche d' Ouverture!", 'ptb-go!', '#e8312a', 'label-ptbgo'),
+            ('Socialistische partij anders', 'SP.A', '#e20025', 'label-spa'),
+            ('Vlaams Belang', 'Vlaams Belang', '#5a9fc1', 'label-vb');
+/*!40000 ALTER TABLE `gov_unions` ENABLE KEYS */;
+
+UNLOCK TABLES;
 
 -- --------------------------------------------------------
 
@@ -194,7 +255,7 @@ CREATE TABLE IF NOT EXISTS login_permissions (
 -- --------------------------------------------------------
 
 --
--- Dumping data for table `permissions`
+-- Dumping data for table `login_permissions`
 --
 
 LOCK TABLES login_permissions WRITE;
