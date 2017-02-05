@@ -84,7 +84,7 @@ class Questions extends MY_Controller
     {
         $questionId = $this->security->xss_clean($this->uri->segment(3));
 
-        $data['question']   = Tickets::with(['category'])->find($questionId);
+        $data['question']   = Tickets::with(['category', 'comments'])->find($questionId);
         $data['title']      = $data['question']->title;
 
         return $this->blade->render('helpdesk/questions/show', $data);
@@ -129,6 +129,8 @@ class Questions extends MY_Controller
         if ($MySQL['create']) { // The question has been inserted.
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'Uw vraag zal zo snel mogelijk gehandeld worden');
+
+            // TODO: Implement a user notification.
         }
 
         return redirect($_SERVER['HTTP_REFERER']);

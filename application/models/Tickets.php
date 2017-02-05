@@ -54,4 +54,17 @@ class Tickets extends Model
 		return $this->belongsToMany('NewsCategories', 'pivot_helpdesk_category', 'ticket_id', 'category_id')
 			->withTimestamps();
 	}
+
+    /**
+     * Get the comments for a ticket.
+     *
+     * @return Collection|BelongsToMany relation
+     */
+    public function comments()
+    {
+        // TODO: Implement the table to the erd.
+        
+        return $this->belongsToMany('Comments', 'pivot_reactions', 'ticket_id', 'comment_id')
+            ->withTimestamps();
+    }
 }

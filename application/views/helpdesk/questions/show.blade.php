@@ -21,8 +21,21 @@
 
             <hr> {{-- Break the question view from the comment section. --}}
 
-            <form class="form-hoirzontal" method="POST" action="">
+            @if ()
+            @endif
+
+            <form class="form-horizontal" method="POST" action="">
                 <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea name="" rows="6" class="form-control" placeholder="Uw antwoord of reactie."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-sm btn-success"><span class="fa fa-check" aria-hidden="true"></span> Reageer</button>
+                        <button type="reset" class="btn btn-sm btn-danger"><span class="fa fa-close" aria-hidden="true"></span> Reset</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -33,6 +46,10 @@
                 <div class="panel-heading">Informatie:</div>
 
                 <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Aangemaakt door:</strong>
+                        <span class="pull-right">{{ $question->creator->name }}</span>
+                    </li>
                     <li class="list-group-item">
                         <strong>Aangemaakt op:</strong>
                         <span class="pull-right">{{ $question->created_at }}</span>
@@ -49,8 +66,14 @@
                     <span class="fa fa-btn fa-github" aria-hidden="true"></span> Exporteer naar github.
                 </a>
 
-                <a href="{{ base_url() }}" class="list-group-item list-group-item-danger">
-                    <span class="fa fa-close fa-btn" aria-hidden="true"></span> Deze vraag sluiten
+                {{-- Close the ticket. --}}
+                <a href="{{ base_url('questions/status/' . $question->id . '/0') }}" class="list-group-item list-group-item-danger">
+                    <span class="fa fa-close fa-btn" aria-hidden="true"></span> Deze vraag sluiten.
+                </a>
+
+                {{-- Open the ticket --}}
+                <a href="{{ base_url('questions/status/' . $question->id . '1') }}" class="list-group-item list-group-item-success">
+                    <span class="fa fa-check fa-btn" aria-hidden="true"></span> Deze vraag heropenen.
                 </a>
             </div>
 
