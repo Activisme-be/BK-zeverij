@@ -85,7 +85,9 @@ CREATE TABLE IF NOT EXISTS notifications (
     link        VARCHAR(255)    NULL DEFAULT NULL,
     created_at  TIMESTAMP       NULL DEFAULT NULL,
     updated_at  TIMESTAMP       NULL DEFAULT NULL,
-    deleted_at  TIMESTAMP       NULL DEFAULT NULL
+    deleted_at  TIMESTAMP       NULL DEFAULT NULL,
+    CONSTRAINT  fk_creator      FOREIGN KEY (creator_id) REFERENCES users(id),
+    CONSTRAINT  fk_deliver      FOREIGN KEY (deliver_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,7 +109,8 @@ CREATE TABLE IF NOT EXISTS categories (
     module      VARCHAR(40) DEFAULT NULL,
     description TEXT,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    CONSTRAINT  fk_creator_categoy FOREIGN KEY (creator_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -129,7 +132,8 @@ CREATE TABLE IF NOT EXISTS gov_members (
     Information VARCHAR(500)  DEFAULT NULL,
     photo       VARCHAR(255)  DEFAULT NULL,
     created_at  TIMESTAMP     NULL DEFAULT NULL,
-    updated_at  TIMESTAMP     NULL DEFAULT NULL
+    updated_at  TIMESTAMP     NULL DEFAULT NULL,
+    CONSTRAINT  fk_union      FOREIGN KEY (union_id) REFERENCES gov_unions(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -229,7 +233,9 @@ CREATE TABLE IF NOT EXISTS login_abilities (
     login_id    INT(11)     DEFAULT NULL,
     ability_id  INT(11)     DEFAULT NULL,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    CONSTRAINT  fk_abilities        FOREIGN KEY (ability_id) REFERENCES abilities(id),
+    CONSTRAINT  fk_abilities_login  FOREIGN KEY (login_id)   REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -248,7 +254,9 @@ CREATE TABLE IF NOT EXISTS login_permissions (
     permissions_id  INT(11)     DEFAULT NULL,
     login_id        INT(11)     DEFAULT NULL,
     created_at      TIMESTAMP   NULL DEFAULT NULL,
-    updated_at      TIMESTAMP   NULL DEFAULT NULL
+    updated_at      TIMESTAMP   NULL DEFAULT NULL,
+    CONSTRAINT      fk_permissions       FOREIGN key (permissions_id) REFERENCES permissions(id),
+    CONSTRAINT      fk_permissions_login FOREIGN KEY (login_id)       REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -303,7 +311,8 @@ CREATE TABLE IF NOT EXISTS news_comments (
     user_id     INT(11)     DEFAULT NULL,
     comment     TEXT,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    CONSTRAINT  fk_comment_creator  FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -357,7 +366,9 @@ CREATE TABLE IF NOT EXISTS pivot_comments (
     post_id     INT(11)     DEFAULT NULL,
     comment_id  INT(11)     DEFAULT NULL,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
-    updated_at  TIMESTAMP   NULL DEFAULT NULL
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    CONSTRAINT  fk_news_item    FOREIGN KEY (post_id)    REFERENCES new_items(id),
+    CONSTRAINT  fk_item_comment FOREIGN KEY (comment_id) REFERENCES news_comments(id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -377,7 +388,10 @@ CREATE TABLE IF NOT EXISTS pivot_items (
     item_id         INT(11)     DEFAULT NULL,
     creator_id      INT(11)     DEFAULT NULL,
     created_at      TIMESTAMP   NULL DEFAULT NULL,
-    updated_at      TIMESTAMP   NULL DEFAULT NULL
+    updated_at      TIMESTAMP   NULL DEFAULT NULL,
+    CONSTRAINT      fk_gov_member       FOREIGN KEY (sportsmen_id)  REFERENCES gov_members(id),
+    CONSTRAINT      fk_item_gov_member  FOREIGN KEY (item_id)       REFERENCES new_items(id),
+    CONSTRAINT      fk_item_creator     FOREIGN KEY (creator_id)    REFERENCES users(id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
