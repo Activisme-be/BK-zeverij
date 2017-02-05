@@ -13,7 +13,7 @@ class Questions extends MY_Controller
 {
     // FIXME: Rename the Tickets model to Question.
     // FIXME: Set proper middleware to the controller.
-    
+
     /**
      * Questions constructor.
      *
@@ -84,7 +84,7 @@ class Questions extends MY_Controller
     {
         $questionId = $this->security->xss_clean($this->uri->segment(3));
 
-        $data['question']   = Tickets::find($quetionId);
+        $data['question']   = Tickets::with(['category'])->find($questionId);
         $data['title']      = $data['question']->title;
 
         return $this->blade->render('helpdesk/questions/show', $data);
