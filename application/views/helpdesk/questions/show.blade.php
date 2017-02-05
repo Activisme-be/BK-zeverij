@@ -66,15 +66,17 @@
                     <span class="fa fa-btn fa-github" aria-hidden="true"></span> Exporteer naar github.
                 </a>
 
-                {{-- Close the ticket. --}}
-                <a href="{{ base_url('questions/status/' . $question->id . '/0') }}" class="list-group-item list-group-item-danger">
-                    <span class="fa fa-close fa-btn" aria-hidden="true"></span> Deze vraag sluiten.
-                </a>
-
-                {{-- Open the ticket --}}
-                <a href="{{ base_url('questions/status/' . $question->id . '1') }}" class="list-group-item list-group-item-success">
-                    <span class="fa fa-check fa-btn" aria-hidden="true"></span> Deze vraag heropenen.
-                </a>
+                @if ($question->Status === 'Open')
+                    {{-- Close the ticket. --}}
+                    <a href="{{ base_url('questions/status/' . $question->id . '/0') }}" class="list-group-item list-group-item-danger">
+                        <span class="fa fa-close fa-btn" aria-hidden="true"></span> Deze vraag sluiten.
+                    </a>
+                @elseif ($question->Status === 'Closed')
+                    {{-- Open the ticket --}}
+                    <a href="{{ base_url('questions/status/' . $question->id . '1') }}" class="list-group-item list-group-item-success">
+                        <span class="fa fa-check fa-btn" aria-hidden="true"></span> Deze vraag heropenen.
+                    </a>
+                @endif
             </div>
 
         </div>
