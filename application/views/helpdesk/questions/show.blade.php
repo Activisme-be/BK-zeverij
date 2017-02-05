@@ -45,7 +45,7 @@
             </div>
 
             <div class="list-group">
-                <a href="{{ base_url() }}" class="list-group-item list-group-item-warning">
+                <a href="{{ base_url('questions/github/' . $question->id) }}" class="list-group-item list-group-item-warning">
                     <span class="fa fa-btn fa-github" aria-hidden="true"></span> Exporteer naar github.
                 </a>
 

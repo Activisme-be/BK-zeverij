@@ -196,6 +196,30 @@ class Questions extends MY_Controller
     }
 
     /**
+     * Export a ticket to github.
+     *
+     * @see    http://www.domain.tld/questions/github/{questionIds}
+     * @return response|redirect
+     */
+    public function github()
+    {
+        $github     = new \Github\Client();
+        $ticket     = Tickets::find($this->security->xss_clean($this->uri->segment(3)));
+
+        //> Github hook
+        $github->authenticate('username', 'password', \Github\Client::AUTH_HTTP_PASSWORD);
+        $params = ['title' => $ticket->title, 'body' => $ticket->description];
+        //> END
+
+        if ($github->api('issue')->create('Activisme-be', 'BK-zeverij', $params)) { // The issue is pushed to github.
+            $this->session->set_flashdata('class', 'alert alert-success');
+            $this->session->set_flashdata('message', 'Het ticket is naar github gexporteerd.');
+        }
+
+        return redirect(base_url('questions/backend'));
+    }
+
+    /**
      * Delete a ticket out off the application.
      *
      * @see    GET|HEAD:

@@ -13,7 +13,9 @@
   "require": {
     "php": ">=5.2.4",
 	"illuminate/database": "5.3.*",
-    "illuminate/events": "5.3.*"
+    "illuminate/events": "5.3.*",
+    "knplabs/github-api": "^2.0",
+    "php-http/guzzle6-adapter": "^1.1"
   },
   "autoload": {
     "classmap": [
