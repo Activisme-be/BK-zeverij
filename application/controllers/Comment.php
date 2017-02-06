@@ -85,6 +85,22 @@ class Comment extends MY_Controller
 		return redirect($_SERVER['HTTP_REFERER'], 'refresh');
 	}
 
+	public function storeQuestion()
+    {
+        $this->form_validation->set_rules();
+
+        if ($this->form_validation->run() === false) { // Validation fails
+            return redirect($_SERVER['HTTP_REFERER'], 'refresh');
+
+        }
+
+        // No validation errors found. So move on with the logic?
+
+        $articleId = $this->security->xss_clean($this->uri->segment(3));
+
+        $input['user']
+    }
+
 	/** 
 	 * Report a comment that breaks our policy. 
 	 * 

@@ -65,6 +65,7 @@ class Tickets extends Model
         // TODO: Implement the table to the erd.
         
         return $this->belongsToMany('Comments', 'pivot_reactions', 'ticket_id', 'comment_id')
+            ->withPivot('creator_id')
             ->withTimestamps();
     }
 }

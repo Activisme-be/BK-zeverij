@@ -24,10 +24,10 @@
             @if ()
             @endif
 
-            <form class="form-horizontal" method="POST" action="">
+            <form class="form-horizontal" method="POST" action="{{ base_url() }}">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <textarea name="" rows="6" class="form-control" placeholder="Uw antwoord of reactie."></textarea>
+                        <textarea name="comment" rows="6" class="form-control" placeholder="Uw antwoord of reactie."></textarea>
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                 </a>
 
                 @if ($question->Status === 'Open')
-                    <a href="{{ base_url('questions/status/' . $question->id . '/0') }}" class="list-group-item list-group-item-danger">
+                    <a @if ($question->export_github == 'Y') disabled @endif href="{{ base_url('questions/status/' . $question->id . '/0') }}" class="list-group-item list-group-item-danger">
                         <span class="fa fa-close fa-btn" aria-hidden="true"></span> Deze vraag sluiten.
                     </a>
                 @elseif ($question->Status === 'Closed')
