@@ -140,7 +140,7 @@
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputPassword2">Wachtwoord</label>
                                                         <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Wachtwoord">
-                                                        <div class="help-block text-right"><a href="">Wachtwoord vergeten?</a></div>
+                                                        <div class="help-block text-right"><a data-toggle="modal" data-target="#resetPass" href="#">Wachtwoord vergeten?</a></div>
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-primary btn-block">Inloggen</button>
@@ -148,7 +148,7 @@
                                                 </form>
                                             </div>
                                             <div class="bottom text-center">
-                                                Geen account? <a href="#"><b>Registreer</b></a>
+                                                Geen account? <a href="{{ base_url('auth/register') }}"><b>Registreer</b></a>
                                             </div>
                                         </div>
                                     </li>
@@ -180,9 +180,9 @@
                     <div class="col-md-2 col-sm-6 paddingtop-bottom">
                         <h6 class="heading7">LINKS</h6>
                         <ul class="footer-ul">
-                            <li><a href="{{ base_url() }}">Disclaimer</a></li>
-                            <li><a href="{{ base_url() }}">Klassement</a></li>
-                            <li><a href="{{ base_url() }}">Registreren</a></li>
+                            <li><a href="{{ base_url('disclaimer') }}">Disclaimer</a></li>
+                            <li><a href="{{ base_url('ranking') }}">Klassement</a></li>
+                            <li><a href="{{ base_url('auth/register') }}">Registreren</a></li>
                             <li><a href="http://www.activisme.be">Activisme.be</a></li>
                         </ul>
                     </div>
@@ -205,7 +205,7 @@
                 </div>
             </div>
         </footer>
-        <!--footer start from here-->
+        {{-- footer start from here --}}
 
         <div class="copyright">
             <div class="container">
@@ -225,6 +225,10 @@
                </div>
             </div>
         </div>
+
+        {{-- Modal Includes --}}
+            @include('auth/reset')
+        {{-- /Modal Includes --}}
 
         {{-- Core JavaScript --}}
         {{-- ============================================= --}}
