@@ -564,15 +564,16 @@ DROP TABLE IF EXISTS tickets;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE IF NOT EXISTS tickets (
     PRIMARY KEY (id),
-    id          INT(11)         NOT NULL AUTO_INCREMENT,
-    creator_id  INT(11)         NULL DEFAULT NULL,
-    status      VARCHAR(255)    NULL DEFAULT NULL,
-    publish     VARCHAR(50)     NULL DEFAULT NULL,
-    title       VARCHAR(255)    DEFAULT NULL,
-    description TEXT,
-    created_at  TIMESTAMP       NULL DEFAULT NULL,
-    updated_at  TIMESTAMP       NULL DEFAULT NULL,
-    deleted_at  TIMESTAMP       NULL DEFAULT NULL,
+    id            INT(11)         NOT NULL AUTO_INCREMENT,
+    creator_id    INT(11)         NULL DEFAULT NULL,
+    status        VARCHAR(255)    NULL DEFAULT NULL,
+    publish       VARCHAR(50)     NULL DEFAULT NULL,
+    title         VARCHAR(255)    DEFAULT NULL,
+    export_github VARCHAR(10)     NOT NULL DEFAULT 'N',
+    description   TEXT,
+    created_at    TIMESTAMP       NULL DEFAULT NULL,
+    updated_at    TIMESTAMP       NULL DEFAULT NULL,
+    deleted_at    TIMESTAMP       NULL DEFAULT NULL,
     CONSTRAINT  fk_ticket_creator   FOREIGN KEY (creator_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

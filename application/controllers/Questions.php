@@ -213,11 +213,16 @@ class Questions extends MY_Controller
         $params = ['title' => $ticket->title, 'body' => $ticket->description];
         //> END
 
-        if ($github->api('issue')->create('Activisme-be', 'BK-zeverij', $params)) { // The issue is pushed to github.
-            $ticket->update(['export_github' => 'Y']); // TODO: add export_github column to the database.
+        if ($ticket->export_github === 'N') {
+            if ($github->api('issue')->create('Activisme-be', 'BK-zeverij', $params)) { // The issue is pushed to github.
+                $ticket->update(['export_github' => 'Y']);
 
-            $this->session->set_flashdata('class', 'alert alert-success');
-            $this->session->set_flashdata('message', 'Het ticket is naar github gexporteerd.');
+                $this->session->set_flashdata('class', 'alert alert-success');
+                $this->session->set_flashdata('message', 'Het ticket is naar github gexporteerd.');
+            }
+        } else {
+            $this->session->set_flashdata('alert alert-danger');
+            $this->session->set_flashdata('message', 'Wij konden deze vraag niet naar github exporteren.');
         }
 
         return redirect(base_url('questions/backend'));
