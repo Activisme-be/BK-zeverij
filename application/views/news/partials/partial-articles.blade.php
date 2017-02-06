@@ -47,7 +47,7 @@
 								</td> {{-- /Information --}}
 								
 								<td> {{-- Functions --}}
-									<a href="" class="label label-info">Bekijk</a>
+									<a href="{{ base_url('news/show' . $article->id) }}" class="label label-info">Bekijk</a>
 									<a href="" class="label label-warning">Aanpassen</a>
 									<a href="{{ base_url('news/delete/' . $article->id) }}" class="label label-danger">Verwijder</a>
 								</td> {{-- /Functions --}}

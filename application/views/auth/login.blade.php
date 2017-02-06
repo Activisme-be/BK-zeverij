@@ -10,7 +10,12 @@
             @endif
 
             <div class="panel panel-default">
-                <div class="panel-heading">Inloggen</div>
+                <div class="panel-heading">
+                    Inloggen op BK-Wansmaak.
+                    <span class="pull-right">
+                        Geen account? <a href="{{ base_url('auth/register') }}">Registreer.</a>
+                    </span>
+                </div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{ base_url('auth/verify') }}" method="post">
@@ -21,7 +26,7 @@
                             <label class="control-label col-sm-4">Email adres: </label>
 
                             <div class="col-sm-6">
-                                <input type="text" name="email" class="form-control">
+                                <input type="text" placeholder="jhon.doe@gmail.com" name="email" class="form-control">
                             </div>
                         </div>
 
@@ -29,7 +34,7 @@
                             <label class="control-label col-sm-4">Wachtwoord:</label>
 
                             <div class="col-sm-6">
-                                <input type="password" name="password" class="form-control">
+                                <input type="password" placeholder="Wachtwoord" name="password" class="form-control">
                             </div>
                         </div>
 

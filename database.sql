@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS categories (
     created_at  TIMESTAMP   NULL DEFAULT NULL,
     updated_at  TIMESTAMP   NULL DEFAULT NULL,
     deleted_at  TIMESTAMP   NULL DEFAULT NULL,
-    CONSTRAINT  fk_creator_categoy FOREIGN KEY (creator_id) REFERENCES users(id)
+    CONSTRAINT  fk_creator_category FOREIGN KEY (creator_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -480,11 +480,13 @@ CREATE TABLE IF NOT EXISTS pivot_reaction_report (
     PRIMARY KEY (id),
     id          INT(11)     NOT NULL AUTO_INCREMENT,
     comment_id  INT(11)     DEFAULT NULL,
+    creator_id  INT(11)     DEFAULT NULL,
     report_id   INT(11)     DEFAULT NULL,
     created_at  TIMESTAMP   NULL DEFAULT NULL,
     updated_at  TIMESTAMP   NULL DEFAULT NULL,
     CONSTRAINT  fk_report_comment   FOREIGN KEY (comment_id)    REFERENCES news_comments(id),
-    CONSTRAINT  fk_report_creator   FOREIGN KEY (report_id)     REFERENCES users(id)
+    CONSTRAINT  fk_report_data      FOREIGN KEY (report_id)     REFERENCES reactions_reports(id),
+    CONSTRAINT  fk_report_creator   FOREIGN KEY (creator_id)    REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

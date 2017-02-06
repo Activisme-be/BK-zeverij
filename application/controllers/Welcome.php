@@ -43,6 +43,7 @@ class Welcome extends MY_Controller
         $data['title']     = 'Index';
         $data['sportsmen'] = Sportsmen::count();
         $data['teams']     = Teams::count();
+        $data['news']      = Articles::take(3)->get();
 
         return $this->blade->render('welcome', $data);
 	}
