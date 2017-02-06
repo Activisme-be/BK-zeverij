@@ -93,6 +93,7 @@ class News extends MY_Controller
         $data['title']      = 'Nieuws berichten';
         $data['news']       = Articles::with(['comments', 'author' => $authorInfo, 'categories'])->get();
         $data['categories'] = NewsCategories::where('module', 'news')->get();
+        $data['reports']    = Reports::with(['reportReaction', 'creator'])->get();
 
         return $this->blade->render('news/backend', $data);
     }

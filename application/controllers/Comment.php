@@ -110,7 +110,9 @@ class Comment extends MY_Controller
 		$reactionId = $this->security->xss_clean($this->input->post('id'));
 
 		$MySQL['create']   = Reports::create($input); 
-		$MySQL['relation'] = Reports::find($MySQL['create']->id)->reportReaction()->attach($reactionId); 
+		$MySQL['relation'] = Reports::find($MySQL['create']->id)
+            ->reportReaction()
+            ->attach($reactionId, ['creator_id' => $this->user['id']]);
 
 		if ($MySQL['create'] && $MySQL['relation']) { // Create and relation OK
 			$this->session->set_flashdata('class', 'alert alert-success'); 

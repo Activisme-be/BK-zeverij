@@ -40,6 +40,7 @@
 
 					<div class="col-sm-10">
 						<textarea rows="8" placeholder="Het nieuwsbericht" name="description" class="form-control"></textarea>
+						<span class="help-block"><small>(Dit veld is <a href="">markdown</a> ondersteund)</small></span>
 					</div>
 				</div>
 

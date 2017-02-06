@@ -192,7 +192,7 @@
                             @if ((int) count($news) > 0)
                                 @foreach ($news as $item)
                                     <p>
-                                        <a href="">{{ substr($item->heading,0, 65) . '...'  }}</a>
+                                        <a href="{{ base_url('news/show/' . $item->id) }}">{{ substr($item->heading,0, 65) . '...'  }}</a>
                                         <span>- {{ $item->created_at }}</span>
                                     </p>
                                 @endforeach

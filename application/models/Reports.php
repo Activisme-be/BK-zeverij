@@ -1,48 +1,66 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Illuminate\Database\Eloquent\Model; 
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Comment report model. 
- * 
+ * Comment report model.
+ *
  * @author    Tim Joosten	<Topairy@gmail.com>
  * @copyright Activisme-BE	<info@activisme.be>
- * @license   MIT license	
+ * @license   MIT license
  * @since     2017
  * @package   BK-wansmaak
- */ 
-class Reports extends Model 
+ */
+class Reports extends Model
 {
 	/**
-	 * Set the database table used. 
-	 * 
+	 * Set the database table used.
+	 *
 	 * @return string
 	 */
-	protected $table = 'reactions_reports'; 
+	protected $table = 'reactions_reports';
 
 	/**
-	 * Set mass-assign fields. 
-	 * 
+	 * Set mass-assign fields.
+	 *
 	 * @return array
 	 */
 	protected $fillable = ['user_id', 'reason'];
 
 	 /**
-	  * Enable / Disable the timestamps. 
-	  * 
+	  * Enable / Disable the timestamps.
+	  *
 	  * @return bool
 	  */
-	 public $timestamps = true; 
+	 public $timestamps = true;
 
 	 /**
-	  * Report a reaction relation. 
-	  * 
-	  * @return belongsToMany relationship. 
+	  * Report a reaction relation.
+	  *
+	  * @return belongsToMany relationship.
 	  */
-	 public function reportReaction() 
+	 public function reportReaction()
 	 {
 	 	return $this->belongsToMany('Comments', 'pivot_reaction_report', 'report_id', 'comment_id')
+            ->withPivot('creator_id')
 	 		->withTimestamps();
 	 }
+
+	 public function closeReport()
+	 {
+		 return $this->belongsToMany('Comments', 'pivot_reaction_report', 'comment_id', 'report_id')
+		 	->withPivot('creator_id')
+			->withTimestamps();
+	 }
+
+     /**
+      * Get the user information.
+      *
+      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+      */
+	 public function creator()
+     {
+         return $this->belongsTo('Authencate', 'creator_id');
+     }
 
 }
