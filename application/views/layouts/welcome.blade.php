@@ -196,9 +196,9 @@
                     </div>
                     <div class="col-md-3 col-sm-6 paddingtop-bottom">
                         <h6 class="heading7">SOCIALE MEDIA</h6>
-                        <div class="fb-page" data-href="https://www.facebook.com/facebook" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <div class="fb-page" data-href="https://www.facebook.com/ActivismeTomManhaeghe" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                             <div class="fb-xfbml-parse-ignore">
-                                <blockquote cite="https://www.facebook.com/facebook"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote>
+                                <blockquote cite="https://www.facebook.com/ActivismeTomManhaeghe"><a href="https://www.facebook.com/ActivismeTomManhaeghe">Facebook</a></blockquote>
                             </div>
                         </div>
                     </div>
