@@ -54,4 +54,16 @@ class Helpdesk extends MY_Controller
         $data['title'] = 'Regels van deze actie';
         return $this->blade->render('', $data);
 	}
+
+    /**
+     * Show the application documentation.
+     *
+     * @see    GET|HEAD: http://www.domain.tld/helpdesk/docs
+     * @return Blade view
+     */
+	public function docs()
+    {
+        $data['title'] = 'Documentatie';
+        return $this->blade->render('', $data);
+    }
 }

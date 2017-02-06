@@ -11,7 +11,7 @@
                     <div class="list-group-item">
                         <div class="media">
                             <div class="media-left">
-                                <a href="#">
+                                <a href="{{ base_url('helpdesk/docs') }}">
                                     <img class="media-object img-thumbnail img-rounded" style="width: 64px; height:64px;" src="{{ base_url('assets/img/help.svg') }}" alt="...">
                                 </a>
                             </div>
