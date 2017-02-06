@@ -46,13 +46,6 @@ class Reports extends Model
 	 		->withTimestamps();
 	 }
 
-	 public function closeReport()
-	 {
-		 return $this->belongsToMany('Comments', 'pivot_reaction_report', 'comment_id', 'report_id')
-		 	->withPivot('creator_id')
-			->withTimestamps();
-	 }
-
      /**
       * Get the user information.
       *

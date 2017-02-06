@@ -12,6 +12,13 @@
 class Report extends MY_Controller
 {
     /**
+     * Authencated user data session.
+     *
+     * @return array $user
+     */
+    public $user = [];
+
+    /**
      * Report Constructor.
      *
      * @return void
@@ -19,24 +26,29 @@ class Report extends MY_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library(['session', 'blade']);
+        $this->load->helper(['url']);
+
+        $this->user = $this->session->userdata('authencated_user');
     }
 
     /**
-     * 
+     * Show a specific report.
      *
-     * @see
-     * @return
+     * @see     GET|HEAD: http://www.domain.tld/report/view/{reportId}
+     * @return  Blade view
      */
     public function view()
     {
         $reportId = $this->security->xss_clean($this->uri->segment(3));
+        return $this->blade->render('', $data);
     }
 
     /**
+     * Delete an old or invalid report out off the database.
      *
-     *
-     * @see
-     * @return
+     * @see     GET|HEAD: http://www.domain.tld/report/delete/{reportid}
+     * @return  Redirect|Response
      */
     public function delete()
     {
@@ -46,16 +58,23 @@ class Report extends MY_Controller
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', '');
         }
+
+        return redirect(base_url('/news/backend'));
     }
 
+    /**
+     * Close a invalid comment report.
+     *
+     * @see    GET|HEAD: http://www.domain/tld/report/close/{reportId}
+     * @return Redirect|Response
+     */
     public function close()
     {
         $reportId = $this->security->xss_clean($this->uri->segment(3));
+        $report   = Reports::find($reportId)->reportReaction()->sync([]);
 
-        if () {
-            $this->session->set_flashdata('class', '');
-            $this->session->set_flashdata('message', '');
-        }
+        $this->session->set_flashdata('class', 'alert alert-success');
+        $this->session->set_flashdata('message', 'De rapporteer is gesloten.');
 
         return redirect(base_url('/news/backend'));
     }

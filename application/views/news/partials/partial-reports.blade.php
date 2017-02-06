@@ -39,7 +39,7 @@
                                         <td>{{ $data->created_at }}</td>
 
                                         <td> {{-- Functions --}}
-                                            <a href="" class="label label-primary">Sluiten</a>
+                                            <a href="{{ base_url('report/close/' . $data->id) }}" class="label label-primary">Sluiten</a>
                                             <a href="" class="label label-info">Bekijk</a>
                                             <a href="" class="label label-danger">Verwijder</a>
                                         </td> {{-- /Functions --}}
