@@ -135,15 +135,15 @@
 
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputEmail2">Email adres</label>
-                                                        <input type="email" name="email" class="form-control" id="exampleInputEmail2" placeholder="Email adres">
+                                                        <input type="email" v-model="login.email" name="email" class="form-control" id="exampleInputEmail2" placeholder="Email adres">
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputPassword2">Wachtwoord</label>
-                                                        <input type="password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Wachtwoord">
+                                                        <input type="password" v-model="login.password" name="password" class="form-control" id="exampleInputPassword2" placeholder="Wachtwoord">
                                                         <div class="help-block text-right"><a data-toggle="modal" data-target="#resetPass" href="#">Wachtwoord vergeten?</a></div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary btn-block">Inloggen</button>
+                                                    <div class="form-group" v-if="! submitted">
+                                                        <button type="submit" v-attr="disabled: errorsLogin" class="btn btn-primary btn-block">Inloggen</button>
                                                     </div>
                                                 </form>
                                             </div>

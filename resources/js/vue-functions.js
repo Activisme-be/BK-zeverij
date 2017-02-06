@@ -5,6 +5,7 @@ new Vue({
         register         : { username : '', email : '', name : '', password : '', password_confirm : '', disclaimer : '' },
         accountSettings  : { username : '', email : '', name : ''},
         categoryInsert   : { category : '', description : ''},
+        login            : { email : '', password: ''},
         search           : { term : ''},
         submitted        : false
     },
@@ -17,6 +18,12 @@ new Vue({
             }
 
             return false;
+        },
+
+        errorsLogin: function () {
+            for (var key in this.login) {
+                if (! this.login[key]) return true;
+            }
         },
 
         errorsSettings: function () {
