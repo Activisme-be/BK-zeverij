@@ -1,4 +1,4 @@
-@layout('layouts/front-end')
+@layout('layouts/welcome')
 
 @section('content')
     <div class="row">
