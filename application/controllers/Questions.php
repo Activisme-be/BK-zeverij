@@ -214,6 +214,8 @@ class Questions extends MY_Controller
         //> END
 
         if ($github->api('issue')->create('Activisme-be', 'BK-zeverij', $params)) { // The issue is pushed to github.
+            $ticket->update(['export_github' => 'Y']); // TODO: add export_github column to the database.
+
             $this->session->set_flashdata('class', 'alert alert-success');
             $this->session->set_flashdata('message', 'Het ticket is naar github gexporteerd.');
         }
