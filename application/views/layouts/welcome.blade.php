@@ -174,7 +174,7 @@
                             En is louter bedoeld als ludiek weerwoord omtrent de verwoordingen van onze politici,
                             op de sociale media en en de klassieke media.
                         </p>
-                        <p><i class="fa fa-envelope"></i> E-mail: <a href="mailto:acties@activsme.be">Acties@activisme.be</a></p>
+                        <p><i class="fa fa-envelope" aria-hidden="true"></i> E-mail: <a href="mailto:acties@activsme.be">Acties@activisme.be</a></p>
 
                     </div>
                     <div class="col-md-2 col-sm-6 paddingtop-bottom">
@@ -189,9 +189,16 @@
                     <div class="col-md-3 col-sm-6 paddingtop-bottom">
                         <h6 class="heading7">LAATSTE NIEUWS</h6>
                         <div class="post">
-                            <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
-                            <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
-                            <p>facebook crack the movie advertisment code:what it means for you <span>August 3,2015</span></p>
+                            @if ((int) count($news) > 0)
+                                @foreach ($news as $item)
+                                    <p>
+                                        facebook crack the movie advertisment code:what it means for you
+                                        <span>August 3,2015</span>
+                                    </p>
+                                @endforeach
+                            @else
+                                <p><strong>Info:</strong> Er zijn geen nieuwsberichten</p>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 paddingtop-bottom">
