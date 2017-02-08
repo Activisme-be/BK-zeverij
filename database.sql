@@ -248,6 +248,29 @@ CREATE TABLE IF NOT EXISTS login_abilities (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pivot_reactions`
+--
+
+DROP TABLE IF EXISTS pivot_reactions;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE IF NOT EXISTS pivot_reactions (
+    PRIMARY KEY (id),
+    id          INT(11)     NOT NULL AUTO_INCREMENT,
+    creator_id  INT(11)     DEFAULT NULL,
+    ticket_id   INT(11)     DEFAULT NULL,
+    comment_id  INT(11)     DEFAULT NULL,
+    created_at  TIMESTAMP   NULL DEFAULT NULL,
+    updated_at  TIMESTAMP   NULL DEFAULT NULL,
+    CONSTRAINT  fk_ticket_creator2   FOREIGN KEY (creator_id) REFERENCES users(id),
+    CONSTRAINT  fk_ticket_nr         FOREIGN KEY (ticket_id)  REFERENCES tickets(id),
+    CONSTRAINT  fk_ticket_comment    FOREIGN KEY (comment_id) REFERENCES Comments(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `login_permissions`
 --
 
