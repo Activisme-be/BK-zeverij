@@ -6,9 +6,12 @@
 
             {{-- search form --}}
             <div class="pull-left">
-                <form class="form-inline" action="{{ base_url('items/search') }}" method="GET">
-                    <input type="text" name="term" placeholder="Zoekterm" class="form-control">
-                    <button class="btn btn-danger">
+                <form class="form-inline" action="{{ base_url('items/search') }}" v-if="! submitted" method="GET">
+                    {{-- CSRF --}}
+                    <input type="hidden" name="{{ $this->security->get_csrf_token_name() }}" value="{{ $this->security->get_csrf_hash() }}">
+
+                    <input type="text" name="term" v-model="search.term" placeholder="Zoekterm" class="form-control">
+                    <button v-attr="disabled: errorsSearch" class="btn btn-danger">
                         <span class="fa fa-search"></span> Zoek
                     </button>
                 </form>
