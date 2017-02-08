@@ -7,3 +7,4 @@
 /CONTRIBUTING.md 		export-ignore
 /CONDUCT.md		 		export-ignore
 /ISSUE_TEMPLATE.md		export-ignore
+/.scss-lint.yml         export-ignore

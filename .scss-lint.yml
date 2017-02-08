@@ -1,0 +1,7 @@
+linters:
+  VendorPrefix:
+    enabled: false
+  ImportantRule:
+    enabled: false
+  DuplicateProperty:
+    enabled: false
