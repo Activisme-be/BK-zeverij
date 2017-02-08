@@ -1,0 +1,11 @@
+linters:
+  VendorPrefix:
+    enabled: false
+  ImportantRule:
+    enabled: false
+  DuplicateProperty:
+    enabled: false
+  QualifyingElement:
+    enabled: false
+  SelectorDepth:
+    enabled: false
