@@ -1,7 +1,7 @@
 function edit(hyperlink)  {
 	$('#form')[0].reset(); // Reset form on modals. 
 
-	// AJAX load data form ajax 
+	// AJAX load data from ajax 
 	$.ajax({
 		url      : hyperlink, 
 		type     : 'GET', 
