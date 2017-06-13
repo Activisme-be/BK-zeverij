@@ -79,7 +79,7 @@
                                     <option value="">-- Selecteer de categorie: --</option>
 
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->category }}</span>
+                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
                                     @endforeach
                                 </select>
 
